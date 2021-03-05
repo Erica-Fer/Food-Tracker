@@ -1,6 +1,6 @@
 # Full-Plate
 
-This repository is for the 497 Capstone project, managed by students of the University of Washington.
+This repository is for the 497 Capstone project, managed by students of the University of Washington. This project is being co-developed by <a href="https://github.com/littleevanss">littleevanss</a> and <a href="https://github.com/Erica-Fer">Erica-Fer</a>.
 
 ## FAQ
 
