@@ -17,6 +17,8 @@ body{
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 70px 30px;
+    border-radius: 10px;
+    box-shadow: 5px 8px rgba(0, 128, 128, 0.405);
 }
 
 .avatar{
@@ -34,12 +36,14 @@ h1{
     padding: 0 0 20px;
     text-align: center;
     font-size: 22px;
+    color: black;
 }
 
 .loginbox p{
     margin: 0;
     padding: 0;
     font-weight: bold;
+    color: rgb(0, 0, 0);
 }
 
 .loginbox input{
