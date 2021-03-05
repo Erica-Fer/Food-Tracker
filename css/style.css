@@ -16,15 +16,74 @@ body{
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
+    padding: 70px 30px;
 }
 
 .avatar{
-    /* padding-left: 320px; */
     width: 100px;
     height: 100px;
-    /* border-radius: 50%; */
-    /* position: absolute; */
+    border-radius: 50%;
+    position: absolute;
     top: -50px;
     left: calc(50% - 50px);
 
+}
+
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.loginbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.loginbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loginbox input[type="text"], input[type="password"]{
+    border: none;
+    border-bottom: 1px solid;
+    outline: none;
+    height: 40px;
+}
+
+/*? do we want background shade to change when clicked???*/
+/* .loginbox input[type="text"]:focus, input[type="password"]:focus{
+    border: none;
+    border-bottom: 1px solid;
+    outline: none;
+    height: 40px;
+    background-color: rgb(184, 184, 184);
+} */
+
+.loginbox input[type="submit"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    /* width: 50%; */
+    border-radius: 10px;
+    background: rgb(255, 221, 84);
+    font-weight: bold;
+    font-size: larger;
+}
+
+.loginbox input[type="submit"]:hover{
+    cursor: pointer;
+    background: #ffbf00;
+}
+
+.loginbox a{
+    text-decoration: none;
+    line-height: 20px;
+}
+
+.loginbox a:hover{
+    color: #3d07ff
 }
