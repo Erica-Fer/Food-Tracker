@@ -1,0 +1,30 @@
+/* style for login */
+body{
+    margin: 0;
+    padding: 0;
+    background-color: bisque;
+    font-family: sans-serif;
+}
+
+.loginbox{
+    width: 320px;
+    height: 420px;
+    background: palevioletred;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+}
+
+.avatar{
+    /* padding-left: 320px; */
+    width: 100px;
+    height: 100px;
+    /* border-radius: 50%; */
+    /* position: absolute; */
+    top: -50px;
+    left: calc(50% - 50px);
+
+}
