@@ -1,26 +1,68 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=`, initial-scale=1.0">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <title>Full-Plate</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/materialize.css">
 </head>
+
 <body>
-    <div class="loginbox">
-    <img src="img/avatar.png" class="avatar">
-        <h1>Full-Plate Login</h1>
-        <form>
-            <p>Enter username</p>
-            <input type="text" name="Username input box" placeholder="Type here">
-            <p>Enter password</p>
-            <input type="password" name="Password input box" placeholder="Type here">
-            <input type="submit" name="Submit entries and login" value="Login">
+    <div class="container">
+        <h1 class="center-align">Welcome to Full-Plate!</h1>
+        <div class="carousel carousel-slider center">
+            <div class="carousel-fixed-item center">
+            </div>
+            <div class="carousel-item red white-text" href="#one!">
+                <h2>Track what you've eaten that day</h2>
+            </div>
+            <div class="carousel-item amber white-text" href="#two!">
+                <h2>See how your health has been doing</h2>
+            </div>
+            <div class="carousel-item green white-text" href="#three!">
+                <h2>Find out what foods cause you problems</h2>
+            </div>
+            <div class="carousel-item blue white-text" href="#four!">
+                <h2>Customize your experience</h2>
+            </div>
+        </div>
 
-            <a href="#">Lost your password?</a><br>
+        <div class="row">
+            <div class="col s5">
+                <a href="pages/loginPage.html" class="waves-effect waves-light btn-large">Login</a>
+            </div>
+            <div class="col s4">
+                <a href="pages/register.html" class="waves-effect waves-light btn-small grey">Register</a>
+            </div>
 
-
-        </form>
+        </div>
     </div>
+
+
+    <!--JavaScript at end of body for optimized loading-->
+    <!-- <script type="text/javascript" src="js/materialize.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.carousel').carousel({
+                fullWidth: true,
+                indicators: true
+            });
+        });
+    </script>
+
+
 </body>
+
 </html>
