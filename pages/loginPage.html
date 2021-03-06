@@ -1,26 +1,63 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <title>Full-Plate</title>
-        <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/materialize.css">
 </head>
-<body>
-    <div class="loginbox">
-    <img src="../img/avatar.png" class="avatar">
-        <h1>Full-Plate Login</h1>
-        <form>
-            <p>Enter username</p>
-            <input type="text" name="Username input box" placeholder="Type here">
-            <p>Enter password</p>
-            <input type="password" name="Password input box" placeholder="Type here">
-            <input type="submit" name="Submit entries and login" value="Login">
 
-            <a href="#">Lost your password?</a><br>
+<body style="background-color: bisque;">
+    <!-- login box -->
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m7 l6">
+                <div class="card-panel">
+                    <div class="row">
+                        <div class="input-field col s12 text-black">
+                            <i class="material-icons prefix">email</i>
+                            <input id="email" type="email" class="validate">
+                            <label for="email">Enter your E-mail</label>
+                            <span class="helper-text" data-error="Please enter a valid e-mail address." data-success=""></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phonelink_lock</i>
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Enter your password</label>
+                        </div>
+                    </div>
+                    <p class="center-align flow-text">
+                        <a href="main.html" class="waves-effect waves-light btn-large center">Submit</a><br><br><br>
 
-
-        </form>
+                        <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+
 </body>
+
 </html>
