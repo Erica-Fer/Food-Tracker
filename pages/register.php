@@ -7,6 +7,8 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $errors = [];
 
+$email = '';
+$password = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $email = $_POST['email'];
@@ -72,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="row">
                                 <div class="input-field col s12 text-black">
                                     <i class="material-icons prefix">email</i>
-                                    <input id="email" type="email" name="email" class="validate">
+                                    <input id="email" type="email" name="email" class="validate" value="<?php echo $email ?>">
                                     <label for="email">Enter your E-mail</label>
                                     <span class="helper-text" data-error="Please enter a valid e-mail addreess." data-success=""></span>
                                 </div>
@@ -80,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">phonelink_lock</i>
-                                    <input id="password" type="password" name="password" class="validate">
+                                    <input id="password" type="password" name="password" class="validate" value="<?php echo $password ?>">
                                     <label for="password">Enter your password</label>
                                 </div>
                             </div>
