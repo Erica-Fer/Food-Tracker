@@ -108,13 +108,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             <!-- submit button -->
                             <p class="center-align flow-text">
-                                <button type="submit" class="waves-effect waves-light btn-large center">Register</a><br><br><br>
+                                <button type="submit" class="waves-effect waves-light btn-large center">Register</a></button><br><br><br>
 
+                                <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
+                                <p class="center-align">Return to welcome screen.</p>
                             </p>
                         </form>
                         <!-- back button -->
 
-                        <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a>
                     </div>
                 </div>
             </div>

@@ -5,13 +5,49 @@
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// $statement = $pdo->prepare('SELECT * FROM users ORDER BY email');
-// $statement->execute();
-// $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+$statement = $pdo->prepare('SELECT * FROM users');
+$statement->execute();
+$users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-// echo '<pre>';
-// var_dump($users);
-// echo '</pre>';
+$errors = [];
+
+$email = '';
+$password = '';
+$foundEmail = '';
+$foundPassword = '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $foundEmail = $users['$email'];
+    $foundPassword = $users['$password'];
+    
+    echo '<pre>';
+    var_dump($foundEmail);
+    echo '</pre>';
+    
+    if (!$email) {
+        $errors[] = 'Please provide a username.';
+    }
+
+    if (!$password) {
+        $errors[] = 'Please provide a password.';
+    }
+
+
+
+    if (empty($errors)) {
+        // $statement = $pdo->prepare("INSERT INTO users (email, password)
+        //             VALUES (:email, :password)");
+
+        // $statement->bindValue(':email', $email);
+        // $statement->bindValue(':password', $password);
+        // $statement->execute();
+        header('Location: main.php');
+    }
+}
+
 
 ?>
 
@@ -40,6 +76,9 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 <div class="card">
                     <div class="card-content">
                         <div class="card-title">Full-Plate Login</div>
+                        
+                        <form action="" method="post">
+                        <!-- email -->
                         <div class="row">
                             <div class="input-field col s12 text-black">
                                 <i class="material-icons prefix">email</i>
@@ -49,6 +88,8 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                     data-success=""></span>
                             </div>
                         </div>
+
+                        <!-- password -->
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">phonelink_lock</i>
@@ -56,12 +97,18 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 <label for="password">Enter your password</label>
                             </div>
                         </div>
-                        <p class="center-align flow-text">
-                            <a href="main.html" class="waves-effect waves-light btn-large center">Submit</a><br><br><br>
 
+                        <!-- submit -->
+                        <p class="center-align flow-text">
+                            <button type="submit" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br>
+
+                            <!-- go back -->
                             <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i
-                                    class="material-icons">arrow_back</i></a>
+                                    class="material-icons">arrow_back</i></a><br>
+                                    <p class="center-align">Return to welcome screen.</p>
+
                         </p>
+                        </form>
                     </div>
                 </div>
             </div>
