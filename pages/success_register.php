@@ -39,13 +39,18 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             <div class="col s12 m7 l6">
                 <div class="card">
                     <div class="card-content">
-                        <div class="card-title"><b>Registration successful!</b></div><br>
-                        <p class="center-align"><p class="flow-text">Hello, and welcome to Full-Plate!</p> We provide a number of settings you can change to make the app as accessible as possible. <b>Font size, color, and contrast</b> are all customizable. Would you like to make those changes now?</p><br><br>
-                        
+                        <!-- intro paragraph -->
+                        <p class="center-align">
+                        <p class="flow-text">Hello, and welcome to Full-Plate!</p> <br>
+                        We provide a number of settings you can change to make the app as accessible as possible. <b>Font size, color, and contrast</b> are all customizable. Would you like to make those changes now?
+                        </p><br><br>
+
+                        <!-- go to settings button -->
                         <p class="center-align">
                             <a href="settings.php" class="waves-effect waves-light btn-large center">Yes! Take me to settings.</a><br><br><br>
 
-                            <p class="center-align">
+                        <!-- go to main button -->
+                        <p class="center-align">
                             <a href="main.php" class="waves-effect waves-light btn-large center grey">No, take me to the app.</a><br><br><br>
                         </p>
                     </div>
@@ -59,7 +64,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
         });
     </script>
