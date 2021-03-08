@@ -1,5 +1,20 @@
 <html lang="en">
 
+<?php
+
+$pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$statement = $pdo->prepare('SELECT * FROM users ORDER BY email');
+$statement->execute();
+$users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+echo '<pre>';
+var_dump($users);
+echo '</pre>';
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
