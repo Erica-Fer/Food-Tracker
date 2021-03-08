@@ -17,7 +17,13 @@
 </head>
 
 <body style="background-color: bisque;">
-    <h1>UNDER CONSTRUCTION</h1>
+    <h1>SETTINGS: UNDER CONSTRUCTION</h1>
+    <p class="center-align">
+        <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
+        Return to welcome page
+    </p>
+
+
 
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

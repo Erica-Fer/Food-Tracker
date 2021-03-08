@@ -39,28 +39,14 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             <div class="col s12 m7 l6">
                 <div class="card">
                     <div class="card-content">
-                        <div class="card-title">Full-Plate Login</div>
-                        <div class="row">
-                            <div class="input-field col s12 text-black">
-                                <i class="material-icons prefix">email</i>
-                                <input id="email" type="email" class="validate">
-                                <label for="email">Enter your E-mail</label>
-                                <span class="helper-text" data-error="Please enter a valid e-mail addreess."
-                                    data-success=""></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">phonelink_lock</i>
-                                <input id="password" type="password" class="validate">
-                                <label for="password">Enter your password</label>
-                            </div>
-                        </div>
-                        <p class="center-align flow-text">
-                            <a href="main.html" class="waves-effect waves-light btn-large center">Submit</a><br><br><br>
+                        <div class="card-title"><b>Registration successful!</b></div><br>
+                        <p class="center-align"><p class="flow-text">Hello, and welcome to Full-Plate!</p> We provide a number of settings you can change to make the app as accessible as possible. <b>Font size, color, and contrast</b> are all customizable. Would you like to make those changes now?</p><br><br>
+                        
+                        <p class="center-align">
+                            <a href="settings.php" class="waves-effect waves-light btn-large center">Yes! Take me to settings.</a><br><br><br>
 
-                            <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i
-                                    class="material-icons">arrow_back</i></a>
+                            <p class="center-align">
+                            <a href="main.php" class="waves-effect waves-light btn-large center grey">No, take me to the app.</a><br><br><br>
                         </p>
                     </div>
                 </div>
