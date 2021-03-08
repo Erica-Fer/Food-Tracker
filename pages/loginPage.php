@@ -13,20 +13,27 @@ $errors = [];
 
 $email = '';
 $password = '';
-$foundEmail = '';
-$foundPassword = '';
+$foundEmail = false;
+$foundPassword = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $foundEmail = $users['$email'];
-    $foundPassword = $users['$password'];
-    
-    echo '<pre>';
-    var_dump($foundEmail);
-    echo '</pre>';
-    
+    foreach ($users as $info) :
+        // var_dump( $info);
+        $foundEmail = $info['email'] == $email;
+        $foundPassword = $info['password'] == $password;
+
+        if ($foundEmail || $foundPassword) {
+            break;
+        }
+    endforeach;
+
+    // echo '<pre>';
+    // var_dump($users);
+    // echo '</pre>';
+
     if (!$email) {
         $errors[] = 'Please provide a username.';
     }
@@ -35,7 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'Please provide a password.';
     }
 
-
+    if (!$foundEmail && !$foundPassword) {
+        $errors[] = 'Account does not exist.';
+        $errors[] = 'Try again, or sign-up here: <a href="register.php">Register for Full-Plate</a>';
+    } else if (!$foundEmail) {
+        $errors[] = 'Email not found.';
+    } else if (!$foundPassword) {
+        $errors[] = 'Password not found.';
+    }
 
     if (empty($errors)) {
         // $statement = $pdo->prepare("INSERT INTO users (email, password)
@@ -76,38 +90,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="card">
                     <div class="card-content">
                         <div class="card-title">Full-Plate Login</div>
-                        
+
+                        <!-- print err messages -->
+                        <?php if (!empty($errors)) : ?>
+                            <div class="class alert alert-danger">
+                                <?php foreach ($errors as $error) : ?>
+                                    <div><?php echo $error ?></div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <!-- get input from forms -->
                         <form action="" method="post">
-                        <!-- email -->
-                        <div class="row">
-                            <div class="input-field col s12 text-black">
-                                <i class="material-icons prefix">email</i>
-                                <input id="email" type="email" class="validate">
-                                <label for="email">Enter your E-mail</label>
-                                <span class="helper-text" data-error="Please enter a valid e-mail addreess."
-                                    data-success=""></span>
+
+                            <!-- email -->
+                            <div class="row">
+                                <div class="input-field col s12 text-black">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="email" type="email" name="email" class="validate">
+                                    <label for="email">Enter your E-mail</label>
+                                    <span class="helper-text" data-error="Please enter a valid e-mail addreess." data-success=""></span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- password -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">phonelink_lock</i>
-                                <input id="password" type="password" class="validate">
-                                <label for="password">Enter your password</label>
+                            <!-- password -->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">phonelink_lock</i>
+                                    <input id="password" type="password" name="password" class="validate">
+                                    <label for="password">Enter your password</label>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- submit -->
-                        <p class="center-align flow-text">
-                            <button type="submit" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br>
+                            <!-- submit -->
+                            <p class="center-align flow-text">
+                                <button type="submit" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br>
 
-                            <!-- go back -->
-                            <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i
-                                    class="material-icons">arrow_back</i></a><br>
-                                    <p class="center-align">Return to welcome screen.</p>
+                                <!-- go back -->
+                                <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
+                            <p class="center-align">Return to welcome screen.</p>
 
-                        </p>
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -120,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
         });
     </script>
