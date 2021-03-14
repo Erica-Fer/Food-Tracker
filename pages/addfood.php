@@ -18,7 +18,27 @@
 
 <body style="background-color: bisque;">
     <div class="container">
-        <div class="class h1 center-align">add food</div>
+        <div class="center-align background: white">
+
+        <h1>Enter what you ate in here</h1>
+
+        <form action="" class="">
+            <section>
+                <h2>What did you have for breakfast?</h2>
+                <input id="breakfast" type="text" name="breakfast">
+            </section>
+
+            <section>
+                <h2>What did you have for lunch?</h2>
+                <input id="lunch" type="text" name="lunch">
+            </section>
+
+            <section>
+                <h2>What did you have for dinner?</h2>
+                <input id="dinner" type="text" name="dinner">
+            </section>
+        </form>
+        </div>
     </div>
 
 
@@ -27,7 +47,7 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
         });
     </script>

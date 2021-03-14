@@ -1,5 +1,11 @@
 <html lang="en">
 
+<?php
+
+    header('Location: main.html'); // ? patchwork redirect. need names updated correctly at some point
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
