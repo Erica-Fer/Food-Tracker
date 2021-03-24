@@ -1,5 +1,38 @@
 <html lang="en">
 
+<?php
+$pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$statement = $pdo->prepare('SELECT * FROM foodForDay');
+$statement->execute();
+$users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$errors = [];
+
+$breakfast = '';
+$lunch = '';
+$dinner = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+    $breakfast = $_POST['breakfast'];
+    $lunch = $_POST['lunch'];
+    $dinner = $_POST['dinner'];
+
+    if (empty($errors)) {
+        $statement = $pdo->prepare("INSERT INTO foodForDay (breakfast, lunch, dinner)
+                    VALUES (:breakfast, :lunch, :dinner)");
+
+        $statement->bindValue(':breakfast', $breakfast);
+        $statement->bindValue(':lunch', $lunch);
+        $statement->bindValue(':dinner', $dinner);
+        $statement->execute();
+        header('Location: addfood.php');
+    }
+}
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,24 +53,32 @@
     <div class="container">
         <div class="center-align background: white">
 
-        <h1>Enter what you ate in here</h1>
+            <h1>Enter what you ate in here</h1><br>
 
-        <form action="" class="">
-            <section>
-                <h2>What did you have for breakfast?</h2>
-                <input id="breakfast" type="text" name="breakfast">
-            </section>
+            <form action="" class="" method="post">
+                <section>
+                    <h2>What did you have for breakfast?</h2>
+                    <input id="breakfast" type="text" name="breakfast">
+                </section>
 
-            <section>
-                <h2>What did you have for lunch?</h2>
-                <input id="lunch" type="text" name="lunch">
-            </section>
+                <section>
+                    <h2>What did you have for lunch?</h2>
+                    <input id="lunch" type="text" name="lunch">
+                </section>
 
-            <section>
-                <h2>What did you have for dinner?</h2>
-                <input id="dinner" type="text" name="dinner">
-            </section>
-        </form>
+                <section>
+                    <h2>What did you have for dinner?</h2>
+                    <input id="dinner" type="text" name="dinner">
+                </section>
+
+                <!-- submit -->
+                <p class="center-align flow-text">
+                    <button type="submit" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br>
+
+                    <!-- go back -->
+                    <a href="main.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
+                <p class="center-align">Return to calendar.</p>
+            </form>
         </div>
     </div>
 
