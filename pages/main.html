@@ -3,6 +3,9 @@
 
     BETTER RESOURCES:
     https://courses.cs.washington.edu/courses/cse154/16au/lectures.shtml#today 
+
+    REFERENCE FOR CALENDAR:
+    https://github.com/niinpatel/calendarHTML-Javascript
 -->
 
 <!DOCTYPE html>
@@ -28,11 +31,24 @@
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <!-- not sure if this is necessary-->
     <script>dayjs().format()</script>
+
+    <!--calendar functionality api?-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.js" type="text/javascript"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth"
+        });
+        calendar.render();
+      });
+    </script> -->
     
     <title> trying my best lmfao</title>
 </head>
 <body>
-    <h1 id="hello"> hello world</h1>
+  <!-- <div id="calendar"></div> -->
+    <!-- <h1 id="hello"> hello world</h1> -->
     <div class="month">
       <ul>
         <li id="prev" > &#10094; prev </li> <!--originally was a class-->
@@ -41,8 +57,22 @@
         <li id="current-month">April 2022</li>
       </ul>
     </div>
+    <table>
+        <thead>
+          <tr class="weekdays">
+            <th>SUN</th>
+            <th>MON</th>
+            <th>TUE</th>
+            <th>WED</th>
+            <th>THU</th>
+            <th>FRI</th>
+            <th>SAT</th>
+          </tr>
+      </thead>
+      <tbody id="calendar-days"> </tbody>
 
-  <ul class="weekdays">
+    </table>
+  <!-- <ul class="weekdays">
       <li>SUN</li>
       <li>MON</li>
       <li>TUE</li>
@@ -50,9 +80,9 @@
       <li>THU</li>
       <li>FRI</li>
       <li>SAT</li>
-  </ul>
+  </ul> -->
   
-  <ul class="days">
+  <!-- <ul class="days">
       <li></li>
       <li>01</li>
       <li>02</li>
@@ -85,7 +115,7 @@
       <li>29</li>
       <li>30</li>
       <li>31</li>
-  </ul>
+  </ul> -->
 
 </body>
 </html>
