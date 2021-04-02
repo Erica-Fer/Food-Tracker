@@ -10,27 +10,30 @@ $statement->execute();
 $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 $errors = [];
-
-$breakfast = '';
+if (isset($_POST['breakfast'])) {
+    $temp = $_POST['breakfast'];
+    echo "breakfast: $temp";
+}
+// $breakfast = $_POST['breakfast'];
 $lunch = '';
 $dinner = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $breakfast = $_POST['breakfast'];
-    $lunch = $_POST['lunch'];
-    $dinner = $_POST['dinner'];
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//     $breakfast = $_POST['breakfast'];
+//     $lunch = $_POST['lunch'];
+//     $dinner = $_POST['dinner'];
 
-    if (empty($errors)) {
-        $statement = $pdo->prepare("INSERT INTO foodForDay (breakfast, lunch, dinner)
-                    VALUES (:breakfast, :lunch, :dinner)");
+//     if (empty($errors)) {
+//         $statement = $pdo->prepare("INSERT INTO foodForDay (breakfast, lunch, dinner)
+//                     VALUES (:breakfast, :lunch, :dinner)");
 
-        $statement->bindValue(':breakfast', $breakfast);
-        $statement->bindValue(':lunch', $lunch);
-        $statement->bindValue(':dinner', $dinner);
-        $statement->execute();
-        header('Location: addfood.php');
-    }
-}
+//         $statement->bindValue(':breakfast', $breakfast);
+//         $statement->bindValue(':lunch', $lunch);
+//         $statement->bindValue(':dinner', $dinner);
+//         $statement->execute();
+//         header('Location: addfood.php');
+//     }
+// }
 
 ?>
 
@@ -82,6 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button type="submit" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br> -->
 
             <!-- go back -->
+
+            <p id="demo"></p>
+
             <a href="main.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
             <p class="center-align">Return to calendar.</p>
             </form>
@@ -114,47 +120,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }],
                 onChipAdd: () => {
                     console.log("Chip add");
+
+                    // console.log(M.Chips.getInstance($('.chips')).chipsData);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "addfood.php",
+                        data: {
+                            breakfast: "##TEST"
+                        },
+                        success: function(result) {
+                            $("#content").html(result);
+                        }
+                    });
+
+                    // var xmlhttp = new XMLHttpRequest();
+                    // xmlhttp.open("GET", "addfood.php", true);
+                    // request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    // xmlhttp.send("##TEST");
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("demo").innerHTML = this.responseText;
+                        }
+                    };
+                    xhttp.open("POST", "php/post.php", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send("breakfast=#TEST");
                 },
             });
         });
-
-        /* JQuery */
-        // $(document).ready(function() {
-        //     $('.chips').chips();
-        //     $('.chips-initial').chips({
-        //         data: [{
-        //             tag: 'Apple',
-        //         }, {
-        //             tag: 'Microsoft',
-        //         }, {
-        //             tag: 'Google',
-        //         }],
-        //     });
-        //     $('.chips-placeholder').chips({
-        //         placeholder: 'Enter a tag',
-        //         secondaryPlaceholder: '+Tag',
-        //     });
-        //     $('.chips-autocomplete').chips({
-        //         autocompleteOptions: {
-        //             data: {
-        //                 'Apple': null,
-        //                 'Microsoft': null,
-        //                 'Google': null
-        //             },
-        //             limit: Infinity,
-        //             minLength: 1
-        //         },
-        //         data: [{
-        //             tag: 'Apple',
-        //         }],
-        //         onChipAdd: () => {
-        //             console.log("Chip add");
-        //             console.log($('.chips'));
-        //         },
-        //     });
-
-
-        // });
     </script>
 
 
