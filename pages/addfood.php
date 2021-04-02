@@ -9,16 +9,13 @@ $statement = $pdo->prepare('SELECT * FROM foodForDay');
 $statement->execute();
 $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-$date = $_GET['date'];
-echo $date;
 $errors = [];
 
 $breakfast = '';
 $lunch = '';
 $dinner = '';
-$date = ""; // ? unique id from calendar
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $breakfast = $_POST['breakfast'];
     $lunch = $_POST['lunch'];
     $dinner = $_POST['dinner'];
@@ -50,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <title>Full-Plate</title>
-    <link rel="stylesheet" type="text/css" href="css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="../css/materialize.css">
 </head>
 
 <body style="background-color: bisque;">
@@ -59,6 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <h1>Add food for <?php echo $_GET['date'] ?> </h1><br>
 
+            <h2>What did you have for breakfast?</h2>
+            <div class="chips chips-autocomplete chips-placeholder"></div>
+
+
+            <!-- 
             <form action="" class="" method="post">
                 <section>
                     <h2>What did you have for breakfast?</h2>
@@ -73,15 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <section>
                     <h2>What did you have for dinner?</h2>
                     <input id="dinner" type="text" name="dinner">
-                </section>
+                </section> -->
 
-                <!-- submit -->
-                <p class="center-align flow-text">
-                    <button type="submit" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br>
+            <!-- submit -->
+            <!-- <p class="center-align flow-text">
+                <button type="submit" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br> -->
 
-                <!-- go back -->
-                <a href="main.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
-                <p class="center-align">Return to calendar.</p>
+            <!-- go back -->
+            <a href="main.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
+            <p class="center-align">Return to calendar.</p>
             </form>
         </div>
     </div>
@@ -93,7 +95,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('.chips').chips();
+            $('.chips-initial').chips({
+                data: [{
+                    tag: 'Apple',
+                }, {
+                    tag: 'Microsoft',
+                }, {
+                    tag: 'Google',
+                }],
+            });
+            $('.chips-placeholder').chips({
+                placeholder: 'Enter a tag',
+                secondaryPlaceholder: '+Tag',
+            });
+            $('.chips-autocomplete').chips({
+                autocompleteOptions: {
+                    data: {
+                        'Apple': null,
+                        'Microsoft': null,
+                        'Google': null
+                    },
+                    limit: Infinity,
+                    minLength: 1
+                },
+                data: [{
+                    tag: 'Apple',
+                }, {
+                    tag: 'Microsoft',
+                }, {
+                    tag: 'Google',
+                }],
+                onChipAdd: () => {
+                    console.log("Chip add");
 
+                },
+            });
         });
     </script>
 
