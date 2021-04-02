@@ -121,31 +121,17 @@ $dinner = '';
                 onChipAdd: () => {
                     console.log("Chip add");
 
-                    // console.log(M.Chips.getInstance($('.chips')).chipsData);
+                    console.log(M.Chips.getInstance($('.chips')).chipsData);
 
-                    $.ajax({
-                        type: "POST",
-                        url: "addfood.php",
-                        data: {
-                            breakfast: "##TEST"
-                        },
-                        success: function(result) {
-                            $("#content").html(result);
-                        }
-                    });
-
-                    // var xmlhttp = new XMLHttpRequest();
-                    // xmlhttp.open("GET", "addfood.php", true);
-                    // request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    // xmlhttp.send("##TEST");
-
+                    // make call to PHP file to handle giving tags info to be put in database
+                    // should let the user add information without ever pressing a "save" button
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
                             document.getElementById("demo").innerHTML = this.responseText;
                         }
                     };
-                    xhttp.open("POST", "php/post.php", true);
+                    xhttp.open("POST", "addfood.php", true);
                     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xhttp.send("breakfast=#TEST");
                 },
