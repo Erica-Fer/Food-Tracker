@@ -94,11 +94,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-
         /* Javascript */
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.chips');
-            var instances = M.Chips.init(elems, {});
+            var instances = M.Chips.init(elems, {
+                autocompleteOptions: {
+                    data: {
+                        'Apple': null,
+                        'Microsoft': null,
+                        'Google': null
+                    },
+                    limit: Infinity,
+                    minLength: 1
+                },
+                placeholder: 'Enter a tag',
+                secondaryPlaceholder: 'Enter a tag',
+                data: [{
+                    tag: 'Apple',
+                }],
+                onChipAdd: () => {
+                    console.log("Chip add");
+                },
+            });
         });
 
         /* JQuery */
