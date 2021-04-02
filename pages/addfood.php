@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container">
         <div class="center-align background: white">
 
-            <h1>Enter what you ate in here</h1><br>
+            <h1>Add food for <?php echo $_GET['date'] ?> </h1><br>
 
             <form action="" class="" method="post">
                 <section>
