@@ -1,6 +1,7 @@
 <html lang="en">
 
 <?php
+session_start();
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -8,11 +9,14 @@ $statement = $pdo->prepare('SELECT * FROM foodForDay');
 $statement->execute();
 $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+$date = $_GET['date'];
+echo $date;
 $errors = [];
 
 $breakfast = '';
 $lunch = '';
 $dinner = '';
+$date = ""; // ? unique id from calendar
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
     $breakfast = $_POST['breakfast'];
@@ -75,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p class="center-align flow-text">
                     <button type="submit" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br>
 
-                    <!-- go back -->
-                    <a href="main.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
+                <!-- go back -->
+                <a href="main.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
                 <p class="center-align">Return to calendar.</p>
             </form>
         </div>
