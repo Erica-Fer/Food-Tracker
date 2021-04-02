@@ -94,44 +94,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.chips').chips();
-            $('.chips-initial').chips({
-                data: [{
-                    tag: 'Apple',
-                }, {
-                    tag: 'Microsoft',
-                }, {
-                    tag: 'Google',
-                }],
-            });
-            $('.chips-placeholder').chips({
-                placeholder: 'Enter a tag',
-                secondaryPlaceholder: '+Tag',
-            });
-            $('.chips-autocomplete').chips({
-                autocompleteOptions: {
-                    data: {
-                        'Apple': null,
-                        'Microsoft': null,
-                        'Google': null
-                    },
-                    limit: Infinity,
-                    minLength: 1
-                },
-                data: [{
-                    tag: 'Apple',
-                }, {
-                    tag: 'Microsoft',
-                }, {
-                    tag: 'Google',
-                }],
-                onChipAdd: () => {
-                    console.log("Chip add");
 
-                },
-            });
+        /* Javascript */
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.chips');
+            var instances = M.Chips.init(elems, {});
         });
+
+        /* JQuery */
+        // $(document).ready(function() {
+        //     $('.chips').chips();
+        //     $('.chips-initial').chips({
+        //         data: [{
+        //             tag: 'Apple',
+        //         }, {
+        //             tag: 'Microsoft',
+        //         }, {
+        //             tag: 'Google',
+        //         }],
+        //     });
+        //     $('.chips-placeholder').chips({
+        //         placeholder: 'Enter a tag',
+        //         secondaryPlaceholder: '+Tag',
+        //     });
+        //     $('.chips-autocomplete').chips({
+        //         autocompleteOptions: {
+        //             data: {
+        //                 'Apple': null,
+        //                 'Microsoft': null,
+        //                 'Google': null
+        //             },
+        //             limit: Infinity,
+        //             minLength: 1
+        //         },
+        //         data: [{
+        //             tag: 'Apple',
+        //         }],
+        //         onChipAdd: () => {
+        //             console.log("Chip add");
+        //             console.log($('.chips'));
+        //         },
+        //     });
+
+
+        // });
     </script>
 
 
