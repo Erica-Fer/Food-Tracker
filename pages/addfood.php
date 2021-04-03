@@ -2,6 +2,10 @@
 
 <?php
 session_start();
+
+
+
+
 ?>
 
 <head>
@@ -57,7 +61,7 @@ session_start();
         // should let them see previous lunch/dinner/breakfast/etc. entries
         function getDatabase(formNum) {
             var date = "<?php echo $_GET['date'] ?>";
-            console.log("date: " + date);
+            result = '';
 
             switch (formNum) {
                 case 0: // breakfast
@@ -71,7 +75,7 @@ session_start();
                             document.getElementById("demo").innerHTML = xhttp.responseText;
                             var result = this.responseText;
                             console.log(result);
-                            return this.responseText
+                            // return this.responseText
                         }
                     };
                     xhttp.open("POST", "php/grabdata.php", true);
@@ -86,7 +90,7 @@ session_start();
             }
 
             return [{
-                tag: 'Apple'
+                tag: result
             }, {
                 tag: 'Locust'
             }];
@@ -94,12 +98,13 @@ session_start();
 
         document.addEventListener('DOMContentLoaded', function() {
             var elems = [document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
+            var prevFood = getDatabase(1);
             // console.log("elems: " + elems); // ? debug
 
             // set values for each element
             // should let each user form keep unique elements, and elements featured in other forms
             for (i = 0; i < 3; i++) {
-                var prevFood = getDatabase(i);
+                console.log(prevFood + ', ind: ' + i);
 
                 var instances = M.Chips.init(elems[i], {
                     autocompleteOptions: {
@@ -118,11 +123,8 @@ session_start();
                         var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
                         var formData = '.chips' + formId;
                         var chipsData = M.Chips.getInstance($(formData)).chipsData;
-                        // console.log(chipsData); // ?
 
-                        // ? returnning banana always?
                         var newestTag = chipsData[chipsData.length - 1].tag;
-                        // console.log("last item: " + chipsData[chipsData.length - 1].tag); // ? for debugging
 
                         // make call to PHP file to handle giving tags info to be put in database
                         // should let the user add information without ever pressing a "save" button
