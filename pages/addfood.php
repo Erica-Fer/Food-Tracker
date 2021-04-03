@@ -118,13 +118,14 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
                     break;
                 case 1: // lunch
                     result = <?php echo json_encode($lunchFood, JSON_HEX_TAG) ?>;
+                    // return 0;
                     break;
                 case 2: // dinner
                     result = <?php echo json_encode($dinnerFood, JSON_HEX_TAG) ?>;
                     break;
             }
 
-            if(result == null)
+            if(result == null || result.length < 1)
             {
                 return 0;
             }
@@ -145,8 +146,9 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
                     autocompleteOptions: {
                         data: {
                             'Apple': null,
-                            'Microsoft': null,
-                            'Google': null
+                            'Rice': null,
+                            'Custard': null,
+                            'Chocolate': null
                         },
                         limit: Infinity,
                         minLength: 1
