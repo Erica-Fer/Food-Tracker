@@ -60,7 +60,13 @@ $dinner = '';
             <h1>Add food for <?php echo $_GET['date'] ?> </h1><br>
 
             <h2>What did you have for breakfast?</h2>
-            <div class="chips chips-autocomplete chips-placeholder"></div>
+            <div class="chips chips-autocomplete" id="breakfast"></div>
+
+            <h2>What did you have for lunch?</h2>
+            <div class="chips chips-autocomplete" id="lunch"></div>
+
+            <h2>What did you have for dinner?</h2>
+            <div class="chips chips-autocomplete" id="dinner"></div>
 
 
             <!-- 
@@ -118,22 +124,26 @@ $dinner = '';
                 data: [{
                     tag: 'Apple',
                 }],
-                onChipAdd: () => {
+                onChipAdd: (event) => {
                     console.log("Chip add");
+                    console.log(event[0].id);
 
-                    console.log(M.Chips.getInstance($('.chips')).chipsData);
+                    var formId = event[0].id; // the form that was being added to
+                    var chipsData = M.Chips.getInstance($('.chips')).chipsData;
+                    var newestTag = chipsData[chipsData.length - 1].tag;
+                    // console.log("last item: " + chipsData[chipsData.length - 1].tag); // ? for debugging
 
                     // make call to PHP file to handle giving tags info to be put in database
                     // should let the user add information without ever pressing a "save" button
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
-                            document.getElementById("demo").innerHTML = this.responseText;
+                            document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
                         }
                     };
-                    xhttp.open("POST", "addfood.php", true);
-                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    xhttp.send("breakfast=#TEST");
+                    xhttp.open("POST", "php/post.php", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
+                    xhttp.send(formId+"="+newestTag);
                 },
             });
         });

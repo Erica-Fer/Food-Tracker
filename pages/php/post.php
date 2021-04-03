@@ -7,30 +7,36 @@ $statement = $pdo->prepare('SELECT * FROM foodForDay');
 $statement->execute();
 $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-$errors = [];
-if (isset($_POST['breakfast'])) {
-    $temp = $_POST['breakfast'];
-    echo "breakfast: $temp";
-}
-// $breakfast = $_POST['breakfast'];
+$breakfast = '';
 $lunch = '';
 $dinner = '';
 
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     $breakfast = $_POST['breakfast'];
-//     $lunch = $_POST['lunch'];
-//     $dinner = $_POST['dinner'];
+$errors = [];
 
-//     if (empty($errors)) {
-//         $statement = $pdo->prepare("INSERT INTO foodForDay (breakfast, lunch, dinner)
-//                     VALUES (:breakfast, :lunch, :dinner)");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['breakfast'])) {
+        $breakfast = $_POST['breakfast'];
+        echo "breakfast: $breakfast";
+    } else if(isset($_POST['lunch']))
+    {
+        $lunch = $_POST['lunch'];
+        echo "lunch: $lunch";
 
-//         $statement->bindValue(':breakfast', $breakfast);
-//         $statement->bindValue(':lunch', $lunch);
-//         $statement->bindValue(':dinner', $dinner);
-//         $statement->execute();
-//         header('Location: addfood.php');
-//     }
-// }
+    } else { // ? may need to be an if/else
+        $dinner = $_POST['dinner'];
+        echo "dinner: $dinner";
+    }
+
+    // if (empty($errors)) {
+    //     $statement = $pdo->prepare("INSERT INTO foodForDay (breakfast, lunch, dinner)
+    //                 VALUES (:breakfast, :lunch, :dinner)");
+
+    //     $statement->bindValue(':breakfast', $breakfast);
+    //     $statement->bindValue(':lunch', $lunch);
+    //     $statement->bindValue(':dinner', $dinner);
+    //     $statement->execute();
+    //     header('Location: addfood.php');
+    // }
+}
 
 ?>

@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <title>Full-Plate</title>
-    <link rel="stylesheet" type="text/css" href="css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="../css/materialize.css">
 </head>
 
 <body style="background-color: bisque;">
@@ -26,11 +26,11 @@
             <div class="row">
                 <div class="column s12">
 
-                    <a href="addfood.php?date=<?php echo '3/3/21' ?>" class="waves-effect waves-light btn-large center">March 3, 2021</a>
+                    <a href="addfood.php?date=<?php echo '3/3/21' ?>" class="waves-effect waves-light btn-small">March 3, 2021</a>
 
-                    <a href="addfood.php?date=<?php echo '4/1/21' ?>" class="waves-effect waves-light btn-large center">April 1, 2021</a>
+                    <a href="addfood.php?date=<?php echo '4/1/21' ?>" class="waves-effect waves-light btn-small">April 1, 2021</a>
 
-                    <a href="addfood.php?date=<?php echo '3/10/21' ?>" class="waves-effect waves-light btn-large center">March 10, 2021</a>
+                    <a href="addfood.php?date=<?php echo '3/10/21' ?>" class="waves-effect waves-light btn-small">March 10, 2021</a>
 
                     <br><br><br>
                 </div>
