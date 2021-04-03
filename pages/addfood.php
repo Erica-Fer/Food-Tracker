@@ -13,10 +13,10 @@ $statement->bindValue(':date', $date);
 $statement->execute();
 
 $food = $statement->fetchAll(PDO::FETCH_ASSOC);
-$breakfastFood = $food[0]['breakfast'];
-$lunchFood = $food[0]['lunch'];
-$dinnerFood = $food[0]['dinner'];
 
+$breakfastFood = (isset($food[0]['breakfast'])? $food[0]['breakfast'] : null);
+$lunchFood = (isset($food[0]['lunch']) != null ? $food[0]['lunch'] : null);
+$dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
 ?>
 
 <head>
@@ -121,8 +121,12 @@ $dinnerFood = $food[0]['dinner'];
                     break;
                 case 2: // dinner
                     result = <?php echo json_encode($dinnerFood, JSON_HEX_TAG) ?>;
-                    console.log(result)
                     break;
+            }
+
+            if(result == null)
+            {
+                return 0;
             }
 
             return [{tag: result}];
