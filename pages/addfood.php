@@ -3,8 +3,19 @@
 <?php
 session_start();
 
+$date = $_GET['date'];
 
+$pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+$statement = $pdo->prepare("SELECT * FROM foodForDay WHERE date=:date");
+$statement->bindValue(':date', $date);
+$statement->execute();
+
+$food = $statement->fetchAll(PDO::FETCH_ASSOC);
+$breakfastFood = $food[0]['breakfast'];
+$lunchFood = $food[0]['lunch'];
+$dinnerFood = $food[0]['dinner'];
 
 ?>
 
@@ -59,52 +70,72 @@ session_start();
         // get the values from the database for each form
         // used for the chips, so a user can see what theyve already input
         // should let them see previous lunch/dinner/breakfast/etc. entries
-        function getDatabase(formNum) {
-            var date = "<?php echo $_GET['date'] ?>";
-            result = '';
+        // function getDatabase(formNum) {
+        //     var date = "<?php echo $_GET['date'] ?>";
+        //     result = '';
+
+        //     switch (formNum) {
+        //         case 0: // breakfast
+        //             return 0;
+        //             break;
+        //         case 1: // lunch
+        //             var xhttp = new XMLHttpRequest();
+        //             xhttp.onreadystatechange = function() {
+        //                 if (this.readyState == 4 && this.status == 200) {
+        //                     // Typical action to be performed when the document is ready:
+        //                     document.getElementById("demo").innerHTML = xhttp.responseText;
+        //                     var result = this.responseText;
+        //                     console.log(result);
+        //                     // return this.responseText
+        //                 }
+        //             };
+        //             xhttp.open("POST", "php/grabdata.php", true);
+        //             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
+        //             xhttp.send('formType=lunch&date=' + date); // should send something in the form of "breakfast=cheese", or other input
+
+        //             return 0;
+        //             break;
+        //         case 2: // dinner
+        //             return 0;
+        //             break;
+        //     }
+
+        //     return [{
+        //         tag: result
+        //     }, {
+        //         tag: 'Locust'
+        //     }];
+        // }
+
+        // get the php values as defined the beginning of the file
+        // lets us set food already in the database as chips data
+        function getFood(formNum){
+            var result = '';
 
             switch (formNum) {
                 case 0: // breakfast
-                    return 0;
+                    result = <?php echo json_encode($breakfastFood, JSON_HEX_TAG) ?>;
                     break;
                 case 1: // lunch
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            // Typical action to be performed when the document is ready:
-                            document.getElementById("demo").innerHTML = xhttp.responseText;
-                            var result = this.responseText;
-                            console.log(result);
-                            // return this.responseText
-                        }
-                    };
-                    xhttp.open("POST", "php/grabdata.php", true);
-                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
-                    xhttp.send('formType=lunch&date=' + date); // should send something in the form of "breakfast=cheese", or other input
-
-                    return 0;
+                    result = <?php echo json_encode($lunchFood, JSON_HEX_TAG) ?>;
                     break;
                 case 2: // dinner
-                    return 0;
+                    result = <?php echo json_encode($dinnerFood, JSON_HEX_TAG) ?>;
+                    console.log(result)
                     break;
             }
 
-            return [{
-                tag: result
-            }, {
-                tag: 'Locust'
-            }];
+            return [{tag: result}];
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             var elems = [document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
-            var prevFood = getDatabase(1);
             // console.log("elems: " + elems); // ? debug
-
+            
             // set values for each element
             // should let each user form keep unique elements, and elements featured in other forms
             for (i = 0; i < 3; i++) {
-                console.log(prevFood + ', ind: ' + i);
+                var prevFood = getFood(i);
 
                 var instances = M.Chips.init(elems[i], {
                     autocompleteOptions: {
