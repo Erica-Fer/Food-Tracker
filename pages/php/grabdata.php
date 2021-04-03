@@ -1,3 +1,11 @@
+<!-- 
+
+    File for handling grabbing database information.
+    Should be used so that chips in addfood.php can display info that a user has already input.
+
+ -->
+
+
 <?php
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
