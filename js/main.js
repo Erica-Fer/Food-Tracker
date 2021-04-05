@@ -16,22 +16,22 @@
 
         next.onclick = addOne;
         prev.onclick = minusOne;
-
+        
         //if they click on the month -- gets them the current month (likely will change later)
         var current = document.getElementById("current-month");
         current.onclick = updateDate;
     }; 
-
+    
     //returns the number of days in a month
     function numDaysInMonth(month, year) {
         return 32 - new Date(year, month, 32).getDate();
     }
-
+    
     //creates the calendar days based on month & year
     function createCalendar(month, year){
         //finds what day a month starts on
         var starting_day = (new Date(year, month)).getDay();
-        
+
         //populates the calendar with dates
         var cal = document.getElementById("calendar-days");
         cal.innerHTML = ""; //clear old content
