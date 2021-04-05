@@ -14,7 +14,8 @@ $statement->execute();
 
 $food = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-$breakfastFood = (isset($food[0]['breakfast'])? $food[0]['breakfast'] : null);
+// make sure that values are actually there
+$breakfastFood = (isset($food[0]['breakfast']) ? $food[0]['breakfast'] : null);
 $lunchFood = (isset($food[0]['lunch']) != null ? $food[0]['lunch'] : null);
 $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
 ?>
@@ -67,49 +68,9 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
     <script>
         /* Javascript */
 
-        // get the values from the database for each form
-        // used for the chips, so a user can see what theyve already input
-        // should let them see previous lunch/dinner/breakfast/etc. entries
-        // function getDatabase(formNum) {
-        //     var date = "<?php echo $_GET['date'] ?>";
-        //     result = '';
-
-        //     switch (formNum) {
-        //         case 0: // breakfast
-        //             return 0;
-        //             break;
-        //         case 1: // lunch
-        //             var xhttp = new XMLHttpRequest();
-        //             xhttp.onreadystatechange = function() {
-        //                 if (this.readyState == 4 && this.status == 200) {
-        //                     // Typical action to be performed when the document is ready:
-        //                     document.getElementById("demo").innerHTML = xhttp.responseText;
-        //                     var result = this.responseText;
-        //                     console.log(result);
-        //                     // return this.responseText
-        //                 }
-        //             };
-        //             xhttp.open("POST", "php/grabdata.php", true);
-        //             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
-        //             xhttp.send('formType=lunch&date=' + date); // should send something in the form of "breakfast=cheese", or other input
-
-        //             return 0;
-        //             break;
-        //         case 2: // dinner
-        //             return 0;
-        //             break;
-        //     }
-
-        //     return [{
-        //         tag: result
-        //     }, {
-        //         tag: 'Locust'
-        //     }];
-        // }
-
         // get the php values as defined the beginning of the file
         // lets us set food already in the database as chips data
-        function getFood(formNum){
+        function getFood(formNum) {
             var result = '';
 
             switch (formNum) {
@@ -118,28 +79,30 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
                     break;
                 case 1: // lunch
                     result = <?php echo json_encode($lunchFood, JSON_HEX_TAG) ?>;
-                    // return 0;
                     break;
                 case 2: // dinner
                     result = <?php echo json_encode($dinnerFood, JSON_HEX_TAG) ?>;
                     break;
             }
 
-            if(result == null || result.length < 1)
-            {
+            if (result == null || result.length < 1) {
                 return 0;
             }
 
-            return [{tag: result}];
+            return [{
+                tag: result
+            }];
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // array of all chips forms
+            // add as needed, just use '.chips<name>' for the querySelector
             var elems = [document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
             // console.log("elems: " + elems); // ? debug
-            
+
             // set values for each element
             // should let each user form keep unique elements, and elements featured in other forms
-            for (i = 0; i < 3; i++) {
+            for (i = 0; i < elems.length; i++) {
                 var prevFood = getFood(i);
 
                 var instances = M.Chips.init(elems[i], {
@@ -179,8 +142,6 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
             }
         });
     </script>
-
-
 </body>
 
 </html>
