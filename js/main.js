@@ -108,7 +108,7 @@
                     var circle = document.createElement("div");
                     //if it's today's date
                     if(temp_date === curr_day && month === curr_month && year === curr_year) {
-                        console.log("in here");
+                        //console.log("in here");
                         //var circle = document.createElement("div");
                         circle.classList.add("active");
                         circle.appendChild(cellText);
@@ -215,12 +215,20 @@
         //might need to remove previous classes if someone changes something for the day
         //might need to do something to differentiate what day is current day idk 
         var classList = curr.classList;
-        while (classList.length > 0) {
-            classList.remove(classList.item(0));
+        console.log(classList);
+        var size = classList.length;
+        console.log(size);
+        while (size >= 0) {
+            if(classList.item(size) != "active") {
+                classList.remove(classList.item(size));
+            }
+            size--;  
         }
+        console.log("new class list" + classList);
         if(num == 0){
             //curr.classList.remove("empty");
             curr.classList.add("goodDay");
+            //console.log(curr.classList);
         }
         else if(num == 1){
             curr.classList.add("okayDay");
