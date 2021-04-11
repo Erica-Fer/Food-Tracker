@@ -29,6 +29,8 @@
     
     //creates the calendar days based on month & year
     function createCalendar(month, year){
+        //console.log(month);
+        //console.log(year);
         //finds what day a month starts on
         var starting_day = (new Date(year, month)).getDay();
 
@@ -92,26 +94,46 @@
                 else {
                     //create new cell & add the number 
                     var cell = document.createElement("td");
+                    var id = ""; //will store the id for the day (currently like 04052021 but might switch to 04-05-2021)
                     //var circle = document.createElement("div");
                     if(temp_date < 10) {
                         var cellText = document.createTextNode("0" + temp_date);
+                        id += "0";
                     }
                     else {
                         var cellText = document.createTextNode(temp_date);
+                        
                     }
-
+                    id += temp_date;
+                    var circle = document.createElement("div");
                     //if it's today's date
                     if(temp_date === curr_day && month === curr_month && year === curr_year) {
-                        var circle = document.createElement("div");
+                        //var circle = document.createElement("div");
                         circle.classList.add("active");
                         circle.appendChild(cellText);
-                        cell.appendChild(circle);
+                        //cell.appendChild(circle);
                         //circle.classList.add("active");
                         //cell.classList.add("active");
                     }
                     else{
-                        cell.appendChild(cellText);
+                        //alert("going here");
+                        //var other = document.createElement("div");
+                        circle.classList.add("empty");
+                        circle.appendChild(cellText);
+                        //cell.appendChild(circle);
                     }
+
+                    if(month < 9){
+                        id += "0";
+                    }
+                    id += month + 1;
+                    id += year;
+                    circle.setAttribute("id", id)
+                    //circle.setAttribute("onClick", printID);
+                    //cell.setAttribute("id", id);
+                    //console.log(id);
+                    circle.onclick = printID;
+                    cell.appendChild(circle);
                     temp_row.appendChild(cell);
                     temp_date++;
                 }
@@ -182,6 +204,10 @@
 
         }
 
+    }
+
+    function printID(){
+        console.log("you clicked on: " + this.id);
     }
 
     //increments the month/year counter

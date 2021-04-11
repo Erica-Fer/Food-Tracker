@@ -96,6 +96,18 @@ purple background with white (slightly thicker) font */
   /* background: greenyellow; */
 }
 
+#calendar-days .empty {
+  /* color: rgb(184, 181, 181); like, but might be too light */
+  margin:auto;
+  height: 22px;
+  width: 23px;
+  padding-bottom: 10px;
+  border-radius: 30%;
+  border-radius: 30%;
+  border: 2px solid grey;
+  
+}
+
  /* Highlight the "current" day 
   originally:  .days li .active
   /* og .active, but changed it 
