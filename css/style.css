@@ -108,6 +108,31 @@ purple background with white (slightly thicker) font */
   
 }
 
+#calendar-days .goodDay {
+  /* color: rgb(184, 181, 181); like, but might be too light */
+  
+  border: 2px solid yellowgreen;
+  background: yellowgreen;
+  color: white;
+}
+
+#calendar-days .okayDay {
+  /* color: rgb(184, 181, 181); like, but might be too light */
+  
+  border: 2px solid orange;
+  background: orange;
+  color: white;
+}
+
+#calendar-days .badDay {
+  /* color: rgb(184, 181, 181); like, but might be too light */
+  
+  border: 2px solid red;
+  background: red;
+  color: white;
+}
+
+
  /* Highlight the "current" day 
   originally:  .days li .active
   /* og .active, but changed it 

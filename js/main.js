@@ -108,6 +108,7 @@
                     var circle = document.createElement("div");
                     //if it's today's date
                     if(temp_date === curr_day && month === curr_month && year === curr_year) {
+                        console.log("in here");
                         //var circle = document.createElement("div");
                         circle.classList.add("active");
                         circle.appendChild(cellText);
@@ -208,6 +209,33 @@
 
     function printID(){
         console.log("you clicked on: " + this.id);
+        var num = Math.floor(Math.random() * 3);
+        var curr = document.getElementById(this.id);
+        console.log(num);
+        if(num == 0){
+            //curr.classList.remove("empty");
+            curr.classList.add("goodDay");
+        }
+        else if(num == 1){
+            curr.classList.add("okayDay");
+        }
+        else if(num == 2){
+            curr.classList.add("badDay");
+        }
+        else {
+            console.log("you....never should have gotten here???");
+        }
+        //var tempmonth = this.id.substring(2, 4);
+        //console.log(tempmonth);
+        //if(tempmonth.substring(0,1) == 0){
+          //  tempmonth = tempmonth.substring(1,2);
+        //}
+        //console.log(tempmonth);
+        //tempmonth -= 1;
+        //var year = this.id.substring(4, 8);
+        //console.log(year);
+        //createCalendar(tempmonth, year);
+        //window.open("addfood.php");
     }
 
     //increments the month/year counter
