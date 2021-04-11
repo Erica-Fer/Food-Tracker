@@ -212,6 +212,12 @@
         var num = Math.floor(Math.random() * 3);
         var curr = document.getElementById(this.id);
         console.log(num);
+        //might need to remove previous classes if someone changes something for the day
+        //might need to do something to differentiate what day is current day idk 
+        var classList = curr.classList;
+        while (classList.length > 0) {
+            classList.remove(classList.item(0));
+        }
         if(num == 0){
             //curr.classList.remove("empty");
             curr.classList.add("goodDay");

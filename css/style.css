@@ -103,14 +103,16 @@ purple background with white (slightly thicker) font */
   width: 23px;
   padding-bottom: 10px;
   border-radius: 30%;
-  border-radius: 30%;
   border: 2px solid grey;
-  
 }
 
 #calendar-days .goodDay {
   /* color: rgb(184, 181, 181); like, but might be too light */
-  
+  margin:auto;
+  height: 22px;
+  width: 23px;
+  padding-bottom: 10px;
+  border-radius: 30%;
   border: 2px solid yellowgreen;
   background: yellowgreen;
   color: white;
@@ -118,7 +120,11 @@ purple background with white (slightly thicker) font */
 
 #calendar-days .okayDay {
   /* color: rgb(184, 181, 181); like, but might be too light */
-  
+  margin:auto;
+  height: 22px;
+  width: 23px;
+  padding-bottom: 10px;
+  border-radius: 30%;
   border: 2px solid orange;
   background: orange;
   color: white;
@@ -126,7 +132,11 @@ purple background with white (slightly thicker) font */
 
 #calendar-days .badDay {
   /* color: rgb(184, 181, 181); like, but might be too light */
-  
+  margin:auto;
+  height: 22px;
+  width: 23px;
+  padding-bottom: 10px;
+  border-radius: 30%;
   border: 2px solid red;
   background: red;
   color: white;
