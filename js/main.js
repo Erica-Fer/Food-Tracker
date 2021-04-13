@@ -150,6 +150,9 @@
 
     //updates the month & year
     function updateDate(getCurrent = true) {
+        // ignore date stuff -- lets just go to the new page
+
+        // end tester
         //alert(increase);
         if(getCurrent){
             //alert("is get current");
@@ -204,10 +207,13 @@
                 current.innerText = "December " + year;
 
         }
-
-    }
+            }
 
     function printID(){
+        var url = "addfood.php?date=" + this.id;
+        window.location.href = url;
+        // // console.log()
+
         console.log("you clicked on: " + this.id);
         var num = Math.floor(Math.random() * 3);
         var curr = document.getElementById(this.id);
