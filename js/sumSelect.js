@@ -5,6 +5,9 @@
     var increaseMonth = 0;
     var increaseYear = 0;
 
+    // Manage what days are sent to the summary screen
+    var sumDays = ["0000-00-00", "9999-99-99"];
+
     //runs once the user loads the page
     window.onload = function () {
         //stores element that allows users to get next/prev month  
@@ -95,6 +98,14 @@
                     var cell = document.createElement("td");
                     var id = ""; //will store the id for the day (currently like 04052021 but might switch to 04-05-2021)
                     //var circle = document.createElement("div");
+                    id += year;
+                    id += '-';
+                    if (month < 9) {
+                        id += "0";
+                    }
+                    id += month + 1;
+                    id += '-';
+
                     if (temp_date < 10) {
                         var cellText = document.createTextNode("0" + temp_date);
                         id += "0";
@@ -104,6 +115,7 @@
 
                     }
                     id += temp_date;
+
                     var circle = document.createElement("div");
                     //if it's today's date
                     if (temp_date === curr_day && month === curr_month && year === curr_year) {
@@ -123,16 +135,12 @@
                         //cell.appendChild(circle);
                     }
 
-                    if (month < 9) {
-                        id += "0";
-                    }
-                    id += month + 1;
-                    id += year;
+
                     circle.setAttribute("id", id)
-                    //circle.setAttribute("onClick", printID);
+                    //circle.setAttribute("onClick", daySelect);
                     //cell.setAttribute("id", id);
                     //console.log(id);
-                    circle.onclick = printID; //?
+                    circle.onclick = daySelect; //?
                     cell.appendChild(circle);
                     temp_row.appendChild(cell);
                     temp_date++;
@@ -207,63 +215,84 @@
         }
     }
 
-    /* erica code */
+    function goSumDates(){
 
-    function selectSumDates(){
-        // select first date
-        // select second date
-        
     }
 
-    /* end erica code */
+    function daySelect() {
+        console.log("id: " +  this.id);
 
-    function printID() {
-        // var url = "addfood.php?date=" + this.id;
-        // window.location.href = url;
-        // // console.log()
-
-        console.log("you clicked on: " + this.id);
-        var num = Math.floor(Math.random() * 3);
         var curr = document.getElementById(this.id);
-        console.log(num);
-        //might need to remove previous classes if someone changes something for the day
-        //might need to do something to differentiate what day is current day idk 
         var classList = curr.classList;
-        console.log(classList);
+
+        
+        // if(classList == "sumSelect"){
+        //     return;
+        // }
+        
+        if(this.id == sumDays[0] && document.getElementById(sumDays[0]).classList != "empty"){
+            highlightSelected(true, document.getElementById(sumDays[0]));
+            sumDays[0] = '0000-00-00';
+            return;
+        }
+
+        if(this.id == sumDays[1] && document.getElementById(sumDays[1]).classList != "empty"){
+            highlightSelected(true, document.getElementById(sumDays[1]));
+            sumDays[1] = '9999-99-99';
+            return;
+        }
+
+        // handle the selecting of two days, and allow for reselecte
+        if(this.id < sumDays[1] && sumDays[1] != '9999-99-99'){
+            highlightSelected(true, document.getElementById(sumDays[0]));
+            highlightSelected(false, document.getElementById(this.id));
+            sumDays[0] = this.id;
+        }else if(this.id > sumDays[0]){
+            // ? this need to be optimized better
+            if(sumDays[0] == '0000-00-00' && sumDays[1] != '9999-99-99'){
+                highlightSelected(false, document.getElementById(this.id));
+                sumDays[0] = sumDays[1];
+                sumDays[1] = this.id;
+            }else{
+                highlightSelected(true, document.getElementById(sumDays[1]));
+                highlightSelected(false, document.getElementById(this.id));
+                sumDays[1] = this.id;
+            }
+        }
+
+
+        console.log("early day: " +sumDays[0]);
+        console.log("late day: " +sumDays[1]);
+        console.log("selected: " + this.id);
+
+    }
+
+    function highlightSelected(deselect, elem){
+        var daySet = deselect;
+        // console.log("id: " +  elem);
+
+        if(elem != null){
+            var classList = elem.classList;
+        }else
+            return;
         var size = classList.length;
-        console.log(size);
+
+        // if youve clicked on this day already, make note of it
+        // remove all the current classes
         while (size >= 0) {
             if (classList.item(size) != "active") {
                 classList.remove(classList.item(size));
             }
             size--;
         }
-        console.log("new class list" + classList);
-        if (num == 0) {
-            //curr.classList.remove("empty");
-            curr.classList.add("goodDay");
-            //console.log(curr.classList);
+
+        // allow for selecting/deselecting of days
+        if(!deselect){
+            elem.classList.add("sumSelect");
         }
-        else if (num == 1) {
-            curr.classList.add("okayDay");
+        else{
+            elem.classList.add("empty");
         }
-        else if (num == 2) {
-            curr.classList.add("badDay");
-        }
-        else {
-            console.log("you....never should have gotten here???");
-        }
-        //var tempmonth = this.id.substring(2, 4);
-        //console.log(tempmonth);
-        //if(tempmonth.substring(0,1) == 0){
-        //  tempmonth = tempmonth.substring(1,2);
-        //}
-        //console.log(tempmonth);
-        //tempmonth -= 1;
-        //var year = this.id.substring(4, 8);
-        //console.log(year);
-        //createCalendar(tempmonth, year);
-        //window.open("addfood.php");
     }
 
     //increments the month/year counter

@@ -111,6 +111,18 @@ purple background with white (slightly thicker) font */
   border: 2px solid grey;
 }
 
+/* erica added for testing. using for the summary date system */
+#calendar-days .sumSelect {
+  margin:auto;
+  height: 22px;
+  width: 23px;
+  padding-bottom: 10px;
+  border-radius: 30%;
+  border: 2px solid purple;
+  background: purple;
+  color: white;
+}
+
 #calendar-days .goodDay {
   /* color: rgb(184, 181, 181); like, but might be too light */
   margin:auto;
