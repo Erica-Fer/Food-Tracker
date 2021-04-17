@@ -1,12 +1,23 @@
 "use strict";
 
+var sumDays = ["0000-00-00", "9999-99-99"];
+function sumButtonClick(){
+    if (sumDays[0] == "0000-00-00" || sumDays[1] == "9999-99-99"){
+        alert("Please select 2 values.");
+        return;
+    }
+    
+    var url = "summary.php?date=" + sumDays[0] + "&date=" + sumDays[1];
+    window.location.href = url;
+}
+
 (function () {
 
     var increaseMonth = 0;
     var increaseYear = 0;
 
     // Manage what days are sent to the summary screen
-    var sumDays = ["0000-00-00", "9999-99-99"];
+
 
     //runs once the user loads the page
     window.onload = function () {
@@ -152,6 +163,8 @@
             }
 
         }
+        // var sumSelectButton = document.getElementById("sumSelectButton");
+        // sumSelectButton.onclick = sumButtonClick();
     }
 
     //updates the month & year
@@ -215,9 +228,7 @@
         }
     }
 
-    function goSumDates(){
 
-    }
 
     function daySelect() {
         console.log("id: " +  this.id);
@@ -261,9 +272,9 @@
         }
 
 
-        console.log("early day: " +sumDays[0]);
-        console.log("late day: " +sumDays[1]);
-        console.log("selected: " + this.id);
+        // console.log("early day: " +sumDays[0]);
+        // console.log("late day: " +sumDays[1]);
+        // console.log("selected: " + this.id);
 
     }
 
