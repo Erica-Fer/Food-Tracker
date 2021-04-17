@@ -4,15 +4,24 @@
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$statement = $pdo->prepare("SELECT breakfast FROM foodForDay WHERE date IN ('3/3/21','3/10/21','4/1/21')");
+$date1 = $_GET['date1'];
+$date2 = $_GET['date2'];
+
+$statement = $pdo->prepare("SELECT breakfast FROM foodForDay WHERE date >=:date1 AND date <=:date2");
+$statement->bindValue(':date1', $date1);
+$statement->bindValue(':date2', $date2);
 $statement->execute();
 $breakfast = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-$statement = $pdo->prepare("SELECT lunch FROM foodForDay WHERE date IN ('3/3/21','3/10/21','4/1/21')");
+$statement = $pdo->prepare("SELECT lunch FROM foodForDay WHERE date >=:date1 AND date <=:date2");
+$statement->bindValue(':date1', $date1);
+$statement->bindValue(':date2', $date2);
 $statement->execute();
 $lunch = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-$statement = $pdo->prepare("SELECT dinner FROM foodForDay WHERE date IN ('3/3/21','3/10/21','4/1/21')");
+$statement = $pdo->prepare("SELECT dinner FROM foodForDay WHERE date >=:date1 AND date <=:date2");
+$statement->bindValue(':date1', $date1);
+$statement->bindValue(':date2', $date2);
 $statement->execute();
 $dinner = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -37,7 +46,7 @@ $dinner = $statement->fetchAll(PDO::FETCH_ASSOC);
     <div class="container">
         <div class="center-align background: white">
 
-            <h1>Food you had through 3/3/21 and 4/1/21</h1><br>
+            <h1>Food you had through <?php echo $_GET['date1']?> and <?php echo $_GET['date2']?></h1><br>
 
             <h2>What you had for breakfast</h2>
             <?php foreach ($breakfast as $b) : ?>
