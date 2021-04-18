@@ -94,6 +94,12 @@
                     //create new cell & add the number 
                     var cell = document.createElement("td");
                     var id = ""; //will store the id for the day (currently like 04052021 but might switch to 04-05-2021)
+                    id += year + "-";
+                    if (month < 9) {
+                        id += "0";
+                    }
+                    id += month + 1 + "-";
+                   
                     //var circle = document.createElement("div");
                     if (temp_date < 10) {
                         var cellText = document.createTextNode("0" + temp_date);
@@ -123,15 +129,16 @@
                         //cell.appendChild(circle);
                     }
 
-                    if (month < 9) {
-                        id += "0";
-                    }
-                    id += month + 1;
-                    id += year;
+                    // if (month < 9) {
+                    //     id += "0";
+                    // }
+                    // id += month + 1;
+                    // id += year;
                     circle.setAttribute("id", id)
+
                     //circle.setAttribute("onClick", printID);
                     //cell.setAttribute("id", id);
-                    //console.log(id);
+                    console.log(id);
                     circle.onclick = printID; //?
                     cell.appendChild(circle);
                     temp_row.appendChild(cell);
@@ -218,8 +225,9 @@
     /* end erica code */
 
     function printID() {
-        // var url = "addfood.php?date=" + this.id;
-        // window.location.href = url;
+        //var url = "addfood.php?date=" + this.id;
+        //window.location.href = url;
+        window.open("../index.html");
         // // console.log()
 
         console.log("you clicked on: " + this.id);
