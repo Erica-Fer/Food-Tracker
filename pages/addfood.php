@@ -15,14 +15,35 @@ $statement->execute();
 
 $food = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+$breakfastArr = array();
+foreach($food as $f){
+    if($f['breakfast'] != "")
+        array_push($breakfastArr, $f['breakfast']);
+}
+var_dump($breakfastArr);
+
+$lunchArr = array();
+foreach($food as $f){
+    if($f['lunch'] != "")
+        array_push($lunchArr, $f['lunch']);
+}
+var_dump($lunchArr);
+
+$dinnerArr = array();
+foreach($food as $f){
+    if($f['dinner'] != "")
+        array_push($dinnerArr, $f['dinner']);
+}
+var_dump($dinnerArr);
+
 // var_dump($food);
 
 // make sure that values are actually there
 // var_dump($food[0]['breakfast']);
-$breakfastFood = $food[0]['breakfast'];//(isset($food[0]['breakfast']) ? $food[0]['breakfast'] : null);
+$breakfastFood = $breakfastArr; //(isset($food[0]['breakfast']) ? $food[0]['breakfast'] : null);
 // var_dump($breakfastFood);
-$lunchFood = (isset($food[0]['lunch']) != null ? $food[0]['lunch'] : null);
-$dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
+$lunchFood = $lunchArr; //(isset($food[0]['lunch']) != null ? $food[0]['lunch'] : null);
+$dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
 ?>
 
 <head>
@@ -125,6 +146,7 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
             /* CODE FOR CHIPS(tags) */
             // array of all chips forms
             // add as needed, just use '.chips<name>' for the querySelector
+            // ONLY USE FOR CHIP ELEMENTS
             var elemChips = [document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
 
             // set values for each element
