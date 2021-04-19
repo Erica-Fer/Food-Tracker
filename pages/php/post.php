@@ -40,8 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement->bindValue(':lunch', $lunch);
     $statement->bindValue(':dinner', $dinner);
     $statement->execute();
-    //     header('Location: addfood.php');
-    // }
 }
 
 ?>

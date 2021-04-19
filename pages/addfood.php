@@ -40,10 +40,10 @@ var_dump($dinnerArr);
 
 // make sure that values are actually there
 // var_dump($food[0]['breakfast']);
-$breakfastFood = $breakfastArr; //(isset($food[0]['breakfast']) ? $food[0]['breakfast'] : null);
+$breakfastFood = $breakfastArr; //(isset($food[0]['breakfast']) ? $food[0]['breakfast'] : null); ?
 // var_dump($breakfastFood);
-$lunchFood = $lunchArr; //(isset($food[0]['lunch']) != null ? $food[0]['lunch'] : null);
-$dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
+$lunchFood = $lunchArr; //(isset($food[0]['lunch']) != null ? $food[0]['lunch'] : null); ?
+$dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null); ?
 ?>
 
 <head>
@@ -126,9 +126,6 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
             if (result == null || result.length < 1) {
                 return 0;
             }
-            console.log("form: " + formNum + ", got here!");
-
-
             
             return [{
                 tag: result
@@ -139,10 +136,8 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
             /* CODE FOR DAY QUALITY */
             var elemsSelect = document.querySelectorAll('select');
             var instances = M.FormSelect.init(elemsSelect, {
-
             });
-            
-           
+
             /* CODE FOR CHIPS(tags) */
             // array of all chips forms
             // add as needed, just use '.chips<name>' for the querySelector
