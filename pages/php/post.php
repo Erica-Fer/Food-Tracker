@@ -13,6 +13,11 @@ $dinner = '';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(isset($_POST['date'])){
+        $date = $_POST['date'];
+        echo "date: $date";
+    }
+
     if (isset($_POST['breakfast'])) {
         $breakfast = $_POST['breakfast'];
         echo "breakfast: $breakfast";
@@ -27,13 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // if (empty($errors)) {
-    //     $statement = $pdo->prepare("INSERT INTO foodForDay (breakfast, lunch, dinner)
-    //                 VALUES (:breakfast, :lunch, :dinner)");
-
-    //     $statement->bindValue(':breakfast', $breakfast);
-    //     $statement->bindValue(':lunch', $lunch);
-    //     $statement->bindValue(':dinner', $dinner);
-    //     $statement->execute();
+    $statement = $pdo->prepare("INSERT INTO foodForDay (date, breakfast, lunch, dinner)
+                VALUES (:date, :breakfast, :lunch, :dinner)");
+    
+    $statement->bindValue(':date', $date);
+    $statement->bindValue(':breakfast', $breakfast);
+    $statement->bindValue(':lunch', $lunch);
+    $statement->bindValue(':dinner', $dinner);
+    $statement->execute();
     //     header('Location: addfood.php');
     // }
 }

@@ -153,6 +153,7 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
                         var chipsData = M.Chips.getInstance($(formData)).chipsData;
 
                         var newestTag = chipsData[chipsData.length - 1].tag;
+                        var date = "&date=2021-04-21";
 
                         // make call to PHP file to handle giving tags info to be put in database
                         // should let the user add information without ever pressing a "save" button
@@ -164,7 +165,7 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
                         };
                         xhttp.open("POST", "php/post.php", true);
                         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
-                        xhttp.send(formId + "=" + newestTag); // should send something in the form of "breakfast=cheese", or other input
+                        xhttp.send(formId + "=" + newestTag + date); // should send something in the form of "breakfast=cheese", or other input
                     }
                 });
             }
