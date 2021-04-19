@@ -225,9 +225,9 @@
     /* end erica code */
 
     function printID() {
-        //var url = "addfood.php?date=" + this.id;
-        //window.location.href = url;
-        window.open("../index.html");
+        var url = "addfood.php?date=" + this.id;
+        window.location.href = url;
+        //window.open("../index.html");
         // // console.log()
 
         console.log("you clicked on: " + this.id);
