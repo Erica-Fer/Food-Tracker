@@ -15,8 +15,12 @@ $statement->execute();
 
 $food = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+// var_dump($food);
+
 // make sure that values are actually there
-$breakfastFood = (isset($food[0]['breakfast']) ? $food[0]['breakfast'] : null);
+// var_dump($food[0]['breakfast']);
+$breakfastFood = $food[0]['breakfast'];//(isset($food[0]['breakfast']) ? $food[0]['breakfast'] : null);
+// var_dump($breakfastFood);
 $lunchFood = (isset($food[0]['lunch']) != null ? $food[0]['lunch'] : null);
 $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
 ?>
@@ -83,10 +87,12 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
         // lets us set food already in the database as chips data
         function getFood(formNum) {
             var result = '';
+            console.log("form: " + formNum);
 
             switch (formNum) {
                 case 0: // breakfast
                     result = <?php echo json_encode($breakfastFood, JSON_HEX_TAG) ?>;
+                    console.log("breakfast: " + result)
                     break;
                 case 1: // lunch
                     result = <?php echo json_encode($lunchFood, JSON_HEX_TAG) ?>;
@@ -99,7 +105,10 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
             if (result == null || result.length < 1) {
                 return 0;
             }
+            console.log("form: " + formNum + ", got here!");
 
+
+            
             return [{
                 tag: result
             }];
@@ -107,21 +116,20 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
 
         document.addEventListener('DOMContentLoaded', function() {
             /* CODE FOR DAY QUALITY */
-            var elems = document.querySelectorAll('select');
-            var instances = M.FormSelect.init(elems, {
-                
+            var elemsSelect = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elemsSelect, {
+
             });
             
            
             /* CODE FOR CHIPS(tags) */
             // array of all chips forms
             // add as needed, just use '.chips<name>' for the querySelector
-            var elemChips = [document.querySelectorAll('select'), document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
+            var elemChips = [document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
 
             // set values for each element
             // should let each user form keep unique elements, and elements featured in other forms
-            //originally was i = 0
-            for (i = 1; i < elemChips.length; i++) {
+            for (i = 0; i < elemChips.length; i++) {
                 var prevFood = getFood(i);
 
                 var instances = M.Chips.init(elemChips[i], {
