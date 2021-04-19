@@ -42,6 +42,16 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
 
             <h1>Add food for <?php echo $_GET['date'] ?> </h1><br>
 
+            <form>
+                <label for="askDay">How was the quality of your day?</label>
+                <select name="askDay" id="askDay">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="good">Good</option>
+                    <option value="okay">Okay</option>
+                    <option value="bad">Bad</option>
+                </select>
+            </form>
+
             <h2>What did you have for breakfast?</h2>
             <div class="chipsbreakfast chips-autocomplete" id="breakfast"></div>
 
@@ -97,12 +107,29 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
         document.addEventListener('DOMContentLoaded', function() {
             // array of all chips forms
             // add as needed, just use '.chips<name>' for the querySelector
-            var elems = [document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
+            var elems = [document.querySelectorAll('select'), document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
             // console.log("elems: " + elems); // ? debug
+
+            //var elems2 = document.querySelectorAll('select');
+            //var instances = M.FormSelect.init(elems2, options);
+            
+            // var quality = document.getElementById("submitting").value;
+            // console.log(quality);
+            // var xhttp2 = new XMLHttpRequest();
+            // xhttp2.onreadystatechange = function() {
+            //     if (this.readyState == 4 && this.status == 200) {
+            //         document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
+            //     }
+            // };
+            // xhttp.open("POST", "php/post.php", true);
+            // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
+            // xhttp.send(formId + "=" + newestTag); // should send something in the form of "breakfast=cheese", or other input
+
 
             // set values for each element
             // should let each user form keep unique elements, and elements featured in other forms
-            for (i = 0; i < elems.length; i++) {
+            //originally was i = 0
+            for (i = 1; i < elems.length; i++) {
                 var prevFood = getFood(i);
 
                 var instances = M.Chips.init(elems[i], {
@@ -140,6 +167,10 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
                     }
                 });
             }
+        });
+
+        $(document).ready(function(){
+            $('select').formSelect();
         });
     </script>
 </body>
