@@ -106,34 +106,25 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            /* CODE FOR DAY QUALITY */
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, {
+                
+            });
+            
+           
+            /* CODE FOR CHIPS(tags) */
             // array of all chips forms
             // add as needed, just use '.chips<name>' for the querySelector
-            var elems = [document.querySelectorAll('select'), document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
-            // console.log("elems: " + elems); // ? debug
-
-            //var elems2 = document.querySelectorAll('select');
-            //var instances = M.FormSelect.init(elems2, options);
-            
-            // var quality = document.getElementById("submitting").value;
-            // console.log(quality);
-            // var xhttp2 = new XMLHttpRequest();
-            // xhttp2.onreadystatechange = function() {
-            //     if (this.readyState == 4 && this.status == 200) {
-            //         document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
-            //     }
-            // };
-            // xhttp.open("POST", "php/post.php", true);
-            // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
-            // xhttp.send(formId + "=" + newestTag); // should send something in the form of "breakfast=cheese", or other input
-
+            var elemChips = [document.querySelectorAll('select'), document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
 
             // set values for each element
             // should let each user form keep unique elements, and elements featured in other forms
             //originally was i = 0
-            for (i = 1; i < elems.length; i++) {
+            for (i = 1; i < elemChips.length; i++) {
                 var prevFood = getFood(i);
 
-                var instances = M.Chips.init(elems[i], {
+                var instances = M.Chips.init(elemChips[i], {
                     autocompleteOptions: {
                         data: {
                             'Apple': null,
@@ -171,9 +162,6 @@ $dinnerFood = (isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null);
             }
         });
 
-        $(document).ready(function(){
-            $('select').formSelect();
-        });
     </script>
 </body>
 
