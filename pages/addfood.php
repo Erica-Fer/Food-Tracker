@@ -4,6 +4,7 @@
 session_start();
 
 $date = $_GET['date'];
+// if no date, default to current day
 
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
