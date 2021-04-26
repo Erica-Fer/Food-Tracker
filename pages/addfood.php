@@ -4,7 +4,7 @@
 session_start();
 
 $date = $_GET['date'];
-// if no date, default to current day
+// ? TODO: if no date, default to current day
 
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -20,21 +20,21 @@ foreach($food as $f){
     if($f['breakfast'] != "")
         array_push($breakfastArr, $f['breakfast']);
 }
-var_dump($breakfastArr);
+// var_dump($breakfastArr);
 
 $lunchArr = array();
 foreach($food as $f){
     if($f['lunch'] != "")
         array_push($lunchArr, $f['lunch']);
 }
-var_dump($lunchArr);
+// var_dump($lunchArr);
 
 $dinnerArr = array();
 foreach($food as $f){
     if($f['dinner'] != "")
         array_push($dinnerArr, $f['dinner']);
 }
-var_dump($dinnerArr);
+// var_dump($dinnerArr);
 
 // var_dump($food);
 
@@ -111,29 +111,53 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
     };
 
         function getFood(formNum) {
+            // Default to a null value so that if there is nothing, return is not empty
             var result = '';
-            console.log("form: " + formNum);
+
+            // Begin the string to be used for parsing input
+            // This is what allows for each input food to have individual chip
+            // The format of string should be the following:
+            //'[' + '{ "tag": "' + foodTest[0] + '" }' + ',' + '{ "tag": "' + foodTest[2] + '" }' + ']';
+            var food = '[';
 
             switch (formNum) {
                 case 0: // breakfast
                     result = <?php echo json_encode($breakfastFood, JSON_HEX_TAG) ?>;
-                    console.log("breakfast: " + result)
+                    console.log("breakfast: " + result[0]);
+                    for(var i = 0; i < result.length; i++){
+                        food += '{ "tag": "' + result[i] + '" }';
+                        if(i < result.length-1){
+                            food += ',';
+                        }
+                    }
                     break;
                 case 1: // lunch
                     result = <?php echo json_encode($lunchFood, JSON_HEX_TAG) ?>;
+                    for(var i = 0; i < result.length; i++){
+                        food += '{ "tag": "' + result[i] + '" }';
+                        if(i < result.length-1){
+                            food += ',';
+                        }
+                    }
                     break;
                 case 2: // dinner
                     result = <?php echo json_encode($dinnerFood, JSON_HEX_TAG) ?>;
+                    for(var i = 0; i < result.length; i++){
+                        food += '{ "tag": "' + result[i] + '" }';
+                        if(i < result.length-1){
+                            food += ',';
+                        }
+                    }
                     break;
             }
 
             if (result == null || result.length < 1) {
                 return 0;
             }
-            
-            return [{
-                tag: result
-            }];
+
+            // Close off the string and return the parsed food info to be used in the event listener
+            food += ']';
+            return JSON.parse(food);
         }
 
         function saveMood(){
@@ -210,7 +234,7 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
                         var chipsData = M.Chips.getInstance($(formData)).chipsData;
 
                         var newestTag = chipsData[chipsData.length - 1].tag;
-                        var date = "&date=2021-04-21";
+                        var date = "&date=2021-04-21"; // ?
 
                         // make call to PHP file to handle giving tags info to be put in database
                         // should let the user add information without ever pressing a "save" button
