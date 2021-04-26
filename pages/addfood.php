@@ -107,40 +107,52 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
         // get the php values as defined the beginning of the file
         // lets us set food already in the database as chips data
         function getFood(formNum) {
+            // Default to a null value so that if there is nothing, return is not empty
             var result = '';
-            console.log("form: " + formNum);
-            var foodTest = ["apple", "corn", "tomato"];
-            var foodArr = {"tag":"\"" + foodTest + "\""};
 
-            var foodArr = [
-                '{ "tag": "' + foodTest[0] + '" }',
-                '"{ tag: "' + foodTest[1] + '"}"',
-                '"{ tag: "' + foodTest[2] + '"}"',
-            ];
-
-            var food = '[{ "tag": "' + foodTest[0] + '" }' + ',' + '{ "tag": "' + foodTest[2] + '" }]';
+            // Begin the string to be used for parsing input
+            // This is what allows for each input food to have individual chip
+            // The format of string should be the following:
+            //'[' + '{ "tag": "' + foodTest[0] + '" }' + ',' + '{ "tag": "' + foodTest[2] + '" }' + ']';
+            var food = '[';
 
             switch (formNum) {
                 case 0: // breakfast
                     result = <?php echo json_encode($breakfastFood, JSON_HEX_TAG) ?>;
-                    console.log("breakfast: " + result)
+                    console.log("breakfast: " + result[0]);
+                    for(var i = 0; i < result.length; i++){
+                        food += '{ "tag": "' + result[i] + '" }';
+                        if(i < result.length-1){
+                            food += ',';
+                        }
+                    }
                     break;
                 case 1: // lunch
                     result = <?php echo json_encode($lunchFood, JSON_HEX_TAG) ?>;
+                    for(var i = 0; i < result.length; i++){
+                        food += '{ "tag": "' + result[i] + '" }';
+                        if(i < result.length-1){
+                            food += ',';
+                        }
+                    }
                     break;
                 case 2: // dinner
                     result = <?php echo json_encode($dinnerFood, JSON_HEX_TAG) ?>;
+                    for(var i = 0; i < result.length; i++){
+                        food += '{ "tag": "' + result[i] + '" }';
+                        if(i < result.length-1){
+                            food += ',';
+                        }
+                    }
                     break;
             }
 
             if (result == null || result.length < 1) {
                 return 0;
             }
-            
-            // console.log(JSON.parse(foodArr[0]));
-            var obj = JSON.parse(foodArr[0]);
-            console.log(obj);
 
+            // Close off the string and return the parsed food info to be used in the event listener
+            food += ']';
             return JSON.parse(food);
         }
 
