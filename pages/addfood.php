@@ -4,7 +4,7 @@
 session_start();
 
 $date = $_GET['date'];
-// if no date, default to current day
+// ? TODO: if no date, default to current day
 
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -193,7 +193,7 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
                         var chipsData = M.Chips.getInstance($(formData)).chipsData;
 
                         var newestTag = chipsData[chipsData.length - 1].tag;
-                        var date = "&date=2021-04-21";
+                        var date = "&date=2021-04-21"; // ?
 
                         // make call to PHP file to handle giving tags info to be put in database
                         // should let the user add information without ever pressing a "save" button
