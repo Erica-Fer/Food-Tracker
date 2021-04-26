@@ -76,8 +76,8 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
                     <option value="okay">Okay</option>
                     <option value="bad">Bad</option>
                 </select>
+                <input type="button" id="submit" value="Submit">
             </form>
-
             <h2>What did you have for breakfast?</h2>
             <div class="chipsbreakfast chips-autocomplete" id="breakfast"></div>
 
@@ -106,6 +106,10 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
 
         // get the php values as defined the beginning of the file
         // lets us set food already in the database as chips data
+        window.onload = function () {
+            document.getElementById("submit").onclick = saveMood;
+    };
+
         function getFood(formNum) {
             var result = '';
             console.log("form: " + formNum);
@@ -132,11 +136,48 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
             }];
         }
 
+        function saveMood(){
+            //alert("i'm here");
+            var mood = document.getElementById("askDay").value
+            console.log("value is " + mood);
+            //this isn't quite right
+            var date = "&date=2021-04-21";
+            console.log(date);
+            //var date = "&date=2021-04-21";
+
+            // make call to PHP file to handle giving tags info to be put in database
+            // should let the user add information without ever pressing a "save" button
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
+                }
+            };
+            xhttp.open("POST", "php/post.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
+            console.log("made it here");
+            xhttp.send("dayQuality" + "=" + mood + date); // should send something in the form of "breakfast=cheese", or other input
+            console.log("hello");
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("going in here");
             /* CODE FOR DAY QUALITY */
             var elemsSelect = document.querySelectorAll('select');
             var instances = M.FormSelect.init(elemsSelect, {
             });
+            console.log(elemsSelect.value);
+
+            // var askForm = document.querySelector('askDay');
+            // askForm.addEventListener('change', function() {
+            //     alert('changed form!!');
+            // });
+            //for(int i = 0; i <elemsSelect.length; i++){
+              //  console.log("elemsSelect" + elemsSelect[i];
+           // }
+            
+            console.log("instances" + instances.toString());
+
 
             /* CODE FOR CHIPS(tags) */
             // array of all chips forms
