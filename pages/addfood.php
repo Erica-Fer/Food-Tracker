@@ -109,6 +109,16 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
         function getFood(formNum) {
             var result = '';
             console.log("form: " + formNum);
+            var foodTest = ["apple", "corn", "tomato"];
+            var foodArr = {"tag":"\"" + foodTest + "\""};
+
+            var foodArr = [
+                '{ "tag": "' + foodTest[0] + '" }',
+                '"{ tag: "' + foodTest[1] + '"}"',
+                '"{ tag: "' + foodTest[2] + '"}"',
+            ];
+
+            var food = '[{ "tag": "' + foodTest[0] + '" }' + ',' + '{ "tag": "' + foodTest[2] + '" }]';
 
             switch (formNum) {
                 case 0: // breakfast
@@ -127,9 +137,11 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
                 return 0;
             }
             
-            return [{
-                tag: result
-            }];
+            // console.log(JSON.parse(foodArr[0]));
+            var obj = JSON.parse(foodArr[0]);
+            console.log(obj);
+
+            return JSON.parse(food);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
