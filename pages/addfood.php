@@ -20,21 +20,21 @@ foreach($food as $f){
     if($f['breakfast'] != "")
         array_push($breakfastArr, $f['breakfast']);
 }
-var_dump($breakfastArr);
+// var_dump($breakfastArr);
 
 $lunchArr = array();
 foreach($food as $f){
     if($f['lunch'] != "")
         array_push($lunchArr, $f['lunch']);
 }
-var_dump($lunchArr);
+// var_dump($lunchArr);
 
 $dinnerArr = array();
 foreach($food as $f){
     if($f['dinner'] != "")
         array_push($dinnerArr, $f['dinner']);
 }
-var_dump($dinnerArr);
+// var_dump($dinnerArr);
 
 // var_dump($food);
 
