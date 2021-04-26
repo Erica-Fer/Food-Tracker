@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // if (empty($errors)) {
     $statement = $pdo->prepare("INSERT INTO foodForDay (date, breakfast, lunch, dinner, dayQuality)
-                VALUES (:date, :breakfast, :lunch, :dinner :dayQuality)");
+                VALUES (:date, :breakfast, :lunch, :dinner, :dayQuality)");
     
     $statement->bindValue(':date', $date);
     $statement->bindValue(':breakfast', $breakfast);
