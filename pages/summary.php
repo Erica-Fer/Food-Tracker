@@ -7,6 +7,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $date1 = $_GET['date1'];
 $date2 = $_GET['date2'];
 
+// ? issue where info is not limited only to relevant days
 $statement = $pdo->prepare("SELECT breakfast
  FROM foodForDay 
  WHERE EXISTS
