@@ -7,11 +7,23 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $date1 = $_GET['date1'];
 $date2 = $_GET['date2'];
 
-$statement = $pdo->prepare("SELECT breakfast FROM foodForDay WHERE date >=:date1 AND date <=:date2");
+$statement = $pdo->prepare("SELECT breakfast
+ FROM foodForDay 
+ WHERE EXISTS
+    (SELECT dayQuality 
+    FROM foodForDay
+    WHERE dayQuality = 'b'
+    AND date >=:date1 
+    AND date <=:date2
+    )
+ AND date >=:date1 
+ AND date <=:date2");
 $statement->bindValue(':date1', $date1);
 $statement->bindValue(':date2', $date2);
 $statement->execute();
 $breakfast = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+echo var_dump($breakfast);
 
 $statement = $pdo->prepare("SELECT lunch FROM foodForDay WHERE date >=:date1 AND date <=:date2");
 $statement->bindValue(':date1', $date1);
