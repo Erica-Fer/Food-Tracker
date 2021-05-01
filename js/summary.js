@@ -70,7 +70,7 @@ function combineData(data) {
                 allFoodItems.set(ln, value+1);
             }
 
-            foodAtTime.set("lunch", ln);
+            // foodAtTime.set("lunch", ln);
             foodAtTime.set("lunch", foodAtTime.get("lunch")+ln);
         }
 
@@ -84,18 +84,26 @@ function combineData(data) {
                 allFoodItems.set(dn, value+1);
             }
 
-            var obj = [];
-            if(!isNaN(foodAtTime.get("dinner")))
-                obj.push(foodAtTime.get("dinner"));
-            obj.push(dn);
-            out("object: " + obj);
-            foodAtTime.set("dinner", obj);
+            out("dn: " + dn)
+            if(isNaN(foodAtTime.get("dinner"))){
+                out("got here in nan")
+                var obj = [dn]
+                foodAtTime.set("dinner", obj);
+            }else{
+                var obj = foodAtTime.get("dinner");
+                out ( "obj: " + obj);
+                foodAtTime.set("dinner", );
+            }
+
+            out(foodAtTime.get("dinner"));
         }
     }
 
-    for(let [key, value] of allFoodItems){
-        out("\t\t" + key + " = " + value)
-    }
+    // for(let [key, value] of allFoodItems){
+    //     out("\t\t" + key + " = " + value)
+    // }
+
+    formatData(allFoodItems);
 
     // for(let value of foodAtTime["dinner"]){
     //     out("\t\t" + "Dinner = " + value)
@@ -109,7 +117,19 @@ function sortData() { } // ? not currently used
 
 // Format the data based on most common
 // Should list out top 3
-function formatData() { }
+function formatData(allFood) { 
+    for(let [key, value] of allFood){
+        out("\t\t" + key + " = " + value)
+    }
+
+    var first = "1. ";
+    var second = "2. ";
+    var third = "3. ";
+    var total = first + "<br>" + second + "<br>" + third;
+
+    document.getElementById("top3").innerHTML = total;
+
+}
 
 
 /* DEBUG ONLY FUNCTIONS */

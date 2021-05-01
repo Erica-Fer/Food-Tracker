@@ -25,7 +25,7 @@
             <h1>Food you had through <?php echo $_GET['date1']?> and <?php echo $_GET['date2']?></h1><br>
 
             <h2>Top 3 worst foods</h2>
-            <p id="top3"></p>
+            <h4 id="top3"></h4>
 
             <br><br>
 
