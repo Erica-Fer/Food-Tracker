@@ -7,10 +7,6 @@ window.addEventListener('load',
         callDatabase(combineData);
     }, false);
 
-function returnResult(result){
-    return result;
-}
-
 // Return the database information between the given date numbers
 // ? TODO: include a call to validate user request in admin
 function callDatabase(callback) {
@@ -31,95 +27,103 @@ function callDatabase(callback) {
 
 // Get all data into one easy to sort array
 // Keeps the sortData() function more specific
-function combineData(data) { 
+function combineData(data) {
     // out(Object.prototype.toString.call(data))
     let allFoodItems = new Map();
     let foodAtTime = new Map();
+    var top3 = [0,0,0];
 
 
-    for(i = 0; data[i] != null; i++){
+    for (i = 0; data[i] != null; i++) {
         // out(data[i]["breakfast"]); // ?
         var br = data[i]["breakfast"];
         var ln = data[i]["lunch"];
         var dn = data[i]["dinner"];
-        
+
         // Add all food to a hashmap and increment how many times its been seen
         // Should be used to define which are worst problem foods
         var value;
-        if(br != ""){
+        if (br != "") {
             value = allFoodItems.get(br);
             // If NaN, initialize the values
-            if(isNaN(value)){
+            if (isNaN(value)) {
                 allFoodItems.set(br, 1);
                 foodAtTime.set("breakfast", br);
             }
-            else{
-                allFoodItems.set(br, value+1);
-                foodAtTime.set("breakfast", foodAtTime.get("breakfast")+br);
+            else {
+                allFoodItems.set(br, value + 1);
+                foodAtTime.set("breakfast", foodAtTime.get("breakfast") + br);
             }
 
+            // out("\n" + allFoodItems.get(br));
+            top3 = addSorted(top3,parseInt(allFoodItems.get(br)));
         }
 
-        value = allFoodItems.get(ln);
-        if(ln != ""){
+        if (ln != "") {
+            value = allFoodItems.get(ln);
             // If NaN, initialize the values
-            if(isNaN(value)){
+            if (isNaN(value)) {
                 allFoodItems.set(ln, 1);
             }
-            else{
-                allFoodItems.set(ln, value+1);
+            else {
+                allFoodItems.set(ln, value + 1);
             }
 
             // foodAtTime.set("lunch", ln);
-            foodAtTime.set("lunch", foodAtTime.get("lunch")+ln);
+            foodAtTime.set("lunch", foodAtTime.get("lunch") + ln);
         }
 
-        value = allFoodItems.get(dn);
-        if(dn != ""){
+        if (dn != "") {
+            value = allFoodItems.get(dn);
             // If NaN, initialize the values
-            if(isNaN(value)){
+            if (isNaN(value)) {
                 allFoodItems.set(dn, 1);
             }
-            else{
-                allFoodItems.set(dn, value+1);
+            else {
+                allFoodItems.set(dn, value + 1);
             }
 
-            out("dn: " + dn)
-            if(isNaN(foodAtTime.get("dinner"))){
-                out("got here in nan")
+            // out("dn: " + dn)
+            if (isNaN(foodAtTime.get("dinner"))) {
+                // out("got here in nan")
                 var obj = [dn]
                 foodAtTime.set("dinner", obj);
-            }else{
+            } else {
                 var obj = foodAtTime.get("dinner");
-                out ( "obj: " + obj);
-                foodAtTime.set("dinner", );
+                // out ( "obj: " + obj);
+                foodAtTime.set("dinner",);
             }
-
-            out(foodAtTime.get("dinner"));
         }
     }
 
-    // for(let [key, value] of allFoodItems){
-    //     out("\t\t" + key + " = " + value)
-    // }
-
-    formatData(allFoodItems);
+    formatData(top3);
 
     // for(let value of foodAtTime["dinner"]){
     //     out("\t\t" + "Dinner = " + value)
     // }
 }
 
-// Sort the data gotten from the database
-// Should be called before formatting data
+// Add top 3 bad day foods in sorted order
 // Makes it easier to know which was most common bad-day food
-function sortData() { } // ? not currently used
+function addSorted(food, top) {
+    for (let i in top) {
+        out(top[i])
+    }
+
+
+}
+
 
 // Format the data based on most common
 // Should list out top 3
-function formatData(allFood) { 
-    for(let [key, value] of allFood){
-        out("\t\t" + key + " = " + value)
+function formatData(allFood) {
+    // for(let [key, value] of allFood){
+    //     out("\t\t" + key + " = " + value)
+    // }
+
+    out(allFood)
+    for(var i in allFood){
+        out(allFood[i]);
     }
 
     var first = "1. ";
