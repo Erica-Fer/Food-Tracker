@@ -24,14 +24,19 @@
 
             <h1>Food you had through <?php echo $_GET['date1']?> and <?php echo $_GET['date2']?></h1><br>
 
-            <p id="display"></p>
+            <h2>Top 3 worst foods</h2>
+            <p id="top3"></p>
 
+            <br><br>
 
-            <h2>What you had for breakfast</h2>
+            <h3>What you had for breakfast</h3>
+            <p id="breakfast"></p>
 
-            <h2>What you had for lunch</h2>
+            <h3>What you had for lunch</h3>
+            <p id="lunch"></p>
 
-            <h2>What you had for dinner</h2>
+            <h3>What you had for dinner</h3>
+            <p id="dinner"></p>
 
             <!-- used for loading xhttp GET/POST calls in javascript -->
             <p id="demo"></p>

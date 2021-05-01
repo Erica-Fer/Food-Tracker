@@ -12,14 +12,14 @@ function returnResult(result){
 // Return the database information between the given date numbers
 // ? TODO: include a call to validate user request in admin
 function callDatabase(callback) {
-    out("entered");
+    // out("entered");
     var myObj;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            myObj = this.responseText;
-            // out(myObj);
-            callback(myObj);
+            // Async callback
+            // Will call the function 'combineData' when info is retrieved
+            callback(this.responseText);
         }
     };
     xhttp.open("POST", "../php/summaryData.php", true);
@@ -27,12 +27,11 @@ function callDatabase(callback) {
     xhttp.send("date1=2021-04-01&date2=2021-04-21"); // ? TODO: need dates to be variables
 }
 
-// ? do we need this
 // Get all data into one easy to sort array
 // Keeps the sortData() function more specific
 function combineData(data) { 
-    out(data);
-    
+    let allFoodItems = new Map();
+    let timeOfDay = new Map();
 }
 
 // Sort the data gotten from the database

@@ -23,7 +23,8 @@ $statement = $pdo->prepare(
 	    FROM foodForDay
 	    WHERE dayQuality = 'b'
 	)
-    AND (breakfast <> '' OR lunch <> '' OR dinner <> '')");
+    AND (breakfast <> '' OR lunch <> '' OR dinner <> '')
+    ORDER BY breakfast,lunch,dinner");
 $statement->bindValue(':date1', $date1);
 $statement->bindValue(':date2', $date2);
 $statement->execute();
