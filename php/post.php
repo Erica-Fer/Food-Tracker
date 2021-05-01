@@ -21,12 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "date: $date";
     }
     
-    if(isset($_POST['dayQuality'])){
-        //var_dump("here");
-        $mood = $_POST['dayQuality'];
-        echo "dayQuality: $mood";
-    }
-    else if (isset($_POST['breakfast'])) {
+    if (isset($_POST['breakfast'])) {
         $breakfast = $_POST['breakfast'];
         echo "breakfast: $breakfast";
     } else if(isset($_POST['lunch']))
@@ -40,14 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // if (empty($errors)) {
-    $statement = $pdo->prepare("INSERT INTO foodForDay (date, breakfast, lunch, dinner, dayQuality)
-                VALUES (:date, :breakfast, :lunch, :dinner, :dayQuality)");
+    $statement = $pdo->prepare("INSERT INTO foodForDay (date, breakfast, lunch, dinner)
+                VALUES (:date, :breakfast, :lunch, :dinner)");
     
     $statement->bindValue(':date', $date);
     $statement->bindValue(':breakfast', $breakfast);
     $statement->bindValue(':lunch', $lunch);
     $statement->bindValue(':dinner', $dinner);
-    $statement->bindValue(':dayQuality', $mood);
     $statement->execute();
 }
 

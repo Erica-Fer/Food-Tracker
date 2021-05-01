@@ -44,6 +44,7 @@ $breakfastFood = $breakfastArr; //(isset($food[0]['breakfast']) ? $food[0]['brea
 // var_dump($breakfastFood);
 $lunchFood = $lunchArr; //(isset($food[0]['lunch']) != null ? $food[0]['lunch'] : null); ?
 $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinner'] : null); ?
+//echo json_encode($date); //UNCOMMENTED THIS MIGHT NEED IT BACK
 ?>
 
 <head>
@@ -162,10 +163,12 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
 
         function saveMood(){
             //alert("i'm here");
-            var mood = document.getElementById("askDay").value
+            var mood = document.getElementById("askDay").value;
             console.log("value is " + mood);
             //this isn't quite right
-            var date = "&date=2021-04-21";
+            //$date
+            //console.log(<?php echo json_encode($date) ?>);
+            var date = "&date=" + <?php echo json_encode($date) ?>;
             console.log(date);
             //var date = "&date=2021-04-21";
 
@@ -177,7 +180,7 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
                     document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
                 }
             };
-            xhttp.open("POST", "../php/post.php", true);
+            xhttp.open("POST", "../php/postmoods.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
             console.log("made it here");
             xhttp.send("dayQuality" + "=" + mood + date); // should send something in the form of "breakfast=cheese", or other input

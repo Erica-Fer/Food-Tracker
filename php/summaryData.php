@@ -21,7 +21,7 @@ $statement = $pdo->prepare(
     AND date IN (
 	    SELECT date
 	    FROM foodForDay
-	    WHERE dayQuality = 'b'
+	    WHERE dayQuality = 'bad'
 	)
     AND (breakfast <> '' OR lunch <> '' OR dinner <> '')
     ORDER BY breakfast,lunch,dinner");
