@@ -13,6 +13,7 @@ $date2 = $_POST['date2'];
 // Select all food values which appeared on a bad day
 // Helps eliminate irrelevant food info
 // ? may need to include okay days as well
+// ? TODO: update database to be 'bad'
 $statement = $pdo->prepare(
     "SELECT breakfast, lunch, dinner
     FROM foodForDay 
