@@ -24,6 +24,9 @@
 
             <h1>Food you had through <?php echo $_GET['date1']?> and <?php echo $_GET['date2']?></h1><br>
 
+            <p id="display"></p>
+
+
             <h2>What you had for breakfast</h2>
 
             <h2>What you had for lunch</h2>
