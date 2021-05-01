@@ -31,7 +31,7 @@ function combineData(data) {
     // out(Object.prototype.toString.call(data))
     let allFoodItems = new Map();
     let foodAtTime = new Map();
-    var top3 = [0,0,0];
+    var top3 = [];
 
 
     for (i = 0; data[i] != null; i++) {
@@ -56,7 +56,7 @@ function combineData(data) {
             }
 
             // out("\n" + allFoodItems.get(br));
-            top3 = addSorted(top3,parseInt(allFoodItems.get(br)));
+            top3 = addSorted(allFoodItems.get(br), top3);
         }
 
         if (ln != "") {
@@ -96,6 +96,9 @@ function combineData(data) {
         }
     }
 
+        for (let i in top3) {
+        out("top3 value: " + top3[i])
+    }
     formatData(top3);
 
     // for(let value of foodAtTime["dinner"]){
@@ -103,14 +106,30 @@ function combineData(data) {
     // }
 }
 
+
+function locationOf(element, array, start, end) {
+    start = start || 0;
+    end = end || array.length;
+    var pivot = parseInt(start + (end - start) / 2, 10);
+    if (array[pivot] === element) return pivot;
+    if (end - start <= 1)
+        return array[pivot] > element ? pivot - 1 : pivot;
+    if (array[pivot] < element) {
+        return locationOf(element, array, pivot, end);
+    } else {
+        return locationOf(element, array, start, pivot);
+    }
+}
+
 // Add top 3 bad day foods in sorted order
 // Makes it easier to know which was most common bad-day food
-function addSorted(food, top) {
-    for (let i in top) {
-        out(top[i])
-    }
-
-
+// https://stackoverflow.com/questions/1344500/efficient-way-to-insert-a-number-into-a-sorted-array-of-numbers/21822316#21822316
+function addSorted(element, array) {
+    // for (let i in top) {
+    //     out("top3 value: " + top[i])
+    // }
+    array.splice(locationOf(element, array) + 1, 0, element);
+    return array;
 }
 
 
@@ -121,10 +140,10 @@ function formatData(allFood) {
     //     out("\t\t" + key + " = " + value)
     // }
 
-    out(allFood)
-    for(var i in allFood){
-        out(allFood[i]);
-    }
+    // out(allFood)
+    // for(var i in allFood){
+    //     out(allFood[i]);
+    // }
 
     var first = "1. ";
     var second = "2. ";
