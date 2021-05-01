@@ -7,6 +7,8 @@ window.addEventListener('load',
         callDatabase(combineData);
     }, false);
 
+
+
 // Return the database information between the given date numbers
 // ? TODO: include a call to validate user request in admin
 function callDatabase(callback) {
@@ -31,8 +33,21 @@ function combineData(data) {
     // out(Object.prototype.toString.call(data))
     let allFoodItems = new Map();
     let foodAtTime = new Map();
-    var top3 = [];
+    var top3 = [{
+        food: "cheese",
+        count: 4
+    },
+    {
+        food: "taco",
+        count: 2
+    },
+    {
+        food: "lasgancan",
+        count: 7
+    }];
 
+    out("food = " + top3[2].food + "\ncount = " + top3[2].count);
+ 
 
     for (i = 0; data[i] != null; i++) {
         // out(data[i]["breakfast"]); // ?
@@ -71,6 +86,8 @@ function combineData(data) {
 
             // foodAtTime.set("lunch", ln);
             foodAtTime.set("lunch", foodAtTime.get("lunch") + ln);
+            top3 = addSorted(allFoodItems.get(ln), top3);
+
         }
 
         if (dn != "") {
@@ -93,11 +110,17 @@ function combineData(data) {
                 // out ( "obj: " + obj);
                 foodAtTime.set("dinner",);
             }
+            top3 = addSorted(allFoodItems.get(dn), top3);
+
         }
     }
 
-        for (let i in top3) {
-        out("top3 value: " + top3[i])
+    //     for (let i in allFoodItems) {
+    //     out("top3 value: " + top3[i])
+    // }
+
+        for(let [key, value] of allFoodItems){
+        out("\t\t" + key + " = " + value)
     }
     formatData(top3);
 
@@ -120,10 +143,11 @@ function locationOf(element, array, start, end) {
         return locationOf(element, array, start, pivot);
     }
 }
+// https://stackoverflow.com/questions/1344500/efficient-way-to-insert-a-number-into-a-sorted-array-of-numbers/21822316#21822316
 
 // Add top 3 bad day foods in sorted order
 // Makes it easier to know which was most common bad-day food
-// https://stackoverflow.com/questions/1344500/efficient-way-to-insert-a-number-into-a-sorted-array-of-numbers/21822316#21822316
+// Just swap values in a while loop of size 3 O(1)
 function addSorted(element, array) {
     // for (let i in top) {
     //     out("top3 value: " + top[i])
