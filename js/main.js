@@ -224,6 +224,7 @@
 
     function colorMood(moodList){
         for(var i = 0; i < moodList.length; i++){
+            console.log(moodList[i].date + "\n" + moodList[i].dayQuality);
             var currentMonth = getCurrentMonth();
             var currentYear = getCurrentYear();
             //console.log(moodList[i].date);
