@@ -152,8 +152,10 @@ function addSorted(element, array) {
     // for (let i in top) {
     //     out("top3 value: " + top[i])
     // }
-    array.splice(locationOf(element, array) + 1, 0, element);
-    return array;
+    // array.splice(locationOf(element, array) + 1, 0, element);
+    // return array;
+
+    
 }
 
 

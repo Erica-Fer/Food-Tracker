@@ -59,7 +59,7 @@
 
         //stores what date we're currently on
         var temp_date = 1;
-
+        var id;
         for (let i = 0; i < 6; i++) {
             //creates a table row
             var temp_row = document.createElement("tr");
@@ -93,7 +93,7 @@
                 else {
                     //create new cell & add the number 
                     var cell = document.createElement("td");
-                    var id = ""; //will store the id for the day (currently like 04052021 but might switch to 04-05-2021)
+                    id = ""; //will store the id for the day (currently like 04052021 but might switch to 04-05-2021)
                     id += year + "-";
                     if (month < 9) {
                         id += "0";
@@ -151,6 +151,14 @@
             }
 
         }
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                colorMood(JSON.parse(this.responseText));
+            }
+        };
+        xhttp.open("GET", "../php/grabmoods.php", true);
+        xhttp.send();
     }
 
     //updates the month & year
@@ -214,6 +222,47 @@
         }
     }
 
+    function colorMood(moodList){
+        for(var i = 0; i < moodList.length; i++){
+            var currentMonth = getCurrentMonth();
+            var currentYear = getCurrentYear();
+            console.log(moodList[i].date);
+            var y = moodList[i].date.substring(0, 4);
+            console.log("Y IS " + y);
+            var m = moodList[i].date.substring(5,7);
+            console.log("M IS "+ m);
+            if(currentMonth == m && currentYear == y){
+                //console.log(moodList[i].dayQuality);
+                var curr = document.getElementById(moodList[i].date);
+                var classList = curr.classList;
+                console.log(classList);
+                var size = classList.length;
+                console.log(size);
+                while (size >= 0) {
+                    if (classList.item(size) != "active") {
+                        classList.remove(classList.item(size));
+                    }
+                    size--;
+                }
+                console.log("new class list" + classList);
+                if (moodList[i].dayQuality == "good") {
+                    //curr.classList.remove("empty");
+                    curr.classList.add("goodDay");
+                    //console.log(curr.classList);
+                }
+                else if (moodList[i].dayQuality == "okay") {
+                    curr.classList.add("okayDay");
+                }
+                else if (moodList[i].dayQuality == "bad") {
+                    curr.classList.add("badDay");
+                }
+                else {
+                    console.log("you....never should have gotten here???");
+                }
+            }
+        }
+    }
+
     /* end erica code */
 
     function printID() {
@@ -222,7 +271,7 @@
         //window.open("../index.html");
         // // console.log()
 
-        console.log("you clicked on: " + this.id);
+        /*console.log("you clicked on: " + this.id);
         var num = Math.floor(Math.random() * 3);
         var curr = document.getElementById(this.id);
         console.log(num);
@@ -252,7 +301,7 @@
         }
         else {
             console.log("you....never should have gotten here???");
-        }
+        }*/
         //var tempmonth = this.id.substring(2, 4);
         //console.log(tempmonth);
         //if(tempmonth.substring(0,1) == 0){
@@ -286,6 +335,24 @@
             increaseYear--;
         }
         updateDate(false);
+    }
+
+    function getCurrentMonth(){
+        var curr_month = increaseMonth;
+        //console.log("CURR MONTH" + curr_month);
+        var m = "";
+        if (curr_month < 9) {
+            m += "0";
+        }
+        m += curr_month + 1;
+        //console.log("CURR MONTH " + m);
+        return m;
+    }
+
+    function getCurrentYear(){
+        var curr_year = increaseYear;
+        //console.log("CURR YEAR " + curr_year);
+        return curr_year;
     }
 
 })();
