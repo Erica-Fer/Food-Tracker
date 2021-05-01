@@ -131,7 +131,7 @@ function addSorted(element, array) {
     // array.splice(locationOf(element, array) + 1, 0, element);
     // return array;
 
-    
+
 }
 
 

@@ -138,7 +138,7 @@
 
                     //circle.setAttribute("onClick", printID);
                     //cell.setAttribute("id", id);
-                    console.log(id);
+                    //console.log(id);
                     circle.onclick = printID; //?
                     cell.appendChild(circle);
                     temp_row.appendChild(cell);
@@ -226,25 +226,25 @@
         for(var i = 0; i < moodList.length; i++){
             var currentMonth = getCurrentMonth();
             var currentYear = getCurrentYear();
-            console.log(moodList[i].date);
+            //console.log(moodList[i].date);
             var y = moodList[i].date.substring(0, 4);
-            console.log("Y IS " + y);
+            //console.log("Y IS " + y);
             var m = moodList[i].date.substring(5,7);
-            console.log("M IS "+ m);
+            //console.log("M IS "+ m);
             if(currentMonth == m && currentYear == y){
                 //console.log(moodList[i].dayQuality);
                 var curr = document.getElementById(moodList[i].date);
                 var classList = curr.classList;
-                console.log(classList);
+                //console.log(classList);
                 var size = classList.length;
-                console.log(size);
+                //console.log(size);
                 while (size >= 0) {
                     if (classList.item(size) != "active") {
                         classList.remove(classList.item(size));
                     }
                     size--;
                 }
-                console.log("new class list" + classList);
+                //console.log("new class list" + classList);
                 if (moodList[i].dayQuality == "good") {
                     //curr.classList.remove("empty");
                     curr.classList.add("goodDay");
