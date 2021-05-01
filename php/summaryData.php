@@ -30,5 +30,6 @@ $statement->bindValue(':date2', $date2);
 $statement->execute();
 $food = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-echo var_dump($food); // ? DEBUG
+// Data to be passed back in summary.js AJAX call
+echo json_encode($food);
 ?>
