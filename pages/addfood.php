@@ -237,7 +237,8 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
                         var chipsData = M.Chips.getInstance($(formData)).chipsData;
 
                         var newestTag = chipsData[chipsData.length - 1].tag;
-                        var date = "&date=2021-04-21"; // ?
+                        var date = "&date=" + <?php echo json_encode($date) ?>;
+                        console.log("IN ADDFOOD: date = " + date);
 
                         // make call to PHP file to handle giving tags info to be put in database
                         // should let the user add information without ever pressing a "save" button
