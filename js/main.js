@@ -214,14 +214,6 @@
         }
     }
 
-    /* erica code */
-
-    function selectSumDates(){
-        // select first date
-        // select second date
-        
-    }
-
     /* end erica code */
 
     function printID() {

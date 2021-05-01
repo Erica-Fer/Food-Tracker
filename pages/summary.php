@@ -1,61 +1,5 @@
 <html lang="en">
 
-<?php
-$pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$date1 = $_GET['date1'];
-$date2 = $_GET['date2'];
-
-// ? issue where info is not limited only to relevant days
-$statement = $pdo->prepare(
-    "SELECT breakfast
-    FROM foodForDay 
-    WHERE date >=:date1 
-    AND date <=:date2
-    AND date IN (
-	    SELECT date
-	    FROM foodForDay
-	    WHERE dayQuality = 'b'
-	)");
-$statement->bindValue(':date1', $date1);
-$statement->bindValue(':date2', $date2);
-$statement->execute();
-$breakfast = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-// echo var_dump($breakfast);
-
-$statement = $pdo->prepare(
-    "SELECT lunch 
-    FROM foodForDay 
-    WHERE date >=:date1 
-    AND date <=:date2
-    AND date IN (
-	    SELECT date
-	    FROM foodForDay
-	    WHERE dayQuality = 'b'
-	)");
-$statement->bindValue(':date1', $date1);
-$statement->bindValue(':date2', $date2);
-$statement->execute();
-$lunch = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-$statement = $pdo->prepare(
-    "SELECT dinner 
-    FROM foodForDay 
-    WHERE date >=:date1 
-    AND date <=:date2
-    AND date IN (
-	    SELECT date
-	    FROM foodForDay
-	    WHERE dayQuality = 'b'
-	)");
-$statement->bindValue(':date1', $date1);
-$statement->bindValue(':date2', $date2);
-$statement->execute();
-$dinner = $statement->fetchAll(PDO::FETCH_ASSOC);
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -64,6 +8,8 @@ $dinner = $statement->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- JS file for getting & parsing food information -->
+    <script src="../js/summary.js" type="text/javascript"></script>
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -79,19 +25,10 @@ $dinner = $statement->fetchAll(PDO::FETCH_ASSOC);
             <h1>Food you had through <?php echo $_GET['date1']?> and <?php echo $_GET['date2']?></h1><br>
 
             <h2>What you had for breakfast</h2>
-            <?php foreach ($breakfast as $b) : ?>
-                <div class="flow-text"><?php echo $b['breakfast'] ?></div>
-            <?php endforeach; ?>
 
             <h2>What you had for lunch</h2>
-            <?php foreach ($lunch as $l) : ?>
-                <div class="flow-text"><?php echo $l['lunch'] ?></div>
-            <?php endforeach; ?>
 
             <h2>What you had for dinner</h2>
-            <?php foreach ($dinner as $d) : ?>
-                <div class="flow-text"><?php echo $d['dinner'] ?></div>
-            <?php endforeach; ?>
 
             <!-- used for loading xhttp GET/POST calls in javascript -->
             <p id="demo"></p>
@@ -101,18 +38,6 @@ $dinner = $statement->fetchAll(PDO::FETCH_ASSOC);
             </form>
         </div>
     </div>
-
-
-    <!--JavaScript at end of body for optimized loading-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        /* Javascript */
-        document.addEventListener('DOMContentLoaded', function() {
-
-        });
-    </script>
 </body>
 
 </html>
