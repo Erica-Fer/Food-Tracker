@@ -118,11 +118,11 @@ function combineData(data) {
     //     for (let i in allFoodItems) {
     //     out("top3 value: " + top3[i])
     // }
-
+    console.log("i'M HERE");
         for(let [key, value] of allFoodItems){
         out("\t\t" + key + " = " + value)
     }
-    formatData(top3);
+    formatData(allFoodItems); //changed from top3 to allFoodItems
 
     // for(let value of foodAtTime["dinner"]){
     //     out("\t\t" + "Dinner = " + value)
@@ -162,6 +162,64 @@ function addSorted(element, array) {
 // Format the data based on most common
 // Should list out top 3
 function formatData(allFood) {
+    console.log("NOW IN FORMAT DATA");
+    console.log(allFood);
+    for (let [key, value] of allFood) {
+        console.log(key + " = " + value);
+    }
+
+    var top3 = new Array(3);
+    //top3[0] = [1,2];
+    //var x = [[1,2]];
+    //console.log(x[0][1]);
+    console.log(top3);
+    // if(top3[1] == null){
+    //     console.log("hello");
+    // }
+    //might need to refactor this later
+    //[1,2,3] 4
+    for (let [key, value] of allFood) {
+        if(top3[2] == null){
+            top3[2] = [key,value];
+        }
+        else if(top3[2][1] > value){ 
+            if(top3[1] != null){ //something is already in there
+                if(top3[1][1] < value){
+                    top3[0] = top3[1];
+                    top3[1] = [key,value];
+                }
+                else{
+                    if(top3[0] == null || top3[0][1] < value)
+                    {
+                        top3[0] = [key,value];
+                    }
+                }
+            }
+            else{
+                top3[1] = [key,value];
+            }
+        }
+        else if(top3[2][1] < value){
+            if(top3[1] == null){ //nothing in top[1]
+                top3[1] = top3[2];
+                top3[2] = [key,value];
+            }
+            else{ //something in top[1]
+                top3[0] = top[1];
+                top3[1] = top3[2];
+                top3[2] = [key,value];
+            }
+        }
+        else{
+            console.log("i don't think we should get here???");
+        }
+        
+    }
+    console.log(top3);
+
+    // for(var i = 0; i < allFood.length; i++){
+    //     console.log(allFood);
+    // }
     // for(let [key, value] of allFood){
     //     out("\t\t" + key + " = " + value)
     // }
@@ -174,7 +232,29 @@ function formatData(allFood) {
     var first = "1. ";
     var second = "2. ";
     var third = "3. ";
-    var total = first + "<br>" + second + "<br>" + third;
+    var total = first;
+    if(top3[2] != null){
+        total += top3[2][0];
+    }
+    else{
+        total += "N/A";
+    }
+    total += "<br>" + second;
+    if(top3[1] != null){
+        total += top3[1][0];
+    }
+    else{
+        total += "N/A";
+    }
+    total += "<br>" + third;
+    if(top3[0] != null){
+        total += top3[0][0];
+    }
+    else{
+        total += "N/A";
+    }
+
+    //var total = first + top3[2][0] + "<br>" + second + top3[1][0]+ "<br>" + third + top3[0][0];
 
     document.getElementById("top3").innerHTML = total;
 
