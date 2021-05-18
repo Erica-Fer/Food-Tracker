@@ -39,24 +39,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (!$foundEmail && !$foundPassword) {
         $errors[] = 'Account does not exist.' . PHP_EOL . 'Try again, or sign-up here: <a href="register.php">Register for Full-Plate</a>';
-    }else if (!$foundEmail) {
+    }else if (!$foundEmail && $email) {
         $errors[] = 'Email not found.';
-    } else if (!$foundPassword) {
+    } else if (!$foundPassword && $password) {
         $errors[] = 'Password not found.';
     }
 
-    if (empty($errors)) {
+    // if (empty($errors)) {
         // $statement = $pdo->prepare("INSERT INTO users (email, password)
         //             VALUES (:email, :password)");
 
         // $statement->bindValue(':email', $email);
         // $statement->bindValue(':password', $password);
         // $statement->execute();
-        header('Location: main.php');
-    }else{
+        // header('Location: ../presentation/main.html');
+    // }else{
         echo json_encode($errors);
         // ? return to request.js
-    }
+    // }
 }
 
 

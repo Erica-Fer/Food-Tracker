@@ -25,6 +25,7 @@ function callDatabase(page, data, callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            // console.log(this.responseText)
             callback(JSON.parse(this.responseText)); // ?
         }
     };
@@ -34,12 +35,15 @@ function callDatabase(page, data, callback) {
 }
 
 function errorParse(errors){
+    if(errors.length == 0){
+        window.location.href = "../presentation/main.html";
+        return;
+    }
     var err = "";
-    console.log("errors: " + errors);
+    // console.log("errors: " + errors);
     for(var i = 0; i < errors.length; i++){
         err += errors[i] + '<br>';
     }
-    console.log("errors: " + err);
     document.getElementById("errors").innerHTML = err;
     // err = errors;
 }
