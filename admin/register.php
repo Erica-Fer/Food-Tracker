@@ -35,10 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $statement->bindValue(':email', $email);
         $statement->bindValue(':password', $password1);
         $statement->execute();
-        header('Location: ../presentation/main.html'); // ?
-    }else{
-        // return to request.js
+        // header('Location: ../presentation/main.html'); // ?
     }
+
+    echo json_encode($errors);
 }
 
 ?>

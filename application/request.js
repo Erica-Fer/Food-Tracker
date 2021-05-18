@@ -14,11 +14,13 @@ function submitReq(login){
         var password1 = document.getElementById("password1").value;
         var password2 = document.getElementById("password2").value;
         pageInfo = "../admin/register.php";
+        formInfo = "email=" + email + "&password1=" + password1 + "&password2=" + password2;
     }
 
     callDatabase(pageInfo, formInfo, errorParse);
 }
 
+// Use POST to pass user info the PHP file to parse and return errors
 function callDatabase(page, data, callback) {
     var result;
 
@@ -34,16 +36,19 @@ function callDatabase(page, data, callback) {
     xhttp.send(data); // ? TODO: need dates to be variables
 }
 
+// Handle what should display based on errors found in submit
 function errorParse(errors){
+    // If no errors, go ahead and go to the main calendar
     if(errors.length == 0){
         window.location.href = "../presentation/main.html";
         return;
     }
+
+    // If there are errors, format data to be shown on the current page
     var err = "";
-    // console.log("errors: " + errors);
     for(var i = 0; i < errors.length; i++){
         err += errors[i] + '<br>';
     }
+
     document.getElementById("errors").innerHTML = err;
-    // err = errors;
 }
