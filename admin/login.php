@@ -13,6 +13,7 @@ $email = '';
 $password = '';
 $foundEmail = false;
 $foundPassword = false;
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $email = $_POST['email'];
@@ -37,8 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (!$foundEmail && !$foundPassword) {
-        $errors[] = 'Account does not exist.';
-        $errors[] = 'Try again, or sign-up here: <a href="register.php">Register for Full-Plate</a>';
+        $errors[] = 'Account does not exist.\\nTry again, or sign-up here: <a href="register.php">Register for Full-Plate</a>';
     } else if (!$foundEmail) {
         $errors[] = 'Email not found.';
     } else if (!$foundPassword) {
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // $statement->execute();
         header('Location: main.php');
     }else{
-        echo json_encode($food);
+        echo json_encode(print_r($errors, true));
         // ? return to request.js
     }
 }

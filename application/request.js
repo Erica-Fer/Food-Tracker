@@ -1,7 +1,3 @@
-function test(){
-    console.log("got here!!!!!!");
-}
-
 // Submit the request given in loginPage.html
 function submitReq(login){
     var pageInfo = "";
@@ -20,15 +16,16 @@ function submitReq(login){
         pageInfo = "../admin/register.php";
     }
 
-    callDatabase(pageInfo, formInfo);
+    callDatabase(pageInfo, formInfo, errorParse);
 }
 
-function callDatabase(page, data) {
+function callDatabase(page, data, callback) {
+    var result;
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(JSON.parse(this.responseText));
-            // callback(JSON.parse(this.responseText)); // ?
+            callback(this.responseText); // ?
         }
     };
     xhttp.open("POST", page, true);
@@ -36,10 +33,15 @@ function callDatabase(page, data) {
     xhttp.send(data); // ? TODO: need dates to be variables
 }
 
-function login(){
-
-}
-
-function register(){
-
+function errorParse(errors){
+    var err = "";
+    errors = JSON.parse(errors);
+    console.log("errors: " + errors);
+    for(var i = 0; i < errors.length; i++){
+        console.log(errors[i]);
+        err = errors[i] + "\n";
+    }
+    console.log("errors: " + err);
+    document.getElementById("errors").innerHTML = err;
+    // err = errors;
 }
