@@ -1,70 +1,5 @@
 <html lang="en">
 
-<?php
-
-$pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$statement = $pdo->prepare('SELECT * FROM users');
-$statement->execute();
-$users = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-$errors = [];
-
-$email = '';
-$password = '';
-$foundEmail = false;
-$foundPassword = false;
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    foreach ($users as $info) :
-        // var_dump( $info);
-        $foundEmail = $info['email'] == $email;
-        $foundPassword = $info['password'] == $password;
-
-        if ($foundEmail || $foundPassword) {
-            break;
-        }
-    endforeach;
-
-    // echo '<pre>';
-    // var_dump($users);
-    // echo '</pre>';
-
-    if (!$email) {
-        $errors[] = 'Please provide a username.';
-    }
-
-    if (!$password) {
-        $errors[] = 'Please provide a password.';
-    }
-
-    if (!$foundEmail && !$foundPassword) {
-        $errors[] = 'Account does not exist.';
-        $errors[] = 'Try again, or sign-up here: <a href="register.php">Register for Full-Plate</a>';
-    } else if (!$foundEmail) {
-        $errors[] = 'Email not found.';
-    } else if (!$foundPassword) {
-        $errors[] = 'Password not found.';
-    }
-
-    if (empty($errors)) {
-        // $statement = $pdo->prepare("INSERT INTO users (email, password)
-        //             VALUES (:email, :password)");
-
-        // $statement->bindValue(':email', $email);
-        // $statement->bindValue(':password', $password);
-        // $statement->execute();
-        header('Location: main.php');
-    }
-}
-
-
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,13 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="card-title">Full-Plate Login</div>
 
                         <!-- print err messages -->
-                        <?php if (!empty($errors)) : ?>
+                        <!-- <?php if (!empty($errors)) : ?>
                             <div class="class alert alert-danger">
                                 <?php foreach ($errors as $error) : ?>
                                     <div><?php echo $error ?></div>
                                 <?php endforeach; ?>
                             </div>
-                        <?php endif; ?>
+                        <?php endif; ?> -->
 
                         <!-- get input from forms -->
                         <form action="" method="post">
@@ -137,18 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
-
-    <!--JavaScript at end of body for optimized loading-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        $(document).ready(function() {
-
-        });
-    </script>
-
-
 </body>
 
 </html>

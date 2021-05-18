@@ -1,5 +1,10 @@
 <html lang="en">
 
+<!-- 
+    ? TODO: preventation direct nvaigation to this page
+
+ -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,15 +33,6 @@
             <h4 id="top3"></h4>
 
             <br><br>
-
-            <h3>What you had for breakfast</h3>
-            <p id="breakfast"></p>
-
-            <h3>What you had for lunch</h3>
-            <p id="lunch"></p>
-
-            <h3>What you had for dinner</h3>
-            <p id="dinner"></p>
 
             <!-- used for loading xhttp GET/POST calls in javascript -->
             <p id="demo"></p>
