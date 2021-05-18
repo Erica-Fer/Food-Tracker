@@ -38,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (!$foundEmail && !$foundPassword) {
-        $errors[] = 'Account does not exist.\\nTry again, or sign-up here: <a href="register.php">Register for Full-Plate</a>';
-    } else if (!$foundEmail) {
+        $errors[] = 'Account does not exist.' . PHP_EOL . 'Try again, or sign-up here: <a href="register.php">Register for Full-Plate</a>';
+    }else if (!$foundEmail) {
         $errors[] = 'Email not found.';
     } else if (!$foundPassword) {
         $errors[] = 'Password not found.';
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // $statement->execute();
         header('Location: main.php');
     }else{
-        echo json_encode(print_r($errors, true));
+        echo json_encode($errors);
         // ? return to request.js
     }
 }

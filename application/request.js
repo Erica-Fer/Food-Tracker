@@ -25,7 +25,7 @@ function callDatabase(page, data, callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            callback(this.responseText); // ?
+            callback(JSON.parse(this.responseText)); // ?
         }
     };
     xhttp.open("POST", page, true);
@@ -35,11 +35,9 @@ function callDatabase(page, data, callback) {
 
 function errorParse(errors){
     var err = "";
-    errors = JSON.parse(errors);
     console.log("errors: " + errors);
     for(var i = 0; i < errors.length; i++){
-        console.log(errors[i]);
-        err = errors[i] + "\n";
+        err += errors[i] + '<br>';
     }
     console.log("errors: " + err);
     document.getElementById("errors").innerHTML = err;
