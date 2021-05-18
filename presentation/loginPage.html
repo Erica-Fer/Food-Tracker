@@ -12,8 +12,11 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+    <!-- App layer file to handle PHP data requests -->
+    <script src="../application/request.js" type="text/javascript"></script>
+
     <title>Full-Plate</title>
-    <link rel="stylesheet" type="text/css" href="css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="../css/materialize.css">
 </head>
 
 <body style="background-color: bisque;">
@@ -35,8 +38,11 @@
                             </div>
                         <?php endif; ?> -->
 
+                        <!-- Application layer outputs errors set by admin layer -->
+                        <p id="errors"></p>
+
                         <!-- get input from forms -->
-                        <form action="" method="post">
+                        <!-- <form action="" method="post"> -->
 
                             <!-- email -->
                             <div class="row">
@@ -59,14 +65,15 @@
 
                             <!-- submit -->
                             <p class="center-align flow-text">
-                                <button type="submit" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br>
+                                
+                                    <button type="submit" onclick="test()" id="submitBtn" class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br>
 
                                 <!-- go back -->
                                 <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
                             <p class="center-align">Return to welcome screen.</p>
 
                             </p>
-                        </form>
+                        <!-- </form> -->
                     </div>
                 </div>
             </div>
