@@ -35,7 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $statement->bindValue(':email', $email);
         $statement->bindValue(':password', $password1);
         $statement->execute();
-        header('Location: success_register.php');
+        header('Location: ../presentation/main.html'); // ?
+    }else{
+        // return to request.js
     }
 }
 

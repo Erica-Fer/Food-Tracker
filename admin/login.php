@@ -1,5 +1,3 @@
-<!--  -->
-
 <?php
 
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
@@ -31,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     endforeach;
 
     if (!$email) {
-        $errors[] = 'Please provide a username.';
+        $errors[] = 'Please provide an email address.';
     }
 
     if (!$password) {
@@ -55,6 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // $statement->bindValue(':password', $password);
         // $statement->execute();
         header('Location: main.php');
+    }else{
+        echo json_encode($food);
+        // ? return to request.js
     }
 }
 
