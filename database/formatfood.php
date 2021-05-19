@@ -12,11 +12,11 @@ $statement->execute();
 
 $food = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-$breakfastArr = array();
+$foodArr = array();
 foreach($food as $f){
     if($f[$key] != "")
-    array_push($breakfastArr, $f[$key]);
+    array_push($foodArr, $f[$key]);
 }
 
-echo json_encode($breakfastArr);
+echo json_encode($foodArr);
 ?>

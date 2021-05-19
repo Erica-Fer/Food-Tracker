@@ -7,28 +7,27 @@ window.onload = function () {
     document.getElementById("submit").onclick = saveMood;
 };
 
-var prevFood = [];
 
 document.addEventListener('DOMContentLoaded', function () {
     /* CODE FOR DAY QUALITY */
     var elemsSelect = document.querySelectorAll('select');
     M.FormSelect.init(elemsSelect, {
     });
-
-
+    
+    
     /* CODE FOR CHIPS(tags) */
     // array of all chips forms
     // add as needed, just use '.chips<name>' for the querySelector
     // ONLY USE FOR CHIP ELEMENTS
     var elemChips = [document.querySelectorAll('.chipsbreakfast')
-        , document.querySelectorAll('.chipslunch')
-        , document.querySelectorAll('.chipsdinner')];
-
+    , document.querySelectorAll('.chipslunch')
+    , document.querySelectorAll('.chipsdinner')];
+    
     // set values for each element
     // should let each user form keep unique elements, and elements featured in other forms
     for (i = 0; i < elemChips.length; i++) {
-        var temp = getFood(i);
-        console.log("final result: " + temp);
+        var prevFood = [];
+        getFood(i, elemChips[i]);
 
         var instances = M.Chips.init(elemChips[i], {
             autocompleteOptions: {
@@ -77,7 +76,7 @@ function getDate() {
     return dateVal;
 }
 
-function getFood(formNum) {
+function getFood(formNum, elemChips) {
     // Default to a null value so that if there is nothing, return is not empty
     var result = '';
 
@@ -100,23 +99,19 @@ function getFood(formNum) {
             break;
     }
 
-    callDatabase(parseFood, key);
+    callDatabase(parseFood, key, elemChips);
 
-    if (result == null || result.length < 1) {
-        return 0;
-    }
+
 
     // Close off the string and return the parsed food info to be used in the event listener
-    food += ']';
-    return JSON.parse(food);
 }
 
-function callDatabase(callback, key) {
+function callDatabase(callback, key, elemChips) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             // console.log("text: " + this.responseText);
-            callback(JSON.parse(this.responseText));
+            callback(JSON.parse(this.responseText), elemChips);
         }
     };
     xhttp.open("POST", "../database/formatfood.php", true);
@@ -124,11 +119,14 @@ function callDatabase(callback, key) {
     xhttp.send("date=" + getDate() + "&key=" + key); // ? TODO: some way to reuse this
 }
 
-function parseFood(foodType) {
+function parseFood(foodType, elemChips) {
     // result = <? php echo json_encode($breakfastFood, JSON_HEX_TAG) ?>; // ?
     console.log("food: " + foodType);
     var food = '';
 
+    if (foodType == null || foodType.length < 1) {
+        return 0;
+    }
 
     for (var i = 0; i < foodType.length; i++) {
         food += '{ "tag": "' + foodType[i] + '" }';
@@ -137,7 +135,15 @@ function parseFood(foodType) {
         }
     }
 
-    console.log("parsed food: " + food);
+    var res = "[" + food + "]";
+    updatePrevFood(JSON.parse(res), elemChips);
+}
+
+function updatePrevFood(food, elemChips){
+    M.Chips.init(elemChips, {
+        data: food
+    });
+    console.log("data: " + elemChips.data);
 }
 
 function saveMood() {
