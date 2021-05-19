@@ -1,11 +1,8 @@
 
 /* Javascript */
 
-// ? TODO: refactor so this is not global
-
 // get the php values as defined the beginning of the file
 // lets us set food already in the database as chips data
-
 window.onload = function () {
     document.getElementById("submit").onclick = saveMood;
 };
@@ -13,18 +10,17 @@ window.onload = function () {
 document.addEventListener('DOMContentLoaded', function () {
     /* CODE FOR DAY QUALITY */
     var elemsSelect = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elemsSelect, {
+    M.FormSelect.init(elemsSelect, {
     });
-    console.log(elemsSelect.value);
-
-    console.log("instances" + instances.toString());
 
 
     /* CODE FOR CHIPS(tags) */
     // array of all chips forms
     // add as needed, just use '.chips<name>' for the querySelector
     // ONLY USE FOR CHIP ELEMENTS
-    var elemChips = [document.querySelectorAll('.chipsbreakfast'), document.querySelectorAll('.chipslunch'), document.querySelectorAll('.chipsdinner')];
+    var elemChips = [document.querySelectorAll('.chipsbreakfast')
+                    , document.querySelectorAll('.chipslunch')
+                    , document.querySelectorAll('.chipsdinner')];
 
     // set values for each element
     // should let each user form keep unique elements, and elements featured in other forms
@@ -71,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// Returns the current date that is in the URL
 function getDate() {
     let params = new URLSearchParams(location.search);
     var dateVal = params.get('date');
