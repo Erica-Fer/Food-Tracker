@@ -14,7 +14,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- JS file for getting & parsing food information -->
-    <script src="../js/summary.js" type="text/javascript"></script>
+    <script src="../application/summary.js" type="text/javascript"></script>
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -27,7 +27,7 @@
     <div class="container">
         <div class="center-align background: white">
 
-            <h1>Food you had through <?php echo $_GET['date1']?> and <?php echo $_GET['date2']?></h1><br>
+            <h1 id="dateInfo"></h1>
 
             <h2>Top 3 worst foods</h2>
             <h4 id="top3"></h4>

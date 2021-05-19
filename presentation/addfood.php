@@ -180,7 +180,7 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
                     document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
                 }
             };
-            xhttp.open("POST", "../php/postmoods.php", true);
+            xhttp.open("POST", "../database/postmoods.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
             console.log("made it here");
             xhttp.send("dayQuality" + "=" + mood + date); // should send something in the form of "breakfast=cheese", or other input
@@ -247,7 +247,7 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
                                 document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
                             }
                         };
-                        xhttp.open("POST", "../php/post.php", true);
+                        xhttp.open("POST", "../database/post.php", true);
                         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
                         xhttp.send(formId + "=" + newestTag + date); // should send something in the form of "breakfast=cheese", or other input
                     }

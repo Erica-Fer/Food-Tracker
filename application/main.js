@@ -157,7 +157,7 @@
                 colorMood(JSON.parse(this.responseText));
             }
         };
-        xhttp.open("GET", "../php/grabmoods.php", true);
+        xhttp.open("GET", "../database/grabmoods.php", true);
         xhttp.send();
     }
 

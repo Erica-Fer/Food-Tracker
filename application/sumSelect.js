@@ -7,7 +7,7 @@ function sumButtonClick(){
         return;
     }
     
-    var url = "summary.php?date1=" + sumDays[0] + "&date2=" + sumDays[1];
+    var url = "summary.html?date1=" + sumDays[0] + "&date2=" + sumDays[1];
     window.location.href = url;
 }
 
