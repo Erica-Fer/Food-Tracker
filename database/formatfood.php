@@ -19,19 +19,4 @@ foreach($food as $f){
 }
 
 echo json_encode($breakfastArr);
-
-$lunchArr = array();
-foreach($food as $f){
-    if($f['lunch'] != "")
-        array_push($lunchArr, $f['lunch']);
-}
-
-$dinnerArr = array();
-foreach($food as $f){
-    if($f['dinner'] != "")
-        array_push($dinnerArr, $f['dinner']);
-}
-$breakfastFood = $breakfastArr;
-$lunchFood = $lunchArr; 
-$dinnerFood = $dinnerArr; 
 ?>

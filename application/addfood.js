@@ -7,6 +7,8 @@ window.onload = function () {
     document.getElementById("submit").onclick = saveMood;
 };
 
+var prevFood = [];
+
 document.addEventListener('DOMContentLoaded', function () {
     /* CODE FOR DAY QUALITY */
     var elemsSelect = document.querySelectorAll('select');
@@ -25,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // set values for each element
     // should let each user form keep unique elements, and elements featured in other forms
     for (i = 0; i < elemChips.length; i++) {
-        var prevFood = [];
-        getFood(i);
+        var temp = getFood(i);
+        console.log("final result: " + temp);
 
         var instances = M.Chips.init(elemChips[i], {
             autocompleteOptions: {
@@ -125,14 +127,17 @@ function callDatabase(callback, key) {
 function parseFood(foodType) {
     // result = <? php echo json_encode($breakfastFood, JSON_HEX_TAG) ?>; // ?
     console.log("food: " + foodType);
+    var food = '';
 
 
-    // for (var i = 0; i < result.length; i++) {
-    //     food += '{ "tag": "' + result[i] + '" }';
-    //     if (i < result.length - 1) {
-    //         food += ',';
-    //     }
-    // }
+    for (var i = 0; i < foodType.length; i++) {
+        food += '{ "tag": "' + foodType[i] + '" }';
+        if (i < foodType.length - 1) {
+            food += ',';
+        }
+    }
+
+    console.log("parsed food: " + food);
 }
 
 function saveMood() {
