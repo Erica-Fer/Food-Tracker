@@ -78,13 +78,7 @@ function getDate() {
 
 function getFood(formNum, elemChips) {
     // Default to a null value so that if there is nothing, return is not empty
-    var result = '';
 
-    // Begin the string to be used for parsing input
-    // This is what allows for each input food to have individual chip
-    // The format of string should be the following:
-    //'[' + '{ "tag": "' + foodTest[0] + '" }' + ',' + '{ "tag": "' + foodTest[2] + '" }' + ']';
-    var food = '[';
     var key = '';
 
     switch (formNum) {
@@ -100,10 +94,6 @@ function getFood(formNum, elemChips) {
     }
 
     callDatabase(parseFood, key, elemChips);
-
-
-
-    // Close off the string and return the parsed food info to be used in the event listener
 }
 
 function callDatabase(callback, key, elemChips) {
@@ -122,12 +112,16 @@ function callDatabase(callback, key, elemChips) {
 function parseFood(foodType, elemChips) {
     // result = <? php echo json_encode($breakfastFood, JSON_HEX_TAG) ?>; // ?
     console.log("food: " + foodType);
+    // Begin the string to be used for parsing input
     var food = '';
 
     if (foodType == null || foodType.length < 1) {
         return 0;
     }
-
+    
+    // This is what allows for each input food to have individual chip
+    // The format of string should be the following:
+    //'[' + '{ "tag": "' + foodTest[0] + '" }' + ',' + '{ "tag": "' + foodTest[2] + '" }' + ']';
     for (var i = 0; i < foodType.length; i++) {
         food += '{ "tag": "' + foodType[i] + '" }';
         if (i < foodType.length - 1) {
