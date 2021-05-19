@@ -267,7 +267,7 @@
     /* end erica code */
 
     function printID() {
-        var url = "addfood.php?date=" + this.id;
+        var url = "addfood.html?date=" + this.id;
         window.location.href = url;
         //window.open("../index.html");
         // // console.log()

@@ -2,7 +2,7 @@
 
 <?php
     // File for handling grabbing database information.
-    // Should be used so that chips in addfood.php can display info that a user has already input.
+    // Should be used so that chips in addfood.html can display info that a user has already input.
 
     // Referenced StackOverflow page for SQL statement preperation:
     //     https://stackoverflow.com/questions/28283141/how-to-select-from-a-dynamic-column-through-a-variable-with-pdo
