@@ -52,6 +52,7 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Import Google Icon Font-->
+    <link rel="stylesheet" type="text/css" href="../css/food.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -63,11 +64,13 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
     <link rel="stylesheet" type="text/css" href="../css/materialize.css">
 </head>
 
-<body style="background-color: bisque;">
+<body>
     <div class="container">
-        <div class="center-align background: white">
-
-            <h1>Add food for <?php echo $_GET['date'] ?> </h1><br>
+        <div class="center-align background: white helloClass">
+            <div class="myClass">
+            <!-- originally had <?php echo $_GET['date'] ?> -->
+            <!-- later change this to a different title name -->
+            <h1 id="title">Add food for </h1><br>
 
             <form>
                 <label for="askDay">How was the quality of your day?</label>
@@ -94,6 +97,7 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
             <a href="main.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
             <p class="center-align">Return to calendar.</p>
             </form>
+</div>
         </div>
     </div>
 
@@ -108,8 +112,44 @@ $dinnerFood = $dinnerArr; //(isset($food[0]['dinner']) != null ? $food[0]['dinne
         // get the php values as defined the beginning of the file
         // lets us set food already in the database as chips data
         window.onload = function () {
+            fixDate();
             document.getElementById("submit").onclick = saveMood;
     };
+
+    function fixDate(){
+
+        let months = new Map([
+            ["01", "January"],
+            ["02", "February"],
+            ["03", "March"],
+            ["04", "April"],
+            ["05", "May"],
+            ["06", "June"],
+            ["07", "July"],
+            ["08", "August"],
+            ["09", "September"],
+            ["10", "October"],
+            ["11","November"],
+            ["12", "December"]
+        ])        ;
+        var current_date = <?php echo json_encode($date, JSON_HEX_TAG) ?>;
+        console.log("woooooo" + current_date);
+        var year = current_date.substring(0, 4);
+        console.log("year" + year);
+        var month = current_date.substring(5, 7);
+        console.log("month" + month);
+        var day = current_date.substring(8, 10);
+        console.log("day" + day);
+        console.log(months.get(month));
+        var result = months.get(month) + " " + day + ", " + year;
+        console.log(result);
+
+        var update = document.getElementById("title");
+        update.innerHTML += result;
+
+
+
+    }
 
         function getFood(formNum) {
             // Default to a null value so that if there is nothing, return is not empty
