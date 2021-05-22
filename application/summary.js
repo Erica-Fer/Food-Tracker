@@ -4,14 +4,88 @@ window.addEventListener('load',
     function () {
         // Use callback methods to pass data from PHP to be processed
         // Allows for async processing of information
-        callDatabase(combineData);
+        let params = new URLSearchParams(location.search);
+        document.getElementById("dateInfo").innerHTML = stringifyDateOutput(params);
+
+        var date = params.toString()
+        callDatabase(date, combineData);
     }, false);
 
 
+function stringifyDateOutput(params) {
+    var rangeOfDates = "";
+    var parsedDate1 = parseDate(params.get('date1'));
+    var parsedDate2 = parseDate(params.get('date2'));
+
+    rangeOfDates = "Food had between "
+                    + parsedDate1[0] 
+                    + " " 
+                    + parsedDate1 [1]
+                    + ", "
+                    + parsedDate1[2]
+                    + " and "
+                    + parsedDate2[0] 
+                    + " " 
+                    + parsedDate2[1]
+                    + ", "
+                    + parsedDate2[2];
+
+    return rangeOfDates;
+}
+
+function parseDate(dateStr) {
+    var result = {};
+    var parsed = dateStr.split("-", 3);
+
+    switch (parsed[1]) {
+        case "01": //january
+            result[0] = "January"
+            break;
+        case "02": //february
+            result[0] = "February"
+            break;
+        case "03": //march
+            result[0] = "March"
+            break;
+        case "04": //april
+            result[0] = "April"
+            break;
+        case "05": //may
+            result[0] = "May"
+            break;
+        case "06": //june
+            result[0] = "June"
+            break;
+        case "07": //july
+            result[0] = "July"
+            break;
+        case "08": //august
+            result[0] = "August"
+            break;
+        case "09": //september
+            result[0] = "September"
+            break;
+        case "10": //october
+            result[0] = "October"
+            break;
+        case "11": //november
+            result[0] = "November"
+            break;
+        case "12": //december
+            result[0] = "December"
+        default:
+            alert("Invalid date!");
+            window.location.href = "../presentation/main.html";
+    }
+
+    result[1] = parsed[2]; // Day
+    result[2] = parsed[0]; // Year
+    return result;
+}
 
 // Return the database information between the given date numbers
 // ? TODO: include a call to validate user request in admin
-function callDatabase(callback) {
+function callDatabase(date, callback) {
     // out("entered");
     var myObj;
     var xhttp = new XMLHttpRequest();
@@ -22,9 +96,9 @@ function callDatabase(callback) {
             callback(JSON.parse(this.responseText));
         }
     };
-    xhttp.open("POST", "../php/summaryData.php", true);
+    xhttp.open("POST", "../database/summaryData.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("date1=2021-04-01&date2=2021-04-21"); // ? TODO: need dates to be variables
+    xhttp.send(date); // ? TODO: need dates to be variables
 }
 
 // Get all data into one easy to sort array
@@ -47,7 +121,7 @@ function combineData(data) {
     }];
 
     out("food = " + top3[2].food + "\ncount = " + top3[2].count);
- 
+
 
     for (i = 0; data[i] != null; i++) {
         // out(data[i]["breakfast"]); // ?
@@ -119,7 +193,7 @@ function combineData(data) {
     //     out("top3 value: " + top3[i])
     // }
     console.log("i'M HERE");
-        for(let [key, value] of allFoodItems){
+    for (let [key, value] of allFoodItems) {
         out("\t\t" + key + " = " + value)
     }
     formatData(allFoodItems); //changed from top3 to allFoodItems
@@ -179,41 +253,40 @@ function formatData(allFood) {
     //might need to refactor this later
     //[1,2,3] 4
     for (let [key, value] of allFood) {
-        if(top3[2] == null){
-            top3[2] = [key,value];
+        if (top3[2] == null) {
+            top3[2] = [key, value];
         }
-        else if(top3[2][1] > value){ 
-            if(top3[1] != null){ //something is already in there
-                if(top3[1][1] < value){
+        else if (top3[2][1] > value) {
+            if (top3[1] != null) { //something is already in there
+                if (top3[1][1] < value) {
                     top3[0] = top3[1];
-                    top3[1] = [key,value];
+                    top3[1] = [key, value];
                 }
-                else{
-                    if(top3[0] == null || top3[0][1] < value)
-                    {
-                        top3[0] = [key,value];
+                else {
+                    if (top3[0] == null || top3[0][1] < value) {
+                        top3[0] = [key, value];
                     }
                 }
             }
-            else{
-                top3[1] = [key,value];
+            else {
+                top3[1] = [key, value];
             }
         }
-        else if(top3[2][1] < value){
-            if(top3[1] == null){ //nothing in top[1]
+        else if (top3[2][1] < value) {
+            if (top3[1] == null) { //nothing in top[1]
                 top3[1] = top3[2];
-                top3[2] = [key,value];
+                top3[2] = [key, value];
             }
-            else{ //something in top[1]
+            else { //something in top[1]
                 top3[0] = top[1];
                 top3[1] = top3[2];
-                top3[2] = [key,value];
+                top3[2] = [key, value];
             }
         }
-        else{
+        else {
             console.log("i don't think we should get here???");
         }
-        
+
     }
     console.log(top3);
 
@@ -233,24 +306,24 @@ function formatData(allFood) {
     var second = "2. ";
     var third = "3. ";
     var total = first;
-    if(top3[2] != null){
+    if (top3[2] != null) {
         total += top3[2][0];
     }
-    else{
+    else {
         total += "N/A";
     }
     total += "<br>" + second;
-    if(top3[1] != null){
+    if (top3[1] != null) {
         total += top3[1][0];
     }
-    else{
+    else {
         total += "N/A";
     }
     total += "<br>" + third;
-    if(top3[0] != null){
+    if (top3[0] != null) {
         total += top3[0][0];
     }
-    else{
+    else {
         total += "N/A";
     }
 
