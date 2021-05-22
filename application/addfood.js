@@ -1,7 +1,6 @@
 /* Javascript */
 
 window.onload = function () {
-    document.getElementById("submit").onclick = saveMood;
     fixDate();
 };
 
@@ -16,6 +15,7 @@ function mood() {
     var elemsSelect = document.querySelectorAll('select');
     M.FormSelect.init(elemsSelect, {
     });
+    document.getElementById("submit").onclick = saveMood;
 
 }
 
