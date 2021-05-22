@@ -1,5 +1,4 @@
 <?php
-echo "in post php";
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -18,20 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //print "here first";
     if(isset($_POST['date'])){
         $date = $_POST['date'];
-        echo "date: $date";
     }
     
     if (isset($_POST['breakfast'])) {
         $breakfast = $_POST['breakfast'];
-        echo "breakfast: $breakfast";
     } else if(isset($_POST['lunch']))
     {
         $lunch = $_POST['lunch'];
-        echo "lunch: $lunch";
-
     } else { // ? may need to be an if/else
         $dinner = $_POST['dinner'];
-        echo "dinner: $dinner";
     }
 
     // if (empty($errors)) {
