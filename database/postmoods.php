@@ -25,16 +25,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // ? INSERT OVERWRITE
     //ON DUPLICATE KEY UPDATE dayQuality='$mood'
     $statement = $pdo->prepare("SELECT count(*) 
-                                FROM foodforday
-                                WHERE date=:date
-                                AND dayQuality != null");
-     $statement->bindValue(':date', $date);
-     $statement->execute();
-
-     $moodCount = $statement->fetchAll(PDO::FETCH_ASSOC);
-     echo $moodCount;
-
+                                FROM foodforday 
+                                WHERE date=:date 
+                                AND (dayQuality='okay' 
+                                OR dayQuality='good' 
+                                OR dayQuality='bad')");
+    $statement->bindValue(':date', $date);
+    $statement->execute();
     
+    $moodStatement = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $moodCount = 0;
+    foreach($moodStatement as $m){
+        foreach($m as $data)
+            $moodCount = $data;
+    } 
+    //if there was already a value in the table 
+    if($moodCount > 0){
+        //echo "deleting";
+        //DELETE FROM table_name WHERE condition;
+        $statement = $pdo->prepare("DELETE FROM foodforday 
+                                    WHERE date=:date 
+                                    AND (dayQuality='okay' 
+                                    OR dayQuality='good' 
+                                    OR dayQuality='bad')");
+        $statement->bindValue(':date', $date);
+        $statement->execute();
+    } 
+  
 $statement = $pdo->prepare(
     "INSERT INTO foodForDay (date, dayQuality)
     VALUES (:date, :dayQuality)"
