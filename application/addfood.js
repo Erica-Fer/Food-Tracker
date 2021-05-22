@@ -108,14 +108,26 @@ function initializeChips(elemChips, food){
             //     // console.log(chip[i]);
             // }
 
-            var data = chip["firstChild"]["wholeText"];
-            console.log(data);
+            var form = "formId=" + formId;
+
+            // Get the data for the chip being deleted
+            var toDelete = "&remove=" + chip["firstChild"]["wholeText"];
 
             
-
+            // Set the date toe be used in the database update
             var date = "&date=" + getDate();
 
-            // console.log("formId: " + formId + "\nformData: " + formData + "\nchipsData: " + chipsData);
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("POST", "../database/removefood.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
+            // MESSAGE FORMAT:
+            // formId=<$breakfast/$lunch/$dinner/symptoms>&remove=<$text>&date=<$yyyy-mm-dd>
+            xhttp.send(form + toDelete + date);
         }
     });
 }
