@@ -13,10 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
 /* CODE FOR DAY QUALITY */
 function mood() {
     var elemsSelect = document.querySelectorAll('select');
-    M.FormSelect.init(elemsSelect, {
-    });
+    M.FormSelect.init(elemsSelect, {});
     document.getElementById("submit").onclick = saveMood;
-
 }
 
 /* CODE FOR CHIPS(tags) */
