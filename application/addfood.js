@@ -53,57 +53,60 @@ document.addEventListener('DOMContentLoaded', function () {
     // set values for each element
     // should let each user form keep unique elements, and elements featured in other forms
     for (i = 0; i < elemChips.length; i++) {
-        var prevFood = [];
+        // var prevFood = [];
         getFood(i, elemChips[i]);
-
-        var instances = M.Chips.init(elemChips[i], {
-            autocompleteOptions: {
-                data: {
-                    'Apple': null,
-                    'Rice': null,
-                    'Custard': null,
-                    'Chocolate': null
-                },
-                limit: Infinity,
-                minLength: 1
-            },
-            placeholder: 'Enter a tag',
-            secondaryPlaceholder: 'Enter a tag',
-            data: prevFood,
-            onChipAdd: (event) => {
-                alert("here");
-                var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
-                var formData = '.chips' + formId;
-                var chipsData = M.Chips.getInstance($(formData)).chipsData;
-
-                var newestTag = chipsData[chipsData.length - 1].tag;
-
-                // Get the date from the given url
-                var date = "&date=" + getDate();
-
-                // make call to PHP file to handle giving tags info to be put in database
-                // should let the user add information without ever pressing a "save" button
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
-                    }
-                };
-                xhttp.open("POST", "../database/post.php", true);
-                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
-                xhttp.send(formId + "=" + newestTag + date); // should send something in the form of "breakfast=cheese", or other input
-            },
-            onChipDelete: (event) =>{
-                alert("i here bitch");
-                var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
-                var formData = '.chips' + formId;
-                var chipsData = M.Chips.getInstance($(formData)).chipsData;
-
-                console.log("formId: " + formId + "formData: " + formData + "chipsData: " + chipsData);
-            }
-        });
     }
 });
+
+function initializeChips(elemChips, food){
+    var prevFood = food;
+    var instances = M.Chips.init(elemChips, {
+        autocompleteOptions: {
+            data: {
+                'Apple': null,
+                'Rice': null,
+                'Custard': null,
+                'Chocolate': null
+            },
+            limit: Infinity,
+            minLength: 1
+        },
+        placeholder: 'Enter a tag',
+        secondaryPlaceholder: 'Enter a tag',
+        data: prevFood,
+        onChipAdd: (event) => {
+            alert("here");
+            var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
+            var formData = '.chips' + formId;
+            var chipsData = M.Chips.getInstance($(formData)).chipsData;
+
+            var newestTag = chipsData[chipsData.length - 1].tag;
+
+            // Get the date from the given url
+            var date = "&date=" + getDate();
+
+            // make call to PHP file to handle giving tags info to be put in database
+            // should let the user add information without ever pressing a "save" button
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
+                }
+            };
+            xhttp.open("POST", "../database/post.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
+            xhttp.send(formId + "=" + newestTag + date); // should send something in the form of "breakfast=cheese", or other input
+        },
+        onChipDelete: (event) =>{
+            alert("i here bitch");
+            var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
+            var formData = '.chips' + formId;
+            var chipsData = M.Chips.getInstance($(formData)).chipsData;
+
+            console.log("formId: " + formId + "formData: " + formData + "chipsData: " + chipsData);
+        }
+    });
+}
 
 // Returns the current date that is in the URL
 function getDate() {
@@ -168,9 +171,16 @@ function parseFood(foodType, elemChips) {
 }
 
 function updatePrevFood(food, elemChips){
-    M.Chips.init(elemChips, {
-        data: food
-    });
+    // console.log(elemChips);
+    // console.log(elemChips.data);
+
+    // elemChips.data = [{tag: 'apple'}];
+    // console.log(elemChips.data);
+
+    initializeChips(elemChips, food);
+
+    // var elem = M.Chips.getInstance(elemChips);
+    // console.log(elem.chipsData);
 }
 
 function saveMood() {
