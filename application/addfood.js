@@ -4,6 +4,7 @@
 // lets us set food already in the database as chips data
 window.onload = function () {
     document.getElementById("submit").onclick = saveMood;
+    fixDate();
 };
 
 function fixDate(){
@@ -21,15 +22,12 @@ function fixDate(){
         ["10", "October"],
         ["11","November"],
         ["12", "December"]
-    ])        ;
-    var current_date = "TEMP" //<?php echo json_encode($date, JSON_HEX_TAG) ?>;
-    console.log("woooooo" + current_date);
+    ]);
+    let params = new URLSearchParams(location.search);
+    var current_date = params.get('date'); //<?php echo json_encode($date, JSON_HEX_TAG) ?>;
     var year = current_date.substring(0, 4);
-    console.log("year" + year);
     var month = current_date.substring(5, 7);
-    console.log("month" + month);
     var day = current_date.substring(8, 10);
-    console.log("day" + day);
     console.log(months.get(month));
     var result = months.get(month) + " " + day + ", " + year;
     console.log(result);
