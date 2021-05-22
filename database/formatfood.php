@@ -19,4 +19,4 @@ foreach($food as $f){
 }
 
 echo json_encode($foodArr);
-?>
+?> 

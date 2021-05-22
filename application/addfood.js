@@ -28,9 +28,7 @@ function fixDate(){
     var year = current_date.substring(0, 4);
     var month = current_date.substring(5, 7);
     var day = current_date.substring(8, 10);
-    console.log(months.get(month));
     var result = months.get(month) + " " + day + ", " + year;
-    console.log(result);
 
     var update = document.getElementById("title");
     update.innerHTML += result;
@@ -73,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             secondaryPlaceholder: 'Enter a tag',
             data: prevFood,
             onChipAdd: (event) => {
+                alert("here");
                 var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
                 var formData = '.chips' + formId;
                 var chipsData = M.Chips.getInstance($(formData)).chipsData;
@@ -93,6 +92,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 xhttp.open("POST", "../database/post.php", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
                 xhttp.send(formId + "=" + newestTag + date); // should send something in the form of "breakfast=cheese", or other input
+            },
+            onChipDelete: (event) =>{
+                alert("i here bitch");
+                var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
+                var formData = '.chips' + formId;
+                var chipsData = M.Chips.getInstance($(formData)).chipsData;
+
+                console.log("formId: " + formId + "formData: " + formData + "chipsData: " + chipsData);
             }
         });
     }
@@ -129,7 +136,6 @@ function callDatabase(callback, key, elemChips) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            // console.log("text: " + this.responseText);
             callback(JSON.parse(this.responseText), elemChips);
         }
     };
@@ -140,7 +146,6 @@ function callDatabase(callback, key, elemChips) {
 
 function parseFood(foodType, elemChips) {
     // result = <? php echo json_encode($breakfastFood, JSON_HEX_TAG) ?>; // ?
-    console.log("food: " + foodType);
     // Begin the string to be used for parsing input
     var food = '';
 
@@ -166,7 +171,6 @@ function updatePrevFood(food, elemChips){
     M.Chips.init(elemChips, {
         data: food
     });
-    console.log("data: " + elemChips.data);
 }
 
 function saveMood() {
