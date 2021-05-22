@@ -2,7 +2,7 @@
 /* hewwo? */
 body{
 background: #519cbd;
-width: 95%;
+/* width: 95%; */
 }
 
 
@@ -18,7 +18,7 @@ width: 95%;
     margin: 30px;
     border-style: groove;
     border-width: 3px;
-    border-color:#519cbd;
+    border-color:#2B7C9C;
     border-radius: 15px;
     padding: 10px;
 
@@ -29,4 +29,27 @@ width: 95%;
 }
 #title{
     font-weight: bold;
+    color:#00415E;
+    /* border-bottom: darkblue dashed; */
+}
+
+#aroundTitle{
+    border-bottom: #005E7C dashed;
+    border-bottom-width: 5px;
+}
+
+.myHeader{
+    text-align: wrap;
+    background-color: #005E7C;
+    width: 100%;
+    /* height: 40px; */
+}
+
+/* need to have a nicer font for this but the idea is there */
+/* might make it smaller too */
+.myHeader h1{
+    text-align: center;
+    color: white;
+    margin: 0;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
