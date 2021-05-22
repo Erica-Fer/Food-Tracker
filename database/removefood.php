@@ -1,15 +1,10 @@
 <?php
-
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $formId = $_POST['formId'];
 $itemToRemove = $_POST['remove'];
 $date = $_POST['date'];
-
-echo $formId;
-echo $itemToRemove;
-echo $date;
 
 $statement = $pdo->prepare("DELETE
                             FROM foodforday

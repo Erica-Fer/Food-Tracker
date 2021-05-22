@@ -126,7 +126,7 @@ function initializeChips(elemChips, food){
             xhttp.open("POST", "../database/removefood.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
             // MESSAGE FORMAT:
-            // formId=<$breakfast/$lunch/$dinner/symptoms>&remove=<$text>&date=<$yyyy-mm-dd>
+            // formId=<$breakfast/$lunch/$dinner/$symptoms>&remove=<$text>&date=<$yyyy-mm-dd>
             xhttp.send(form + toDelete + date);
         }
     });
@@ -140,8 +140,10 @@ function getDate() {
 }
 
 function getFood(formNum, elemChips) {
+    // Start by initializing the blank chips before finding food
+    initializeChips(elemChips, []);
+    
     // Default to a null value so that if there is nothing, return is not empty
-
     var key = '';
 
     switch (formNum) {
@@ -172,6 +174,7 @@ function callDatabase(callback, key, elemChips) {
 }
 
 function parseFood(foodType, elemChips) {
+    console.log(foodType);
     // result = <? php echo json_encode($breakfastFood, JSON_HEX_TAG) ?>; // ?
     // Begin the string to be used for parsing input
     var food = '';
