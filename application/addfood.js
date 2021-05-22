@@ -75,7 +75,6 @@ function initializeChips(elemChips, food){
         secondaryPlaceholder: 'Enter a tag',
         data: prevFood,
         onChipAdd: (event) => {
-            alert("here");
             var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
             var formData = '.chips' + formId;
             var chipsData = M.Chips.getInstance($(formData)).chipsData;
@@ -97,13 +96,26 @@ function initializeChips(elemChips, food){
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
             xhttp.send(formId + "=" + newestTag + date); // should send something in the form of "breakfast=cheese", or other input
         },
-        onChipDelete: (event) =>{
-            alert("i here bitch");
+        onChipDelete: (event, chip) =>{
             var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
             var formData = '.chips' + formId;
             var chipsData = M.Chips.getInstance($(formData)).chipsData;
+            
+            // console.log(chip);
+            // for(let i in chip["firstChild"]){
+            //     console.log("##ind: " + i);
+            //     console.log(chip["firstChild"][i]);
+            //     // console.log(chip[i]);
+            // }
 
-            console.log("formId: " + formId + "formData: " + formData + "chipsData: " + chipsData);
+            var data = chip["firstChild"]["wholeText"];
+            console.log(data);
+
+            
+
+            var date = "&date=" + getDate();
+
+            // console.log("formId: " + formId + "\nformData: " + formData + "\nchipsData: " + chipsData);
         }
     });
 }
@@ -167,20 +179,7 @@ function parseFood(foodType, elemChips) {
     }
 
     var res = "[" + food + "]";
-    updatePrevFood(JSON.parse(res), elemChips);
-}
-
-function updatePrevFood(food, elemChips){
-    // console.log(elemChips);
-    // console.log(elemChips.data);
-
-    // elemChips.data = [{tag: 'apple'}];
-    // console.log(elemChips.data);
-
-    initializeChips(elemChips, food);
-
-    // var elem = M.Chips.getInstance(elemChips);
-    // console.log(elem.chipsData);
+    initializeChips(elemChips, JSON.parse(res));
 }
 
 function saveMood() {
