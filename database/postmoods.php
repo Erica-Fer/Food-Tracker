@@ -21,9 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // ? INSERT OVERWRITE
 $statement = $pdo->prepare(
     "INSERT INTO foodForDay (date, dayQuality)
-    VALUES (:date, :dayQuality)"
+    VALUES (:date, :dayQuality) ON DUPLICATE KEY UPDATE dayQuality='$mood';"
     );
     
+    //INSERT INTO table (Date,Name,Values) VALUES (CURDATE(),'$name','$values') ON DUPLICATE KEY UPDATE Values='$values'
     $statement->bindValue(':date', $date);
     $statement->bindValue(':dayQuality', $mood);
     $statement->execute();

@@ -1,0 +1,32 @@
+/*stylesheet for addfood.php page*/
+/* hewwo? */
+body{
+background: #519cbd;
+width: 95%;
+}
+
+
+.helloClass{
+    margin: 50px;
+    padding:10px;
+    border-radius: 5px;
+    width: 95%;
+
+}
+
+.myClass{
+    margin: 30px;
+    border-style: groove;
+    border-width: 3px;
+    border-color:#519cbd;
+    border-radius: 15px;
+    padding: 10px;
+
+
+     /* height: 900px;
+     width: 800px; */
+
+}
+#title{
+    font-weight: bold;
+}
