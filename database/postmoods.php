@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // ? INSERT OVERWRITE
     //ON DUPLICATE KEY UPDATE dayQuality='$mood'
+    //find if mood exists on day
     $statement = $pdo->prepare("SELECT count(*) 
                                 FROM foodforday 
                                 WHERE date=:date 
@@ -33,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement->bindValue(':date', $date);
     $statement->execute();
     
+    //gets count 
     $moodStatement = $statement->fetchAll(PDO::FETCH_ASSOC);
     $moodCount = 0;
     foreach($moodStatement as $m){
@@ -51,11 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $statement->bindValue(':date', $date);
         $statement->execute();
     } 
-  
-$statement = $pdo->prepare(
-    "INSERT INTO foodForDay (date, dayQuality)
-    VALUES (:date, :dayQuality)"
-    );
+
+    //add new value to table
+    $statement = $pdo->prepare(
+        "INSERT INTO foodForDay (date, dayQuality)
+        VALUES (:date, :dayQuality)"
+        );
     
     //INSERT INTO table (Date,Name,Values) VALUES (CURDATE(),'$name','$values') ON DUPLICATE KEY UPDATE Values='$values'
     $statement->bindValue(':date', $date);
