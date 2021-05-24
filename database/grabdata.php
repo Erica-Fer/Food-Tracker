@@ -1,6 +1,7 @@
 
 
 <?php
+session_start();
     // File for handling grabbing database information.
     // Should be used so that chips in addfood.html can display info that a user has already input.
 
@@ -28,14 +29,15 @@ echo json_encode($food);
 function getFood($date, $form){
     $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $email = $_SESSION["email"];
     
-    $statement = $pdo->prepare("SELECT $form FROM foodForDay WHERE date=:date");
+    $statement = $pdo->prepare("SELECT $form FROM foodForDay WHERE date=:date AND email=:email");
     $statement->bindValue(':date', $date);
+    $statement->bindValue(':email', $email);
+
     $statement->execute();
     
     $food = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $food;
 }
-
-
-?>

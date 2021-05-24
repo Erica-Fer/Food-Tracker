@@ -1,4 +1,8 @@
 // Submit the request given in loginPage.html
+window.onload = function(){
+    checkLoggedIn(redirectToApp);
+}
+
 function submitReq(login){
     var pageInfo = "";
     var formInfo = "";
@@ -18,6 +22,24 @@ function submitReq(login){
     }
 
     callDatabase(pageInfo, formInfo, errorParse);
+}
+
+function checkLoggedIn(callback){
+    console.log("got here");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            callback(this.response);
+       }
+    };
+    xhttp.open("GET", "../admin/sessionValidate.php", true);
+    xhttp.send();
+}
+
+function redirectToApp(response){
+    if(response != -1){
+        window.location.href = "../presentation/main.html";
+    }
 }
 
 // Use POST to pass user info the PHP file to parse and return errors
