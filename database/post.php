@@ -1,4 +1,5 @@
 <?php
+session_start();
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -29,10 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // if (empty($errors)) {
-    $statement = $pdo->prepare("INSERT INTO foodForDay (date, breakfast, lunch, dinner)
-                VALUES (:date, :breakfast, :lunch, :dinner)");
+    $statement = $pdo->prepare("INSERT INTO foodForDay (date, email, breakfast, lunch, dinner)
+                VALUES (:date, :email, :breakfast, :lunch, :dinner)");
     
     $statement->bindValue(':date', $date);
+    $statement->bindValue(':email', $_SESSION["email"]);
     $statement->bindValue(':breakfast', $breakfast);
     $statement->bindValue(':lunch', $lunch);
     $statement->bindValue(':dinner', $dinner);

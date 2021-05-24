@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($foundEmail || $foundPassword) {
             session_start();
             $_SESSION["uid"] = $info["id"];
+            $_SESSION["email"] = $info["email"];
             break;
         }
     endforeach;
