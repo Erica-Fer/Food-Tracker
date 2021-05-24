@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // $foundPassword = $info['password'] == $password;
 
         if ($foundEmail || $foundPassword) {
+            session_start();
+            $_SESSION["uid"] = $info["id"];
             break;
         }
     endforeach;
