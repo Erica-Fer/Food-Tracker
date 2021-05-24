@@ -30,11 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hashPwd = password_hash($password1, PASSWORD_DEFAULT);
 
         $statement = $pdo->prepare("INSERT INTO users (email, password)
-                    VALUES (:email, :password)");
+                                    VALUES (:email, :password)");
 
         $statement->bindValue(':email', $email);
         $statement->bindValue(':password', $hashPwd);
         $statement->execute();
+
+        $statement = $pdo->prepare("SELECT id
+                                    FROM users
+                                    WHERE email=:email");
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $info = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        session_start();
+        $_SESSION["uid"] = $info[0]["id"];
         // header('Location: ../presentation/main.html'); // ?
     }
 

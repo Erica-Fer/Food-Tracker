@@ -52,7 +52,6 @@ function logout(){
     }
 
     function redirectToMain(response){
-        console.log("id: " + response)
         if(response == -1){
             window.location.href = "../index.html";
         }
