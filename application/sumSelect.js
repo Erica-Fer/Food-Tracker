@@ -21,6 +21,7 @@ function sumButtonClick(){
 
     //runs once the user loads the page
     window.onload = function () {
+        checkLoggedIn(redirectToMain);
         //stores element that allows users to get next/prev month  
         var next = document.getElementById("next");
         var prev = document.getElementById("prev");
@@ -35,6 +36,24 @@ function sumButtonClick(){
         var current = document.getElementById("current-month");
         current.onclick = updateDate;
     };
+
+    function checkLoggedIn(callback){
+        console.log("got here");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                callback(this.response);
+           }
+        };
+        xhttp.open("GET", "../admin/sessionValidate.php", true);
+        xhttp.send();
+    }
+
+    function redirectToMain(response){
+        if(response == -1){
+            window.location.href = "../index.html";
+        }
+    }
 
     //returns the number of days in a month
     function numDaysInMonth(month, year) {

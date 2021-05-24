@@ -45,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         session_start();
         $_SESSION["uid"] = $info[0]["id"];
-        // header('Location: ../presentation/main.html'); // ?
     }
 
     echo json_encode($errors);

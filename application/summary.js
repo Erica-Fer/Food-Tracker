@@ -4,12 +4,31 @@ window.addEventListener('load',
     function () {
         // Use callback methods to pass data from PHP to be processed
         // Allows for async processing of information
+        checkLoggedIn(redirectToMain);
         let params = new URLSearchParams(location.search);
         document.getElementById("dateInfo").innerHTML = stringifyDateOutput(params);
 
         var date = params.toString()
         callDatabase(date, combineData);
     }, false);
+
+    function checkLoggedIn(callback){
+        console.log("got here");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                callback(this.response);
+           }
+        };
+        xhttp.open("GET", "../admin/sessionValidate.php", true);
+        xhttp.send();
+    }
+
+    function redirectToMain(response){
+        if(response == -1){
+            window.location.href = "../index.html";
+        }
+    }
 
 
 function stringifyDateOutput(params) {
