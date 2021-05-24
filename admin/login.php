@@ -20,9 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     foreach ($users as $info) :
-        // var_dump( $info);
-        $foundEmail = $info['email'] == $email;
-        $foundPassword = $info['password'] == $password;
+        $hashPwd = $info['password'];
+        $foundPassword = password_verify($password, $hashPwd);
+        
+        $foundEmail = ($info['email'] == $email);
+
+        // $foundPassword = $info['password'] == $password;
 
         if ($foundEmail || $foundPassword) {
             break;

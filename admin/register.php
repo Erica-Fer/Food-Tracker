@@ -27,11 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($errors)) {
+        $hashPwd = password_hash($password1, PASSWORD_DEFAULT);
+
         $statement = $pdo->prepare("INSERT INTO users (email, password)
                     VALUES (:email, :password)");
 
         $statement->bindValue(':email', $email);
-        $statement->bindValue(':password', $password1);
+        $statement->bindValue(':password', $hashPwd);
         $statement->execute();
         // header('Location: ../presentation/main.html'); // ?
     }
