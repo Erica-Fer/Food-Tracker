@@ -98,3 +98,11 @@ background: #519cbd;
     color:#00415E;
     font-family: shortstack;
 }
+
+.foodSection, .symptomsSection{
+    margin: 20px;
+}
+
+.foodSection h4{
+    color: #00415E;
+}
