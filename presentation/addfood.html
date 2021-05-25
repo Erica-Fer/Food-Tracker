@@ -42,7 +42,7 @@
             <div class="myClass">
                 <!-- <h1>Add food for <?php echo $_GET['date'] ?> </h1><br> // ? -->
                 <div id="aroundTitle">
-                <h1 id="title"></h1>
+                    <h1 id="title"></h1>
                 </div>
                 <!-- <h1 id="dateHeading"></h1> -->
                 <!-- <br> -->
@@ -78,25 +78,53 @@
                     <h4>What did you have for <b>dinner</b>?</h4>
                     <div class="chipsdinner chips-autocomplete" id="dinner"></div>
 
-                    <h4>What <b>snacks</b> did you have?</b>?</h4>
-                    <div class="chipssnack chips-autocomplete" id="dinner"></div>
+                    <h4>What <b>snacks</b> did you have?</b></h4>
+                    <!-- <div class="chipssnack chips-autocomplete" id="snacks"></div> -->
                     <p>tbd</p>
                 </div>
                 <div class="sectionSwitch">
                     <h3> - life log - </h3>
                 </div>
-                <div class="symptomsSections">
-                    <p>TBD</p>
+                <div class="lifeSection">
                     <h4>What <b>symptoms</b> did you have today?</h4>
-                    <div class="chipssymptoms chips-autocomplete" id="breakfast"></div>
+                    <!-- <div class="chipssymptoms chips-autocomplete" id="symptoms"></div> -->
+                    <p>tbd</p>
 
-                    <!-- <h4>What did you have for <b>lunch</b>?</h4>
-                    <div class="chipslunch chips-autocomplete" id="lunch"></div>
+                    <h4>What <b>supplements</b> did you take today? </h4>
+                    <!-- <div class="chipssupple chips-autocomplete" id="supplements"></div> -->
+                    <p>tbd</p>
 
-                    <h4>What did you have for <b>dinner</b>?</h4>
-                    <div class="chipsdinner chips-autocomplete" id="dinner"></div> -->
+                    <h4>What did you do for <b>exercise</b> today?</h4>
+                    <!-- <div class="chipsexercise chips-autocomplete" id="exercise"></div> -->
+                    <p>tbd</p>
+
+                    <div id="stressForm">
+                        <form>
+                            <div id="stressLabel" class="left">
+                                <label for="askStress">How much stress did you experience today?</label>
+                            </div>
+                            <div class="select right">
+                                <select name="askStress" id="askStress">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="veryhigh">Severely High Levels</option>
+                                    <option value="high">Slightly High Levels</option>
+                                    <option value="average">Average Levels</option>
+                                    <option value="low">Below Average Levels</option>
+                                    <option value="none">Relatively No Levels</option>
+                                </select>
+                            
+                                <input type="button" id="submitStress" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+
                     <!-- symptoms, stress, supplements, exercise, PMS -->
                 </div>
+            <!-- FIX THIS FORMATTING -->
+            </br>
+            </br>
+            </br>
+            </br>
 
                 <!-- used for loading xhttp GET/POST calls in javascript -->
                 <p id="demo"></p>

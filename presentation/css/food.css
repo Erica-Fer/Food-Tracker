@@ -2,6 +2,7 @@
 /* hewwo? */
 body{
 background: #519cbd;
+/* background: pink; */
 /* width: 95%; */
 }
 
@@ -99,10 +100,17 @@ background: #519cbd;
     font-family: shortstack;
 }
 
-.foodSection, .symptomsSection{
+.foodSection{
     margin: 20px;
 }
 
+.lifeSection{
+    margin: 20px;
+}
 .foodSection h4{
+    color: #00415E;
+}
+
+.lifeSection h4{
     color: #00415E;
 }
