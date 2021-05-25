@@ -1,4 +1,5 @@
 <?php
+session_start();
 $pdo = new PDO('mysql:host=localhost;post=3306;dbname=fullplate_users', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -19,6 +20,7 @@ $statement = $pdo->prepare(
     FROM foodForDay 
     WHERE date >=:date1 
     AND date <=:date2
+    AND email=:email
     AND date IN (
 	    SELECT date
 	    FROM foodForDay
@@ -28,6 +30,7 @@ $statement = $pdo->prepare(
     ORDER BY breakfast,lunch,dinner");
 $statement->bindValue(':date1', $date1);
 $statement->bindValue(':date2', $date2);
+$statement->bindValue(':email', $_SESSION["email"]);
 $statement->execute();
 $food = $statement->fetchAll(PDO::FETCH_ASSOC);
 
