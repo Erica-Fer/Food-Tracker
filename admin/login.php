@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (!$foundEmail && !$foundPassword) {
-        $errors[] = 'Account does not exist.' . PHP_EOL . 'Try again, or sign-up here: <a href="register.php">Register for Full-Plate</a>';
+        $errors[] = 'Account does not exist.' . PHP_EOL . 'Try again, or sign-up here: <a href="register.html">Register for Full-Plate</a>';
     }else if (!$foundEmail && $email) {
         $errors[] = 'Email not found.';
     } else if (!$foundPassword && $password) {
