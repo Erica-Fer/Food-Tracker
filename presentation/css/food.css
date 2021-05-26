@@ -12,7 +12,6 @@ background: #519cbd;
     padding:10px;
     border-radius: 5px;
     width: 95%;
-
 }
 
 .myClass{
@@ -31,6 +30,7 @@ background: #519cbd;
 #title{
     font-weight: bold;
     color:#00415E;
+    /* color: pink; */
     /* border-bottom: darkblue dashed; */
 }
 
@@ -58,14 +58,18 @@ background: #519cbd;
     padding-top: 2px;
     /* font-family: Arial, sans-serif; */
 }
-#dayForm{
+#dayForm, #stressForm{
     margin: 10px;
     height: 60px;
 }
-#dayForm label{
+#dayForm label, #stressForm label{
     font-size: 20px;
     line-height: 5rem;
     color: #00415E;
+    text-align: wrap;
+}
+#stressForm label{
+    font-size: 18px;
 }
 
 .select{
