@@ -1,3 +1,6 @@
+/* body{
+  background:#005E7C ;
+} */
 #full-calendar {
   width: 90%;
   margin:auto;
@@ -160,6 +163,63 @@ purple background with white (slightly thicker) font */
   color: white;
 }
 
+.myHeader, .myFooter{
+  text-align: wrap;
+  background-color: #005E7C;
+  width: 100%;
+  height: 55px;
+  /* height: 40px; */
+}
+.myFooter{
+  position: absolute;
+  bottom: 0;
+}
+
+/* need to have a nicer font for this but the idea is there */
+/* might make it smaller too */
+.myHeader h1{
+  text-align: center;
+  color: white;
+  margin: 0;
+  font-size: 45px;
+  padding-top: 2px;
+  /* font-family: Arial, sans-serif; */
+}
+
+.space{
+  height: 10px;
+  background: white;
+  /* background-color:#C7F8FF; */
+}
+
+
+/* #myTable{
+  border-collapse: separate;
+  border: 5px black solid;
+}   */
+
+.mainButtons{
+  margin: auto;
+  width: 50%;
+  height: 80px;
+}
+
+.left, .right{
+  margin-top: 20px;
+}
+.left{
+  margin-right: 5px;
+}
+
+.right{
+  margin-left: 5px;
+}
+#myCalendar{
+  border:#519cbd solid 2px;
+  /* border:black solid 2px; */
+  height: 574px;
+
+}
  
 
 /*#calendar-days .active .okayDay {
