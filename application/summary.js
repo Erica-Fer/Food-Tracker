@@ -36,13 +36,13 @@ function stringifyDateOutput(params) {
     var parsedDate1 = parseDate(params.get('date1'));
     var parsedDate2 = parseDate(params.get('date2'));
 
-    rangeOfDates = "Food had between "
+    rangeOfDates = ""
                     + parsedDate1[0] 
                     + " " 
                     + parsedDate1 [1]
                     + ", "
                     + parsedDate1[2]
-                    + " and "
+                    + " - "
                     + parsedDate2[0] 
                     + " " 
                     + parsedDate2[1]

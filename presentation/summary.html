@@ -6,6 +6,15 @@
  -->
 
 <head>
+    <style>
+        @font-face {
+            font-family: shortstack;
+            src: url('ShortStack-Regular.ttf');
+        }
+        .myHeader h1{
+            font-family: shortstack;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,25 +34,42 @@
     <link rel="stylesheet" type="text/css" href="css/materialize.css">
 </head>
 
-<body style="background-color: bisque;">
+<body>
+    <header>
+        <div class="myHeader">
+            <!-- ○ 〇 -->
+            <h1>- full ○ plate -</h1>
+        </div>
+    </header>
     <div class="container">
-        <div class="center-align background: white">
+        <div class="center-align background: white helloClass">
+            <div class="myClass">
+                <div id="aroundTitle">
+                    <h1 id ="title">SUMMARY</h1>
+                    <h4 id="dateInfo"></h4>
+                </div>
 
-            <h1 id="dateInfo"></h1>
+                <h3 class="headers">- top 3 worst foods -</h3>
+                <h4 id="top3"></h4>
 
-            <h2>Top 3 worst foods</h2>
-            <h4 id="top3"></h4>
+                <h3 class="headers">- most common symptoms -</h3>
+                <p> TBD</p>
 
-            <br><br>
+                </br>
 
-            <!-- used for loading xhttp GET/POST calls in javascript -->
-            <p id="demo"></p>
+                <!-- used for loading xhttp GET/POST calls in javascript -->
+                <p id="demo"></p>
 
-            <a href="main.html" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons">arrow_back</i></a><br>
-            <p class="center-align">Return to calendar.</p>
-            </form>
+                <a href="main.html" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a><br>
+                <p class="center-align">Return to calendar</p>
+                </form>
+            </div>
         </div>
     </div>
+    <footer>
+        <div class="myFooter">            
+        </div>
+    </footer>
 </body>
 
 </html>
