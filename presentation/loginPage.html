@@ -1,11 +1,22 @@
 <html lang="en">
 
 <head>
+    <style>
+        @font-face {
+            font-family: shortstack;
+            src: url('ShortStack-Regular.ttf');
+        }
+        .myHeader p{
+            font-family: shortstack;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--own style sheet-->
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -19,15 +30,19 @@
     <link rel="stylesheet" type="text/css" href="css/materialize.css">
 </head>
 
-<body style="background-color: bisque;">
+<body>
+    <div class="myHeader">
+        <p>full ○ plate</p>
+    </div>
     <!-- login box -->
-    <div class="container">
-        <div class="row">
+    <!-- <div id="shift"> -->
+    <div class="container myContainer">
+        <div class="row myRow">
             <div class="col s12"></div>
             <div class="col s12 m7 l6">
-                <div class="card">
+                <div class="card myCard">
                     <div class="card-content">
-                        <div class="card-title">Full-Plate Login</div>
+                        <div class="card-title">Log Into Full Plate</div>
 
                         <!-- Application layer outputs errors set by admin layer -->
                         <p id="errors"></p>
@@ -57,12 +72,12 @@
                         <p class="center-align flow-text">
 
                             <button type="submit" onclick="submitReq(true)" id="submitBtn"
-                                class="waves-effect waves-light btn-large center">Submit</a></button><br><br><br>
+                                class="waves-effect waves-light btn-large center">Submit</a></button> </br> </br>
 
                             <!-- go back -->
-                            <a href="../index.html" class="btn-floating btn-large waves-effect waves-light grey"><i
-                                    class="material-icons">arrow_back</i></a><br>
-                        <p class="center-align">Return to welcome screen.</p>
+                            <a href="../index.html" class="btn-floating btn-large waves-effect waves-light blue"><i
+                                    class="material-icons">arrow_back</i></a>
+                        <p class="center-align">Return to Welcome Screen</p>
 
                         </p>
                     </div>
@@ -70,6 +85,7 @@
             </div>
         </div>
     </div>
+    <!-- </div> -->
 </body>
 
 </html>

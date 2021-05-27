@@ -21,7 +21,9 @@ function sumButtonClick(){
 
     //runs once the user loads the page
     window.onload = function () {
+        console.log("here i am");
         checkLoggedIn(redirectToMain);
+        console.log("onload");
         //stores element that allows users to get next/prev month  
         var next = document.getElementById("next");
         var prev = document.getElementById("prev");
@@ -62,6 +64,7 @@ function sumButtonClick(){
 
     //creates the calendar days based on month & year
     function createCalendar(month, year) {
+        console.log("create calendar");
         //console.log(month);
         //console.log(year);
         //finds what day a month starts on
@@ -181,7 +184,18 @@ function sumButtonClick(){
                 break;
             }
 
+
         }
+        console.log("build calendar");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            console.log("in xhttp");
+            if (this.readyState == 4 && this.status == 200) {
+                colorMood(JSON.parse(this.responseText));
+            }
+        };
+        xhttp.open("GET", "../database/grabmoods.php", true);
+        xhttp.send();
         // var sumSelectButton = document.getElementById("sumSelectButton");
         // sumSelectButton.onclick = sumButtonClick();
     }
@@ -244,6 +258,48 @@ function sumButtonClick(){
             default: //december
                 current.innerText = "December " + year;
 
+        }
+    }
+    function colorMood(moodList){
+        console.log("in colorMood");
+        for(var i = 0; i < moodList.length; i++){
+            console.log("in sumSelect" + moodList[i].date + "\n" + moodList[i].dayQuality);
+            var currentMonth = getCurrentMonth();
+            var currentYear = getCurrentYear();
+            //console.log(moodList[i].date);
+            var y = moodList[i].date.substring(0, 4);
+            //console.log("Y IS " + y);
+            var m = moodList[i].date.substring(5,7);
+            //console.log("M IS "+ m);
+            if(currentMonth == m && currentYear == y){
+                //console.log(moodList[i].dayQuality);
+                var curr = document.getElementById(moodList[i].date);
+                var classList = curr.classList;
+                //console.log(classList);
+                var size = classList.length;
+                //console.log(size);
+                while (size >= 0) {
+                    if (classList.item(size) != "active") {
+                        classList.remove(classList.item(size));
+                    }
+                    size--;
+                }
+                //console.log("new class list" + classList);
+                if (moodList[i].dayQuality == "good") {
+                    //curr.classList.remove("empty");
+                    curr.classList.add("goodDay");
+                    //console.log(curr.classList);
+                }
+                else if (moodList[i].dayQuality == "okay") {
+                    curr.classList.add("okayDay");
+                }
+                else if (moodList[i].dayQuality == "bad") {
+                    curr.classList.add("badDay");
+                }
+                else {
+                    console.log("you....never should have gotten here???");
+                }
+            }
         }
     }
 
@@ -345,6 +401,24 @@ function sumButtonClick(){
             increaseYear--;
         }
         updateDate(false);
+    }
+
+    function getCurrentMonth(){
+        var curr_month = increaseMonth;
+        //console.log("CURR MONTH" + curr_month);
+        var m = "";
+        if (curr_month < 9) {
+            m += "0";
+        }
+        m += curr_month + 1;
+        //console.log("CURR MONTH " + m);
+        return m;
+    }
+
+    function getCurrentYear(){
+        var curr_year = increaseYear;
+        //console.log("CURR YEAR " + curr_year);
+        return curr_year;
     }
 
 })();

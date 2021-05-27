@@ -12,13 +12,25 @@
 <html lang="en">
 
 <head>
+  <style>
+    @font-face {
+        font-family: shortstack;
+        src: url('ShortStack-Regular.ttf');
+    }
+    .myHeader h1{
+        font-family: shortstack;
+    }
+  </style>
   <meta charset="UTF-8">
   <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatiable" content="ie-edge">
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <!--own style sheet-->
   <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -50,8 +62,17 @@
 </head>
 
 <body>
+  <header>
+    <div class="myHeader">
+        <!-- ○ 〇 -->
+        <h1>- full ○ plate -</h1>
+    </div>
+  </header>
+  <div class="space">  </div>
   <!-- <div id="calendar"></div> -->
   <!-- <h1 id="hello"> hello world</h1> -->
+  <div class="container">
+    <div id="myCalendar">
   <div class="month">
     <ul>
       <li id="prev"> &#10094; prev </li>
@@ -59,10 +80,12 @@
       <li id="next"> next &#10095;</li>
       <!--originally was a class-->
       <!--<li id="current-month">April<br><span id="current-year" style="font-size:18px">2021</span></li>-->
-      <li id="current-month">April 2022</li>
+      <li id="current-month"></li>
     </ul>
   </div>
-  <table>
+  <!-- <div class="space">  </div> -->
+  
+  <table id="myTable">
     <thead>
       <tr class="weekdays">
         <th>SUN</th>
@@ -74,67 +97,36 @@
         <th>SAT</th>
       </tr>
     </thead>
-    <tbody id="calendar-days"> <h1></h1> </tbody>
+    <tbody id="calendar-days"> </tbody>
 
   </table>
+  </div>
+  <div class="space">  </div>
 
   <!-- ERICA SECTION -->
   <!-- testing summary implement -->
 
-  <p class="center-align flow-text">
-    <a href="sumSelect.html" type="submit" class="waves-effect waves-light btn-large center">Summarize</a></button><br>
+  <!-- <div class="mainButtons"> -->
+  <div class="container">
+  <p class="center-align flow-text left">
+    <a href="sumSelect.html" type="submit" class="waves-effect waves-light btn-large center">Summarize Data</a></button><br>
   </p>
 
-  <p class="center-align flow-text">
-    <button id="btnLogout" onclick="logout()" class="waves-effect waves-light btn-large center">log out</button><br><br><br>
+  <p class="center-align flow-text right">
+    <button id="btnLogout" onclick="logout()" class="waves-effect waves-light btn-large center">log out</button>
   </p>
+  </div>
+</br>
+</div>
+</div>
 
   <!-- END ERICA SECTION -->
 
-  <!-- <ul class="weekdays">
-      <li>SUN</li>
-      <li>MON</li>
-      <li>TUE</li>
-      <li>WED</li>
-      <li>THU</li>
-      <li>FRI</li>
-      <li>SAT</li>
-  </ul> -->
-
-  <!-- <ul class="days">
-      <li></li>
-      <li>01</li>
-      <li>02</li>
-      <li>03</li>
-      <li>04</li>
-      <li>05</li>
-      <li>06</li>
-      <li>07</li>
-      <li>08</li>
-      <li>09</li>
-      <li>10</li>
-      <li><span class="active">11</span></li>
-      <li>12</li>
-      <li>13</li>
-      <li>14</li>
-      <li>15</li>
-      <li>16</li>
-      <li>17</li>
-      <li>18</li>
-      <li>19</li>
-      <li>20</li>
-      <li>21</li>
-      <li>22</li>
-      <li>23</li>
-      <li>24</li>
-      <li>25</li>
-      <li>26</li>
-      <li>27</li>
-      <li>28</li>
-      <li>29</li>
-      <li>30</li>
-      <li>31</li>
-  </ul> -->
+  <footer>
+    <div class="myFooter">   
+               
+    </div>
+  </footer>
 
 </body>
 
