@@ -207,19 +207,20 @@ purple background with white (slightly thicker) font */
 .left, .right{
   margin-top: 20px;
 }
-.left{
+/* .left{
   margin-right: 5px;
 }
 
 .right{
   margin-left: 5px;
-}
+} */
 #myCalendar{
   border:#519cbd solid 2px;
   /* border:black solid 2px; */
   height: 574px;
 
 }
+
  
 
 /*#calendar-days .active .okayDay {

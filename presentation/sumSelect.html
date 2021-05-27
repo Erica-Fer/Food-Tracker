@@ -12,6 +12,15 @@
 <html lang="en">
 
 <head>
+  <style>
+    @font-face {
+        font-family: shortstack;
+        src: url('ShortStack-Regular.ttf');
+    }
+    .myHeader h1{
+        font-family: shortstack;
+    }
+  </style>
   <meta charset="UTF-8">
   <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatiable" content="ie-edge">
@@ -36,8 +45,17 @@
 </head>
 
 <body>
+  <header>
+    <div class="myHeader">
+        <!-- ○ 〇 -->
+        <h1>- full ○ plate -</h1>
+    </div>
+  </header>
+  <div class="space">  </div>
   <!-- <div id="calendar"></div> -->
   <!-- <h1 id="hello"> hello world</h1> -->
+  <div class="container">
+    <div id="myCalendar">
   <div class="month">
     <ul>
       <li id="prev"> &#10094; prev </li>
@@ -48,7 +66,8 @@
       <li id="current-month">April 2022</li>
     </ul>
   </div>
-  <table>
+
+  <table id="myTable">
     <thead>
       <tr class="weekdays">
         <th>SUN</th>
@@ -60,18 +79,29 @@
         <th>SAT</th>
       </tr>
     </thead>
-    <tbody id="calendar-days"> <h1></h1> </tbody>
+    <tbody id="calendar-days"></tbody>
 
   </table>
-
-  <p class="center-align flow-text">
+  </div>
+  <div class="space">  </div>
+  
+  <div class="container">
+  <p class="center-align flow-text left">
     <button id="sumSelectButton" onclick="sumButtonClick()" class="waves-effect waves-light btn-large center">select days to summarize</button></button>
   </p>
 
-  <p class="center-align flow-text">
-    <a href="main.html" type="submit" class="waves-effect waves-light btn-large center">return to main calendar</a></button><br>
+  <p class="center-align flow-text right">
+    <a href="main.html" type="submit" class="waves-effect waves-light btn-large center">go back</a></button><br>
   </p>
+</div>
+</br>
+</div>
 
+<footer>
+  <div class="myFooter">   
+             
+  </div>
+</footer>
 </body>
 
 </html>
