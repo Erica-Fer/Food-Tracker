@@ -50,7 +50,8 @@ body{
 }
 #dateInfo{
     margin-top: 0;
-    color:#697987;
+    /* color:#697987; */
+    color: #519cbd;
     font-weight: bold;
     padding-bottom: 10px;
 
