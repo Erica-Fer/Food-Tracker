@@ -9,26 +9,40 @@ body{
     margin-bottom: 5px;
 }
 
-.myContainer{
-    /* padding-left: 300px; */
-}
 
-.myRow{
+.container{
+    /* padding:none; */
+}
+.first-div{
+    width: 100%;
+    margin-top: 0px;
+}
+.second-div{
+    /* background-color: yellow; */
+    margin-top: 0px;
+}
+.second-div .third-div{
+    width: 80%;
+    
+}
+.third-div{
+    /* background-color: pink; */
+    margin: 0 auto;
     /* margin-left: 200px; */
-    /* width: 600px; */
-    /* padding-left: 200px; */
-    /* width: 100% */
-}
-#shift{
-    /* margin-left: auto;
-    margin-right: auto;
-    padding-left: 400px;
-    padding-right: 400px; */
 }
 
-.myCard{
-    /* width: 400px; */
-    /* width: 50%; */
-    /* float:left; */
-    /* float: right; */
-} 
+/* .test .last-test{
+    width: 60%;
+} */
+
+.last-div{
+    /* background-color: green; */
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.card-content .myCard{
+    text-align: center;
+    font-weight: bold;
+    color: #00415E;
+}
