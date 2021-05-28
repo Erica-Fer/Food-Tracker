@@ -1,6 +1,15 @@
 <html lang="en">
 
 <head>
+    <style>
+        @font-face {
+            font-family: shortstack;
+            src: url('./presentation/ShortStack-Regular.ttf');
+        }
+        .myTitle{
+            font-family: shortstack;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,32 +33,69 @@
 <body>
     <div class="container">
         <!-- Welcome screen title -->
-        <h1 class="center-align flow-text">Welcome to Full-Plate!</h1>
+        <header>
+            <div class="myHeader">
+                <h5 id="welcome">WELCOME TO</h5>
+                <h1 class="myTitle"> full ○ plate</h1>
+            </div>
+        </header>
+        </br>
+
+        
+    <div class="slider">
+        <ul class="slides">
+        <li>
+            <img src="https://cdn.pixabay.com/photo/2010/12/13/10/05/berries-2277_1280.jpg"> <!-- random image -->
+            <div class="caption center-align">
+            <h3>This is our big Tagline!</h3>
+            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+            </div>
+        </li>
+        <li>
+            <img src="https://cdn.pixabay.com/photo/2016/01/19/18/09/oranges-1150086_1280.jpg"> <!-- random image -->
+            <div class="caption left-align">
+            <h3>Left Aligned Caption</h3>
+            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+            </div>
+        </li>
+        <li>
+            <img src="https://cdn.pixabay.com/photo/2016/12/26/17/28/spaghetti-1932466_1280.jpg"> <!-- random image -->
+            <div class="caption right-align">
+            <h3>Right Aligned Caption</h3>
+            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+            </div>
+        </li>
+        </ul>
+    </div>
         
         <!-- Welcome screen tutorial images -->
-        <div class="carousel carousel-slider center">
-            <div class="carousel-fixed-item center">
-            </div>
-            <div class="carousel-item red white-text" href="#one!">
-                <h2>Track what you've eaten that day</h2>
-            </div>
-            <div class="carousel-item amber white-text" href="#two!">
-                <h2>See how your health has been doing</h2>
-            </div>
-            <div class="carousel-item green white-text" href="#three!">
-                <h2>Find out what foods cause you problems</h2>
-            </div>
-            <div class="carousel-item blue white-text" href="#four!">
-                <h2>Customize your experience</h2>
-            </div>
+        <!-- <div class="myDiv">
+        <div class="carousel carousel-slider center"> -->
+            <!-- <div class="myDiv"> -->
+                <!-- <div class="carousel-fixed-item center">
+                </div> -->
+                <!-- <div class="carousel-item white-text" href="#one!">
+                    <h2>Track What You've Eaten That Day</h2>
+                    <img src="https://cdn.pixabay.com/photo/2016/01/19/18/09/oranges-1150086_1280.jpg" alt="orange" width="300" height="300">
+                </div>
+                <div class="carousel-item white-text" href="#two!">
+                    <h2>Check How Your Health Has Been Doing</h2>
+                    <img src="https://cdn.pixabay.com/photo/2016/01/19/18/09/oranges-1150086_1280.jpg" alt="orange">
+                </div>
+                <div class="carousel-item white-text" href="#three!">
+                    <h2>Find Out What Foods Cause Problems</h2>
+                    <img src="https://cdn.pixabay.com/photo/2016/01/19/18/09/oranges-1150086_1280.jpg" alt="orange">
+                </div>
         </div>
+        </div> -->
 
         <!-- Login & Register buttons -->
+        <div class="container">
         <p class="center-align flow-text">
-            <br>
-            <a href="presentation/loginPage.html" class="waves-effect waves-light btn-large center">Login</a><br><br>
-            <a href="presentation/register.html" class="waves-effect waves-light btn-small grey center">Register</a>
+            <a href="presentation/loginPage.html" class="waves-effect waves-light btn-large center left">Login</a>
+            <a href="presentation/register.html" class="waves-effect waves-light btn-large grey center right">Register</a>
         </p>
+        </div>
 
 
     </div>
@@ -60,11 +106,16 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
+         document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.slider');
+            // var instances = M.Slider.init(elems, options);
+        });
         $(document).ready(function () {
-            $('.carousel').carousel({
-                fullWidth: true,
-                indicators: true
-            });
+            // $('.carousel').carousel({
+            //     fullWidth: true,
+            //     indicators: true
+            // });
+            $('.slider').slider();
         });
     </script>
 

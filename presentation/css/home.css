@@ -1,3 +1,40 @@
 body{
     background-color: #519cbd;
 }
+
+.myHeader{
+    color: white;
+    text-align: center;
+    border-bottom: white dotted 10px;
+}
+
+#welcome{
+    margin-top: 20px;
+    margin-bottom: 0;
+    padding-right: 5%;
+    /* font-family: monospace; */
+}
+
+.myTitle{
+    margin-top: 0;
+    font-size: 120px;
+    text-align: center;
+}
+
+.slider h3, .slider h5{
+    text-shadow: 0 0 5px black;
+}
+
+/* .left{
+    padding-left: 20px;
+}
+
+.right{
+    padding-right: 20px;
+} */
+/* .myDiv .carousel{
+    height: 800px;
+    background-color: pink;
+    /* height: 300px; */
+
+
