@@ -43,7 +43,8 @@ function chips() {
     // ONLY USE FOR CHIP ELEMENTS
     var elemChips = [document.querySelectorAll('.chipsbreakfast')
         , document.querySelectorAll('.chipslunch')
-        , document.querySelectorAll('.chipsdinner')];
+        , document.querySelectorAll('.chipsdinner')
+        , document.querySelectorAll('.chipssnacks')];
 
     // set values for each element
     // should let each user form keep unique elements, and elements featured in other forms
@@ -68,6 +69,10 @@ function getFood(formNum, elemChips) {
             break;
         case 2: // Dinner
             key = 'dinner';
+            break;
+        case 3: //Snack
+            console.log("in ssnacks");
+            key = 'snacks';
             break;
     }
 
@@ -127,7 +132,9 @@ function initializeChips(elemChips, food) {
         data: prevFood,
         onChipAdd: (event) => {
             var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
+            console.log(formId);
             var formData = '.chips' + formId;
+
             var chipsData = M.Chips.getInstance($(formData)).chipsData;
 
             var newestTag = chipsData[chipsData.length - 1].tag;
