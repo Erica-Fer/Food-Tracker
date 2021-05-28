@@ -22,9 +22,12 @@ body{
 }
 
 .slider h3, .slider h5{
-    text-shadow: 0 0 5px black;
+    text-shadow: 0 0 5px blue;
 }
 
+.slider h3{
+    color: white;
+}
 /* .left{
     padding-left: 20px;
 }
