@@ -27,7 +27,8 @@ function redirectToMain(response){
 document.addEventListener('DOMContentLoaded', function () {
     mood();
     chips();
-    lifeChips();
+    symptomChips();
+    suppleChips();
 });
 
 /* CODE FOR DAY QUALITY */
@@ -54,21 +55,29 @@ function chips() {
     }
 }
 
-// CODE FOR chips(tags) specifically for the life log section
-function lifeChips(){
-    console.log("in life chips");
+// CODE FOR chips(tags) specifically for the symptom section
+function symptomChips(){
+    // console.log("in life chips");
      // array of all chips forms
     // add as needed, just use '.chips<name>' for the querySelector
     // ONLY USE FOR CHIP ELEMENTS
     var elemChips = [document.querySelectorAll('.chipssymptoms')];
-        // , document.querySelectorAll('.chipslunch')
-        // , document.querySelectorAll('.chipsdinner')
-        // , document.querySelectorAll('.chipssnacks')];
 
-    // set values for each element
-    // should let each user form keep unique elements, and elements featured in other forms
     for (i = 0; i < elemChips.length; i++) {
         getSymptoms(i, elemChips[i]);
+    }
+
+}
+
+function suppleChips(){
+    // console.log("in life chips");
+     // array of all chips forms
+    // add as needed, just use '.chips<name>' for the querySelector
+    // ONLY USE FOR CHIP ELEMENTS
+    var elemChips = [document.querySelectorAll('.chipssupplements')];
+
+    for (i = 0; i < elemChips.length; i++) {
+        getSupple(i, elemChips[i]);
     }
 
 }
@@ -101,17 +110,17 @@ function getFood(formNum, elemChips) {
 
 function getSymptoms(formNum, elemChips) {
     console.log("in get stats");
-    // Start by initializing the blank chips before finding food
+    // Start by initializing the blank chips before finding symptoms
     initializeLifeChips(elemChips, []);
 
     // Default to a null value so that if there is nothing, return is not empty
-    var key = '';
+    var key = 'symptoms';
 
-    switch (formNum) {
-        case 0: // Breakfast
-            key = 'symptoms';
-            break;
-        // case 1: // Lunch
+    // switch (formNum) {
+    //     case 0: // symptoms
+    //         key = 'symptoms';
+    //         break;
+    //     case 1: // Lunch
         //     key = 'lunch';
         //     break;
         // case 2: // Dinner
@@ -121,10 +130,22 @@ function getSymptoms(formNum, elemChips) {
         //     console.log("in ssnacks");
         //     key = 'snacks';
         //     break;
-    }
+    //}
     console.log("key is " + key);
 
-    callDatabase(parseStats, key, elemChips);
+    callDatabase(parseSymptoms, key, elemChips);
+}
+
+function getSupple(formNum, elemChips) {
+    console.log("in get stats");
+    // Start by initializing the blank chips before finding symptoms
+    initializeSupplementChips(elemChips, []);
+
+    // Default to a null value so that if there is nothing, return is not empty
+    var key = 'supplements';
+    console.log("key is " + key);
+
+    callDatabase(parseSupplements, key, elemChips);
 }
 
 function callDatabase(callback, key, elemChips) {
@@ -161,7 +182,7 @@ function parseFood(foodType, elemChips) {
     initializeChips(elemChips, JSON.parse(res));
 }
 
-function parseStats(lifeStat, elemChips) {
+function parseSymptoms(lifeStat, elemChips) {
     // Begin the string to be used for parsing input
     var input = '';
 
@@ -181,6 +202,28 @@ function parseStats(lifeStat, elemChips) {
 
     var res = "[" + input + "]";
     initializeLifeChips(elemChips, JSON.parse(res));
+}
+
+function parseSupplements(lifeStat, elemChips) {
+    // Begin the string to be used for parsing input
+    var input = '';
+
+    if (lifeStat == null || lifeStat.length < 1) {
+        return 0;
+    }
+
+    // This is what allows for each input food to have individual chip
+    // The format of string should be the following:
+    //'[' + '{ "tag": "' + foodTest[0] + '" }' + ',' + '{ "tag": "' + foodTest[2] + '" }' + ']';
+    for (var i = 0; i < lifeStat.length; i++) {
+        input += '{ "tag": "' + lifeStat[i] + '" }';
+        if (i < lifeStat.length - 1) {
+            input += ',';
+        }
+    }
+
+    var res = "[" + input + "]";
+    initializeSupplementChips(elemChips, JSON.parse(res));
 }
 
 // Initializes the chips and their relevant data
@@ -260,6 +303,72 @@ function initializeLifeChips(elemChips, input) {
                 'cramps': null,
                 'diarrhea': null,
                 'constipation': null
+            },
+            limit: Infinity,
+            minLength: 1
+        },
+        placeholder: 'Enter a tag',
+        secondaryPlaceholder: 'Enter a tag',
+        data: prevInput,
+        onChipAdd: (event) => {
+            var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
+            console.log("formId" + formId);
+            var formData = '.chips' + formId;
+
+            var chipsData = M.Chips.getInstance($(formData)).chipsData;
+
+            var newestTag = chipsData[chipsData.length - 1].tag;
+
+            // Get the date from the given url
+            var date = "&date=" + getDate();
+
+            // make call to PHP file to handle giving tags info to be put in database
+            // should let the user add information without ever pressing a "save" button
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
+                }
+            };
+            xhttp.open("POST", "../database/post.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
+            xhttp.send(formId + "=" + newestTag + date); // should send something in the form of "breakfast=cheese", or other input
+        },
+        onChipDelete: (event, chip) => {
+            // The form that was being added to; like lunch/dinner/breakfast/etc.
+            var formId = event[0].id; 
+            var form = "formId=" + formId;
+
+            // Get the data for the chip being deleted
+            var toDelete = "&remove=" + chip["firstChild"]["wholeText"];
+
+            // Set the date toe be used in the database update
+            var date = "&date=" + getDate();
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                }
+            };
+            xhttp.open("POST", "../database/removefood.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            // MESSAGE FORMAT:
+            // formId=<$breakfast/$lunch/$dinner/$symptoms>&remove=<$text>&date=<$yyyy-mm-dd>
+            xhttp.send(form + toDelete + date);
+        }
+    });
+}
+
+function initializeSupplementChips(elemChips, input) {
+    // console.log("in intiailize");
+    var prevInput = input;
+    var instances = M.Chips.init(elemChips, {
+        autocompleteOptions: {
+            data: {
+                'fiber': null,
+                'probiotic': null,
+                'calcium': null,
+                'fish oil': null
             },
             limit: Infinity,
             minLength: 1

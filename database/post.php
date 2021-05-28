@@ -13,6 +13,7 @@ $dinner = '';
 $snacks = '';
 $mood = '';
 $symptoms = '';
+$supplements = '';
 
 $errors = [];
 
@@ -40,11 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         print "in here";
         $symptoms = $_POST['symptoms'];
     }
+    else if(isset($_POST['supplements'])){
+        print "in here";
+        $supplements = $_POST['supplements'];
+    }
+    
     
 
     // if (empty($errors)) {
-    $statement = $pdo->prepare("INSERT INTO foodForDay (date, email, breakfast, lunch, dinner, snacks, symptoms)
-                VALUES (:date, :email, :breakfast, :lunch, :dinner, :snacks, :symptoms)");
+    $statement = $pdo->prepare("INSERT INTO foodForDay (date, email, breakfast, lunch, dinner, snacks, symptoms, supplements)
+                VALUES (:date, :email, :breakfast, :lunch, :dinner, :snacks, :symptoms, :supplements)");
     
     $statement->bindValue(':date', $date);
     $statement->bindValue(':email', $_SESSION["email"]);
@@ -53,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement->bindValue(':dinner', $dinner);
     $statement->bindValue(':snacks', $snacks);
     $statement->bindValue(':symptoms', $symptoms);
+    $statement->bindValue(':supplements', $supplements);
     $statement->execute();
 }
 
