@@ -143,7 +143,7 @@ function commonSymptoms(data) {
     let uniqueSymptoms = new Set();
     
     for(var i = 0; i < data.length; i++){
-        uniqueSymptoms.add(data[i]["symptoms"]);
+        uniqueSymptoms.add(data[i]["symptoms"].toLowerCase());
         // console.log(data[i]);
         //uniqueFoods.add(data[i].value);
     }
