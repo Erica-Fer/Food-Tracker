@@ -37,63 +37,72 @@
     <div class="myHeader">
         <p>full ○ plate</p>
     </div>
-    <!-- login box -->
+
+    <!-- register box -->
     <div class="container">
-        <div class="row">
-            <div class="col s12"></div>
-            <div class="col s12 m7 l6">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-title">Register for Full Plate</div>
-
-                        <!-- print error messages for missing fields -->
-                        <p id="errors"></p>
-
-                        <!-- <?php if (!empty($errors)) : ?>
-                            <div class="class alert alert-danger">
-                                <?php foreach ($errors as $error) : ?>
-                                    <div><?php echo $error ?></div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?> -->
-
-                            <!-- email entry form -->
-                            <div class="row">
-                                <div class="input-field col s12 text-black">
-                                    <i class="material-icons prefix">email</i>
-                                    <input id="email" type="email" name="email" class="validate">
-                                    <label for="email">Enter your E-mail</label>
-                                    <span class="helper-text" data-error="Please enter a valid e-mail addreess." data-success=""></span>
+        <div class="first-div">
+            <div class="second-div">
+                <div class="third-div">
+                    <div class="last-div">
+                        <div class="row">
+                            <!-- <div class="col s12"></div> -->
+                            <div class="col l12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="card-title myCard">Register for Full Plate</div>
+                
+                                        <!-- print error messages for missing fields -->
+                                        <p id="errors"></p>
+                
+                                        <!-- <?php if (!empty($errors)) : ?>
+                                            <div class="class alert alert-danger">
+                                                <?php foreach ($errors as $error) : ?>
+                                                    <div><?php echo $error ?></div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php endif; ?> -->
+                
+                                            <!-- email entry form -->
+                                            <div class="row">
+                                                <div class="input-field col s12 text-black">
+                                                    <i class="material-icons prefix">email</i>
+                                                    <input id="email" type="email" name="email" class="validate">
+                                                    <label for="email">Enter your E-mail</label>
+                                                    <span class="helper-text" data-error="Please enter a valid e-mail addreess." data-success=""></span>
+                                                </div>
+                                            </div>
+                
+                                            <!-- first password entry form -->
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <i class="material-icons prefix">phonelink_lock</i>
+                                                    <input id="password1" type="password" name="password1" class="validate">
+                                                    <label for="password1">Enter your password</label>
+                                                </div>
+                                            </div>
+                
+                                            <!-- second password entry form -->
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <i class="material-icons prefix">phonelink_lock</i>
+                                                    <input id="password2" type="password" name="password2" class="validate">
+                                                    <label for="password2">Re-enter your password</label>
+                                                </div>
+                                            </div>
+                
+                                            <!-- submit button -->
+                                            <p class="center-align flow-text">
+                                                <button type="submit" onclick="submitReq(false)" class="waves-effect waves-light btn-large center">Register</a></button></br></br>
+                
+                                                <!-- back button -->
+                                                <a href="../index.html" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a></br>
+                                                <p class="center-align">Return to Welcome Screen</p>
+                                            </p>
+                
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- first password entry form -->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">phonelink_lock</i>
-                                    <input id="password1" type="password" name="password1" class="validate">
-                                    <label for="password1">Enter your password</label>
-                                </div>
-                            </div>
-
-                            <!-- second password entry form -->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">phonelink_lock</i>
-                                    <input id="password2" type="password" name="password2" class="validate">
-                                    <label for="password2">Re-enter your password</label>
-                                </div>
-                            </div>
-
-                            <!-- submit button -->
-                            <p class="center-align flow-text">
-                                <button type="submit" onclick="submitReq(false)" class="waves-effect waves-light btn-large center">Register</a></button></br></br>
-
-                                <!-- back button -->
-                                <a href="../index.html" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a><br>
-                                <p class="center-align">Return to Welcome Screen</p>
-                            </p>
-
+                        </div>
                     </div>
                 </div>
             </div>
