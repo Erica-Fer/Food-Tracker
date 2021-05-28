@@ -15,11 +15,12 @@ $mood = '';
 $symptoms = '';
 $supplements = '';
 $exercise = '';
+$stressLevel = "";
 
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    print "here first";
+    // print "here first";
     if(isset($_POST['date'])){
         $date = $_POST['date'];
     }
@@ -45,12 +46,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     else if(isset($_POST['exercise'])){
         $exercise = $_POST['exercise'];
     }
+    else if(isset($_POST['stressLevel'])){
+        $stressLevel = $_POST['stressLevel'];
+    }
     
     
 
     // if (empty($errors)) {
-    $statement = $pdo->prepare("INSERT INTO foodForDay (date, email, breakfast, lunch, dinner, snacks, symptoms, supplements, exercise)
-                VALUES (:date, :email, :breakfast, :lunch, :dinner, :snacks, :symptoms, :supplements, :exercise)");
+    $statement = $pdo->prepare("INSERT INTO foodForDay (date, email, breakfast, lunch, dinner, snacks, 
+            symptoms, supplements, exercise, stressLevel)
+                VALUES (:date, :email, :breakfast, :lunch, :dinner, :snacks, :symptoms, :supplements, 
+                :exercise, :stressLevel)");
     
     $statement->bindValue(':date', $date);
     $statement->bindValue(':email', $_SESSION["email"]);
@@ -61,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement->bindValue(':symptoms', $symptoms);
     $statement->bindValue(':supplements', $supplements);
     $statement->bindValue(':exercise', $exercise);
+    $statement->bindValue(':stressLevel', $stressLevel);
     $statement->execute();
 }
 

@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     symptomChips();
     suppleChips();
     exerciseChips();
+    stressChips();
 });
 
 /* CODE FOR DAY QUALITY */
@@ -85,6 +86,15 @@ function exerciseChips(){
     }
 }
 
+// CODE FOR chips(tags) specifically for the stress section
+function stressChips(){
+    var elemChips = [document.querySelectorAll('.chipsstressLevel')];
+
+    for (i = 0; i < elemChips.length; i++) {
+        getStress(i, elemChips[i]);
+    }
+}
+
 function getFood(formNum, elemChips) {
     // Start by initializing the blank chips before finding food
     initializeChips(elemChips, []);
@@ -136,9 +146,19 @@ function getExercise(formNum, elemChips) {
     initializeExerciseChips(elemChips, []);
 
     // sets key we're looking for
-    var key = 'supplements';
+    var key = 'exercise';
 
     callDatabase(parseExercise, key, elemChips);
+}
+
+function getStress(formNum, elemChips) {
+    // Start by initializing the blank chips before finding exercise
+    initializeStressChips(elemChips, []);
+
+    // sets key we're looking for
+    var key = 'stressLevel';
+
+    callDatabase(parseStress, key, elemChips);
 }
 
 function callDatabase(callback, key, elemChips) {
@@ -239,6 +259,28 @@ function parseExercise(lifeStat, elemChips) {
 
     var res = "[" + input + "]";
     initializeExerciseChips(elemChips, JSON.parse(res));
+}
+
+function parseStress(lifeStat, elemChips) {
+    // Begin the string to be used for parsing input
+    var input = '';
+
+    if (lifeStat == null || lifeStat.length < 1) {
+        return 0;
+    }
+
+    // This is what allows for each input food to have individual chip
+    // The format of string should be the following:
+    //'[' + '{ "tag": "' + foodTest[0] + '" }' + ',' + '{ "tag": "' + foodTest[2] + '" }' + ']';
+    for (var i = 0; i < lifeStat.length; i++) {
+        input += '{ "tag": "' + lifeStat[i] + '" }';
+        if (i < lifeStat.length - 1) {
+            input += ',';
+        }
+    }
+
+    var res = "[" + input + "]";
+    initializeStressChips(elemChips, JSON.parse(res));
 }
 
 // Initializes the chips and their relevant data
@@ -452,6 +494,74 @@ function initializeExerciseChips(elemChips, input) {
                 'walking': null,
                 'running': null,
                 'volleyball': null
+            },
+            limit: Infinity,
+            minLength: 1
+        },
+        placeholder: 'Enter a tag',
+        secondaryPlaceholder: 'Enter a tag',
+        data: prevInput,
+        onChipAdd: (event) => {
+            var formId = event[0].id; // the form that was being added to; like lunch/dinner/breakfast/etc.
+            console.log("formId" + formId);
+            var formData = '.chips' + formId;
+
+            var chipsData = M.Chips.getInstance($(formData)).chipsData;
+
+            var newestTag = chipsData[chipsData.length - 1].tag;
+
+            // Get the date from the given url
+            var date = "&date=" + getDate();
+
+            // make call to PHP file to handle giving tags info to be put in database
+            // should let the user add information without ever pressing a "save" button
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText; // ? do i need this?
+                }
+            };
+            xhttp.open("POST", "../database/post.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // ? is this correct?
+            xhttp.send(formId + "=" + newestTag + date); // should send something in the form of "breakfast=cheese", or other input
+        },
+        onChipDelete: (event, chip) => {
+            // The form that was being added to; like lunch/dinner/breakfast/etc.
+            var formId = event[0].id; 
+            var form = "formId=" + formId;
+
+            // Get the data for the chip being deleted
+            var toDelete = "&remove=" + chip["firstChild"]["wholeText"];
+
+            // Set the date toe be used in the database update
+            var date = "&date=" + getDate();
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                }
+            };
+            xhttp.open("POST", "../database/removefood.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            // MESSAGE FORMAT:
+            // formId=<$breakfast/$lunch/$dinner/$symptoms>&remove=<$text>&date=<$yyyy-mm-dd>
+            xhttp.send(form + toDelete + date);
+        }
+    });
+}
+
+function initializeStressChips(elemChips, input) {
+    // console.log("in intiailize");
+    var prevInput = input;
+    var instances = M.Chips.init(elemChips, {
+        autocompleteOptions: {
+            data: {
+                'very high': null,
+                'high': null,
+                'moderate': null,
+                'average': null,
+                'little': null,
+                'none': null
             },
             limit: Infinity,
             minLength: 1
