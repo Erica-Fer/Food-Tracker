@@ -10,10 +10,10 @@ window.addEventListener('load',
 
         var date = params.toString()
         callDatabase(date, combineData);
+        callOtherDatabase(date, commonSymptoms);
     }, false);
 
     function checkLoggedIn(callback){
-        console.log("got here");
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -120,6 +120,51 @@ function callDatabase(date, callback) {
     xhttp.send(date); // ? TODO: need dates to be variables
 }
 
+//used for the symptoms call
+function callOtherDatabase(date, callback) {
+    // out("entered");
+    var myObj;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // Async callback
+            // Will call the function 'combineData' when info is retrieved
+            callback(JSON.parse(this.responseText));
+        }
+    };
+    xhttp.open("POST", "../database/summarySymptoms.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(date); // ? TODO: need dates to be variables
+}
+
+function commonSymptoms(data) {
+    // console.log("made it to commonSymptoms");
+    // console.log(data);
+    let uniqueSymptoms = new Set();
+    
+    for(var i = 0; i < data.length; i++){
+        uniqueSymptoms.add(data[i]["symptoms"]);
+        // console.log(data[i]);
+        //uniqueFoods.add(data[i].value);
+    }
+
+    // console.log(uniqueSymptoms);
+    var output = "";
+    var addComma = false
+    for(symp of uniqueSymptoms.values()){
+        if(addComma){
+            output += ", "
+        }
+        // console.log("in loop: " + symp);
+        output += symp;
+        addComma = true;
+    }
+
+    var element = document.getElementById("mostCommon");
+    element.innerHTML += output;
+
+}
+
 // Get all data into one easy to sort array
 // Keeps the sortData() function more specific
 function combineData(data) {
@@ -139,7 +184,7 @@ function combineData(data) {
         count: 7
     }];
 
-    out("food = " + top3[2].food + "\ncount = " + top3[2].count);
+    // out("food = " + top3[2].food + "\ncount = " + top3[2].count);
 
 
     for (i = 0; data[i] != null; i++) {
@@ -211,10 +256,10 @@ function combineData(data) {
     //     for (let i in allFoodItems) {
     //     out("top3 value: " + top3[i])
     // }
-    console.log("i'M HERE");
-    for (let [key, value] of allFoodItems) {
-        out("\t\t" + key + " = " + value)
-    }
+    // console.log("i'M HERE");
+    // for (let [key, value] of allFoodItems) {
+    //     out("\t\t" + key + " = " + value)
+    // }
     formatData(allFoodItems); //changed from top3 to allFoodItems
 
     // for(let value of foodAtTime["dinner"]){
@@ -255,17 +300,17 @@ function addSorted(element, array) {
 // Format the data based on most common
 // Should list out top 3
 function formatData(allFood) {
-    console.log("NOW IN FORMAT DATA");
-    console.log(allFood);
-    for (let [key, value] of allFood) {
-        console.log(key + " = " + value);
-    }
+    // console.log("NOW IN FORMAT DATA");
+    // console.log(allFood);
+    // for (let [key, value] of allFood) {
+    //     console.log(key + " = " + value);
+    // }
 
     var top3 = new Array(3);
     //top3[0] = [1,2];
     //var x = [[1,2]];
     //console.log(x[0][1]);
-    console.log(top3);
+    // console.log(top3);
     // if(top3[1] == null){
     //     console.log("hello");
     // }
@@ -307,7 +352,7 @@ function formatData(allFood) {
         }
 
     }
-    console.log(top3);
+    // console.log(top3);
 
     // for(var i = 0; i < allFood.length; i++){
     //     console.log(allFood);
