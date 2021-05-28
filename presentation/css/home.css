@@ -22,7 +22,8 @@ body{
 }
 
 .slider h3, .slider h5{
-    text-shadow: 0 0 5px blue;
+    text-shadow: 0 0 10px blue;
+    /* text-shadow: 2px 2px 10px blue; */
 }
 
 .slider h3{
